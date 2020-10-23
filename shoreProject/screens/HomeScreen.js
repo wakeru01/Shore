@@ -23,7 +23,8 @@ const styles = StyleSheet.create({
     screen:{
         backgroundColor: '#EDF5FA',
         flex:1,
-        padding: 20
+        padding: 20,
+        paddingTop: 20
     }
 });
   
