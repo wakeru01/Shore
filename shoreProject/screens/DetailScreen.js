@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Image } from 'react-native';
+import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
 
 export default class App extends React.Component {
   render() {
@@ -13,7 +13,14 @@ export default class App extends React.Component {
         <Text style={{ fontSize: 15 }}>ความถูกต้อง : 0000</Text>
         <Text style={{ fontSize: 15 }}>ความสวยงาม : 00</Text>
         <Text style={{ fontSize: 15 }}>ความเข้าใจ : 00000{"\n"}{"\n"}{"\n"}{"\n"}</Text>
-        <Button title="Buy" style={styles.btn} />
+
+        <View style={[{ width: "90%", margin: 10, backgroundColor: "#92AFF3" }]}>
+          <Button
+            onPress={this.buttonClickListener}
+            title="Buy"
+            color="#92AFF3"
+          />
+        </View> 
       </View>
     );
   }
@@ -24,14 +31,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center'
-  },
-  btn: {
-    borderRadius: 1,
-    borderColor: "#92AFF3",
-    width: 50,
-    height: 30,
-    justifyContent: "center",
-    alignItems: "center",
   },
   logo: {
     width: "100%",
