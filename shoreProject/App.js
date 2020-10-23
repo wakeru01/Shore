@@ -1,11 +1,11 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import HomeScreen from "./screens/HomeScreen";
+import DetailScreen from "./screens/DetailScreen";
 
 export default function App() {
   // เพิ่มโค้ดส่วนนี้
   return(
-    <HomeScreen/>
+    <DetailScreen/>
   )
 }
 

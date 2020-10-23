@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from "react-native";
 import { Searchbar } from 'react-native-paper';
 
-const Search = () => {
+const Home = () => {
     const [searchQuery, setSearchQuery] = React.useState('');
   
     const onChangeSearch = query => setSearchQuery(query);
@@ -17,7 +17,7 @@ const Search = () => {
         </View>
     );
   };
-export default Search;
+export default Home;
 
 const styles = StyleSheet.create({
     screen:{
