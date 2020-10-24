@@ -16,6 +16,7 @@ const HomeNavigator = createStackNavigator(
       defaultNavigationOptions: {
         headerStyle: { backgroundColor: "#4a148c", },
         headerTintColor: "white",
+        headerShown: false
       },
     }
   );
@@ -31,12 +32,13 @@ const NotificationNavigator = createStackNavigator(
       defaultNavigationOptions: {
         headerStyle: { backgroundColor: "#4a148c", },
         headerTintColor: "white",
+        headerShown: false
       },
     }
 );
 
 
-const ShoreTabNavigator = createBottomTabNavigator(
+const AdminTabNavigator = createBottomTabNavigator(
   {
     Home: {
       screen: HomeNavigator,
@@ -66,4 +68,4 @@ const ShoreTabNavigator = createBottomTabNavigator(
 
 
 
-export default createAppContainer(ShoreTabNavigator);
+export default createAppContainer(AdminTabNavigator);
