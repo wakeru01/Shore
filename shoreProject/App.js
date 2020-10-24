@@ -1,11 +1,11 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import DetailScreen from "./screens/DetailScreen";
+import NavigatorAdmin from "./navigation/NavigatorAdmin";
 
 export default function App() {
   // เพิ่มโค้ดส่วนนี้
   return(
-    <DetailScreen/>
+    <NavigatorAdmin/>
   )
 }
 
