@@ -16,9 +16,9 @@ const HomeNavigator = createStackNavigator(
     },
     {
       defaultNavigationOptions: {
-        headerStyle: { backgroundColor: "#4a148c", },
+        headerStyle: { backgroundColor: "#6de9ed", },
         headerTintColor: "white",
-        headerShown: false
+        headerShown: true
       },
     }
   );
@@ -31,9 +31,9 @@ const AddSheetNavigator = createStackNavigator(
   },
   {
     defaultNavigationOptions: {
-      headerStyle: { backgroundColor: "#4a148c", },
+      headerStyle: { backgroundColor: "#6de9ed", },
       headerTintColor: "white",
-      headerShown: false
+      headerShown: true
     },
   }
 );
@@ -48,7 +48,7 @@ const NotificationNavigator = createStackNavigator(
       defaultNavigationOptions: {
         headerStyle: { backgroundColor: "#4a148c", },
         headerTintColor: "white",
-        headerShown: false
+        headerShown: true
       },
     }
 );

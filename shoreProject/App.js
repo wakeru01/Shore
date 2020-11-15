@@ -1,11 +1,11 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import NavigatorAdmin from "./navigation/NavigatorAdmin";
+import NavigatorUser from "./navigation/NavigatorUser";
 
 export default function App() {
   // เพิ่มโค้ดส่วนนี้
   return(
-    <NavigatorAdmin/>
+    <NavigatorUser/>
   )
 }
 
