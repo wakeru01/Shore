@@ -5,7 +5,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image style={styles.logo} source={require("../assets/sheet1.jpg")}/>
+        <Image style={styles.logo} source={require("../../assets/sheet1.jpg")}/>
         <Text style={{ fontSize: 30 }} >Software Engineering {"\n"}{"\n"}</Text>
         <Text style={{ fontSize: 20 }}>ราคา : 30 บาท    ยอดขาย : 3</Text>
         <Text style={{ fontSize: 15 }}>รายละเอียด : shdbkvjlfdvnmklajsghfjcefcnpire {"\n"}{"\n"}</Text>
