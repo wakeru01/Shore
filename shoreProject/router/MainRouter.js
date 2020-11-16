@@ -1,5 +1,5 @@
 import React from 'react'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { HomeNavigator as Home } from '../navigation/NavigatorAdmin'
 import Detail from '../screens/main/DetailScreen'
 import Notification from '../screens/main/NotificationScreen'
