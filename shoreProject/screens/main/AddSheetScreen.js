@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { View, StyleSheet,Button, TextInput, UselessTextInput} from "react-native";
+import { View, StyleSheet,Button, TextInput} from "react-native";
 import DropDownPicker from 'react-native-dropdown-picker'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 
 const AddSheet = () => {
 
-const Home = () => {
     var db = firebase.firestore();
 
     const [searchQuery, setSearchQuery] = React.useState('');
