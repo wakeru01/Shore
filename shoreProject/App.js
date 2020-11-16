@@ -1,4 +1,4 @@
-<<<<<<< Updated upstream
+
 import React from "react";
 import { StyleSheet } from "react-native";
 import NavigatorUser from "./navigation/NavigatorUser";
@@ -8,7 +8,7 @@ export default function App() {
   return(
     <NavigatorUser/>
   )
-=======
+
 import React from 'react';
 import Root from './router/RootRouter'
 import firebase from 'firebase/app'
@@ -22,7 +22,6 @@ const firebaseConfig = {
   storageBucket: "shore-1d16d.appspot.com",
   messagingSenderId: "498778944451",
   appId: "1:498778944451:web:0576c365cf74c47d1c8376"
->>>>>>> Stashed changes
 }
 
 firebase.initializeApp(firebaseConfig)
