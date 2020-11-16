@@ -94,14 +94,14 @@ const AddSheet = () => {
                 />
             </View>  
             <View style={{paddingTop:20}}>
-                <View style={{paddingBottom:10}}>ราคา :</View>
+                <View style={{paddingBottom:5}}>ราคา :</View>
                 <TextInput style={{
                         backgroundColor: "white",
                         padding: 10,
                         marginBottom: 20,
                     }}
                 />
-                <View style={{paddingBottom:10}}>รายละเอียด :</View>
+                <View style={{paddingBottom:5}}>รายละเอียด :</View>
                 <TextInput style={{
                         backgroundColor: "white",
                         padding: 10,

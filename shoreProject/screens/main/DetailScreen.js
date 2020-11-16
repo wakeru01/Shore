@@ -16,18 +16,7 @@ export default class App extends React.Component {
 
 
         <View style={{paddingTop:50}}>
-                <Button onPress={()=>{db.collection("users").add({
-                    first: "s",
-                    last: "Lovelace",
-                    born: 1815
-                })
-                .then(function(docRef) {
-                    console.log("Document written with ID: ", docRef.id);
-                })
-                .catch(function(error) {
-                    console.error("Error adding document: ", error);
-                });}}
-                title="เพิ่ม" />
+                <Button title="เพิ่ม" />
             </View>
       </View>
     );
