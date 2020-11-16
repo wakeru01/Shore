@@ -1,4 +1,13 @@
 Arguments: 
+
+  D:\node.exe D:\bin\yarn.js v--
+
+PATH: 
+  C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\MinGW\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;D:\bin\;D:\;C:\Program Files\Git\cmd;C:\Users\thama\AppData\Local\Programs\Python\Python38-32\Scripts\;C:\Users\thama\AppData\Local\Programs\Python\Python38-32\;C:\Users\thama\AppData\Local\Microsoft\WindowsApps;C:\Users\thama\AppData\Local\GitHubDesktop\bin;C:\Users\thama\AppData\Local\Microsoft\WindowsApps;C:\Users\thama\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\thama\AppData\Local\Yarn\bin;C:\Users\thama\AppData\Roaming\npm;C:\ProgramData\thama\GitHubDesktop\bin
+
+Yarn version: 
+  1.22.4
+
   /usr/local/bin/node /usr/local/Cellar/yarn/1.22.10/libexec/bin/yarn.js install
 
 PATH: 
@@ -14,12 +23,21 @@ Platform:
   darwin x64
 
 Trace: 
+
+  SyntaxError: C:\Users\thama\Desktop\protest_1\Shore\shoreProject\package.json: Unexpected token < in JSON at position 292
+      at JSON.parse (<anonymous>)
+      at D:\lib\cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (D:\lib\cli.js:310:30)
+      at D:\lib\cli.js:321:13
+
   SyntaxError: /Users/rungwaraporn/Documents/Shore/shoreProject/package.json: Unexpected token < in JSON at position 292
       at JSON.parse (<anonymous>)
       at /usr/local/Cellar/yarn/1.22.10/libexec/lib/cli.js:1625:59
       at Generator.next (<anonymous>)
       at step (/usr/local/Cellar/yarn/1.22.10/libexec/lib/cli.js:310:30)
       at /usr/local/Cellar/yarn/1.22.10/libexec/lib/cli.js:321:13
+
 
 npm manifest: 
   {
@@ -33,14 +51,14 @@ npm manifest:
     },
     "dependencies": {
       "@react-native-community/masked-view": "0.1.10",
-  <<<<<<< Updated upstream
+  
       "@react-native-community/picker": "1.6.6",
       "@react-native-picker/picker": "^1.9.2",
-  =======
+
       "@react-navigation/bottom-tabs": "^5.11.1",
       "@react-navigation/native": "^5.8.9",
       "@react-navigation/stack": "^5.12.6",
-  >>>>>>> Stashed changes
+
       "expo": "~39.0.2",
       "expo-cli": "^3.28.2",
       "expo-status-bar": "~1.0.2",

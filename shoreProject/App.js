@@ -1,8 +1,18 @@
+// import React from "react";
+// import { StyleSheet } from "react-native";
+// import NavigatorUser from "./navigation/NavigatorUser";
+
+// export default function App() {
+//   // เพิ่มโค้ดส่วนนี้
+//   return(
+//     <NavigatorUser/>
+//   )
+
 import React from 'react';
 import Root from './router/RootRouter'
-import firebase from 'firebase/app'
 import { NavigationContainer } from '@react-navigation/native'
-
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 const firebaseConfig = {
   apiKey: "AIzaSyA4ximMS8yPj7zp_EGg2GH-VUHxuWVBEDM",
   authDomain: "shore-1d16d.firebaseapp.com",
@@ -15,6 +25,7 @@ const firebaseConfig = {
 }
 
 firebase.initializeApp(firebaseConfig)
+
 
 export default function App() {
   return (

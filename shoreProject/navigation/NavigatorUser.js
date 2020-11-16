@@ -38,35 +38,35 @@ const AddSheetNavigator = createStackNavigator(
   }
 );
 
-const NotificationNavigator = createStackNavigator(
-    {
-      Notifications: {
-        screen: NotificationScreen,
-      },
-    },
-    {
-      defaultNavigationOptions: {
-        headerStyle: { backgroundColor: "#4a148c", },
-        headerTintColor: "white",
-        headerShown: true
-      },
-    }
-);
+// const NotificationNavigator = createStackNavigator(
+//     {
+//       Notifications: {
+//         screen: NotificationScreen,
+//       },
+//     },
+//     {
+//       defaultNavigationOptions: {
+//         headerStyle: { backgroundColor: "#4a148c", },
+//         headerTintColor: "white",
+//         headerShown: true
+//       },
+//     }
+// );
 
-const ProfileNavigator = createStackNavigator(
-    {
-      Profile: {
-        screen: ProfileScreen,
-      },
-    },
-    {
-      defaultNavigationOptions: {
-        headerStyle: { backgroundColor: "#4a148c", },
-        headerTintColor: "white",
-        headerShown: false
-      },
-    }
-);
+// const ProfileNavigator = createStackNavigator(
+//     {
+//       Profile: {
+//         screen: ProfileScreen,
+//       },
+//     },
+//     {
+//       defaultNavigationOptions: {
+//         headerStyle: { backgroundColor: "#4a148c", },
+//         headerTintColor: "white",
+//         headerShown: false
+//       },
+//     }
+// );
 
 
 const ShoreTabNavigator = createBottomTabNavigator(
@@ -79,7 +79,7 @@ const ShoreTabNavigator = createBottomTabNavigator(
         },
       },
     },
-    Addheet: {
+    AddSheet: {
       screen: AddSheetNavigator,
       navigationOptions:{
         tabBarIcon: (tabInfo) => {
