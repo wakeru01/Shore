@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
-import { View, StyleSheet,Button  } from "react-native";
+import { View, StyleSheet,Button, TextInput, UselessTextInput} from "react-native";
 import DropDownPicker from 'react-native-dropdown-picker'
-import { Input } from 'react-native-elements';
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 
 const AddSheet = () => {
+
+const Home = () => {
+    var db = firebase.firestore();
+
     const [searchQuery, setSearchQuery] = React.useState('');
     const [country, setCountry] = React.useState('uk')
-
     const onChangeSearch = query => setSearchQuery(query);
 
     return (
@@ -85,25 +89,38 @@ const AddSheet = () => {
                 />
             </View>  
             <View style={{paddingTop:20}}>
-                <Input
-                  placeholder='ราคา :'
+                <View style={{paddingBottom:10}}>ราคา :</View>
+                <TextInput style={{
+                        backgroundColor: "white",
+                        padding: 10,
+                        marginBottom: 20,
+                    }}
                 />
-
-                <Input
-                  placeholder='รายละเอียด :'
+                <View style={{paddingBottom:10}}>รายละเอียด :</View>
+                <TextInput style={{
+                        backgroundColor: "white",
+                        padding: 10,
+                        marginBottom: 10,
+                        
+                    }}
+                    multiline
+                    numberOfLines={6}
                 />
-
-
-{/* 
-                <Input
-                  placeholder="Comment"
-                  onChangeText={value => this.setState({ comment: value })}
-                  /> */}
 
             </View> 
             <View style={{paddingTop:50}}>
-            <Button
-            title="เพิ่ม" />
+                <Button onPress={()=>{db.collection("users").add({
+                    first: "s",
+                    last: "Lovelace",
+                    born: 1815
+                })
+                .then(function(docRef) {
+                    console.log("Document written with ID: ", docRef.id);
+                })
+                .catch(function(error) {
+                    console.error("Error adding document: ", error);
+                });}}
+                title="เพิ่ม" />
             </View>
         </View>
     );

@@ -14,13 +14,21 @@ export default class App extends React.Component {
         <Text style={{ fontSize: 15 }}>ความสวยงาม : 00</Text>
         <Text style={{ fontSize: 15 }}>ความเข้าใจ : 00000{"\n"}{"\n"}{"\n"}{"\n"}</Text>
 
-        <View style={[{ width: "90%", margin: 10, backgroundColor: "#92AFF3" }]}>
-          <Button
-            onPress={this.buttonClickListener}
-            title="Buy"
-            color="#92AFF3"
-          />
-        </View> 
+
+        <View style={{paddingTop:50}}>
+                <Button onPress={()=>{db.collection("users").add({
+                    first: "s",
+                    last: "Lovelace",
+                    born: 1815
+                })
+                .then(function(docRef) {
+                    console.log("Document written with ID: ", docRef.id);
+                })
+                .catch(function(error) {
+                    console.error("Error adding document: ", error);
+                });}}
+                title="เพิ่ม" />
+            </View>
       </View>
     );
   }
