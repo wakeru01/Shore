@@ -3,7 +3,7 @@ import { View, StyleSheet,Button  } from "react-native";
 import DropDownPicker from 'react-native-dropdown-picker'
 import { Input } from 'react-native-elements';
 
-const Home = () => {
+const AddSheet = () => {
     const [searchQuery, setSearchQuery] = React.useState('');
     const [country, setCountry] = React.useState('uk')
 
@@ -108,7 +108,7 @@ const Home = () => {
         </View>
     );
 };
-export default Home;
+export default AddSheet;
 
 const styles = StyleSheet.create({
     screen: {

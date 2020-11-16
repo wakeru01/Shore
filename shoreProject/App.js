@@ -1,16 +1,12 @@
+// import React from "react";
+// import { StyleSheet } from "react-native";
+// import NavigatorUser from "./navigation/NavigatorUser";
 
-
-import React from "react";
-import { StyleSheet } from "react-native";
-import NavigatorUser from "./navigation/NavigatorUser";
-
-export default function App() {
-  // เพิ่มโค้ดส่วนนี้
-  return(
-    <NavigatorUser/>
-  )
-
-
+// export default function App() {
+//   // เพิ่มโค้ดส่วนนี้
+//   return(
+//     <NavigatorUser/>
+//   )
 
 import React from 'react';
 import Root from './router/RootRouter'
