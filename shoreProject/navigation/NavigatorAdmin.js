@@ -45,7 +45,7 @@ const AddSheetNavigator = () => {
         headerTintColor: "white",
         
       }} initialRouteName="AddSheet">
-        <Stack.Screen name="AddSheet" component={AddSheetScreen} />
+        <Stack.Screen name="Add Sheet" component={AddSheetScreen} />
       </Stack.Navigator>
     )
 }
