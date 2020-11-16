@@ -9,11 +9,17 @@ const AddSheet = () => {
     var db = firebase.firestore();
 
     const [searchQuery, setSearchQuery] = React.useState('');
-    const [faculty, setFaculty] = React.useState('uk')
-    const [branch, setBranch] = React.useState('uk')
-    const [year, setYear] = React.useState('uk')
-    const [semester, setSemester] = React.useState('uk')
+    const [faculty, setFaculty] = React.useState('it')
+    const [branch, setBranch] = React.useState('dbsa')
+    const [year, setYear] = React.useState('1')
+    const [semester, setSemester] = React.useState('1')
+    // this.state = {
+    //     faculty: ['it'],
+    //     branch: ['dbsa'],
+    //     year: ['1'],
+    //     semester: ['1'],
 
+    // }
     const onChangeSearch = query => setSearchQuery(query);
 
     return (
@@ -106,7 +112,6 @@ const AddSheet = () => {
                         backgroundColor: "white",
                         padding: 10,
                         marginBottom: 10,
-                        
                     }}
                     multiline
                     numberOfLines={6}
@@ -115,9 +120,10 @@ const AddSheet = () => {
             </View> 
             <View style={{paddingTop:50}}>
                 <Button onPress={()=>{db.collection("users").add({
-                    first: "s",
-                    last: "Lovelace",
-                    born: 1815
+                    faculty: 'it',
+                    branch: 'dbsa',
+                    year: '1',
+                    semester: '1',
                 })
                 .then(function(docRef) {
                     console.log("Document written with ID: ", docRef.id);
