@@ -1,18 +1,20 @@
 import React from "react";
-import { StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 
 export default function App() {
   // เพิ่มโค้ดส่วนนี้
   return(
-    <Text>notification</Text>
+    <View style={styles.screen}>
+      <Text>notification</Text>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "blue",
-    alignItems: "center",
-    justifyContent: "center",
+  screen: {
+      backgroundColor: '#EDF5FA',
+      flex: 1,
+      padding: 20,
+      paddingTop: 20,
   },
 });
