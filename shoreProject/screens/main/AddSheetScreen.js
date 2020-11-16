@@ -5,7 +5,10 @@ import { Input } from 'react-native-elements';
 
 const Home = () => {
     const [searchQuery, setSearchQuery] = React.useState('');
-    const [country, setCountry] = React.useState('uk')
+    const [faculty, setFaculty] = React.useState('uk')
+    const [branch, setBranch] = React.useState('uk')
+    const [year, setYear] = React.useState('uk')
+    const [semester, setSemester] = React.useState('uk')
 
     const onChangeSearch = query => setSearchQuery(query);
 
@@ -15,11 +18,11 @@ const Home = () => {
             <View style={[styles.dropdown, {zIndex: 1}]}>
                 <DropDownPicker
                     items={[
-                        {label: 'ภาคเรียน', value: 'usa', hidden: true},
-                        {label: 'UK', value: 'uk' },
-                        {label: 'France', value: 'france',},
+                        {label: 'it', value: 'it', hidden: true},
+                        {label: 'engineer', value: 'engineer' },
+                        {label: 'art', value: 'art',},
                     ]}
-                    defaultValue={country}
+                    defaultValue={faculty}
                     containerStyle={{height: 40, flex: 1, marginTop: 10}}
                     style={{backgroundColor: '#fafafa'}}
                     itemStyle={{
@@ -27,16 +30,16 @@ const Home = () => {
                     }}
                     dropDownStyle={{backgroundColor: '#fafafa'}}
                     onChangeItem={item => this.setState({
-                        country: item.value
+                        faculty: item.value
                     })}
                 />
                 <DropDownPicker
                     items={[
-                        {label: 'USA', value: 'usa', hidden: true},
-                        {label: 'UK', value: 'uk' },
-                        {label: 'France', value: 'france',},
+                        {label: 'dbsa', value: 'dbsa', hidden: true},
+                        {label: 'it', value: 'it' },
+                        {label: 'multi', value: 'multi',},
                     ]}
-                    defaultValue={country}
+                    defaultValue={branch}
                     containerStyle={{height: 40, flex: 1, marginTop: 10}}
                     style={{backgroundColor: '#fafafa'}}
                     itemStyle={{
@@ -44,18 +47,20 @@ const Home = () => {
                     }}
                     dropDownStyle={{backgroundColor: '#fafafa'}}
                     onChangeItem={item => this.setState({
-                        country: item.value
+                        branch: item.value
                     })}
                 />
                 </View>
                 <View style={styles.dropdown}>
                 <DropDownPicker
                     items={[
-                        {label: 'USA', value: 'usa', hidden: true},
-                        {label: 'UK', value: 'uk' },
-                        {label: 'France', value: 'france',},
+                        {label: '1', value: '1', hidden: true},
+                        {label: '2', value: '2' },
+                        {label: '3', value: '3',},
+                        {label: '4', value: '4',},
+
                     ]}
-                    defaultValue={country}
+                    defaultValue={year}
                     containerStyle={{height: 40, flex: 1, marginTop: 10}}
                     style={{backgroundColor: '#fafafa'}}
                     itemStyle={{
@@ -63,16 +68,16 @@ const Home = () => {
                     }}
                     dropDownStyle={{backgroundColor: '#fafafa'}}
                     onChangeItem={item => this.setState({
-                        country: item.value
+                        year: item.value
                     })}
                 />
                 <DropDownPicker
                     items={[
-                        {label: 'USA', value: 'usa', hidden: true},
-                        {label: 'UK', value: 'uk' },
-                        {label: 'France', value: 'france',},
+                        {label: '1', value: '1', hidden: true},
+                        {label: '2', value: '2' },
+                        {label: 'summer', value: 'summer',},
                     ]}
-                    defaultValue={country}
+                    defaultValue={semester}
                     containerStyle={{height: 40, flex: 1, marginTop: 10}}
                     style={{backgroundColor: '#fafafa'}}
                     itemStyle={{
@@ -80,7 +85,7 @@ const Home = () => {
                     }}
                     dropDownStyle={{backgroundColor: '#fafafa'}}
                     onChangeItem={item => this.setState({
-                        country: item.value
+                        semester: item.value
                     })}
                 />
             </View>  
