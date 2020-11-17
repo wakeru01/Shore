@@ -1,22 +1,34 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button, Image} from 'react-native';
 
 export default class App extends React.Component {
   render() {
     return (
+      
       <View style={styles.container}>
         <Image style={styles.logo} source={require("../../assets/sheet1.jpg")}/>
-        <Text style={{ fontSize: 30 }} >Software Engineering {"\n"}{"\n"}</Text>
-        <Text style={{ fontSize: 20 }}>ราคา : 30 บาท    ยอดขาย : 3</Text>
-        <Text style={{ fontSize: 15 }}>รายละเอียด : shdbkvjlfdvnmklajsghfjcefcnpire {"\n"}{"\n"}</Text>
-        <Text style={{ fontSize: 20 }}>Rating</Text>
-        <Text style={{ fontSize: 15 }}>ความถูกต้อง : 0000</Text>
-        <Text style={{ fontSize: 15 }}>ความสวยงาม : 00</Text>
-        <Text style={{ fontSize: 15 }}>ความเข้าใจ : 00000{"\n"}{"\n"}{"\n"}{"\n"}</Text>
-
-
+        <View style={{
+                        backgroundColor: "white",
+                        padding: 20,
+                        marginBottom: 20,
+                        marginTop:10
+                    }}>
+          <Text style={{ fontSize: 30, paddingTop: 20 }} >Software Engineering {"\n"}{"\n"}</Text>
+          <Text style={{ fontSize: 20 }}>ราคา : 30 บาท    ยอดขาย : 3</Text>
+          <Text style={{ fontSize: 15 }}>รายละเอียด : shdbkvjlfdvnmklajsghfjcefcnpire {"\n"}{"\n"}</Text>
+          <Text style={{ fontSize: 20 }}>Rating : </Text>
+          <view style={{
+                        padding: 10,
+                        marginLeft: 20,
+                    }}>
+            <Text style={{ fontSize: 15 }}>ความถูกต้อง : 0000 {"\n"}</Text>
+            <Text style={{ fontSize: 15 }}>ความสวยงาม : 00 {"\n"}</Text>
+            <Text style={{ fontSize: 15 }}>ความเข้าใจ : 00000{"\n"}{"\n"}{"\n"}{"\n"}</Text>
+          </view>
+          {"\n"}{"\n"}{"\n"}{"\n"}
+        </View>
         <View style={{paddingTop:50}}>
-                <Button title="เพิ่ม" />
+                <Button title="ซื้อ" />
             </View>
       </View>
     );
@@ -26,7 +38,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#EDF5FA',
     alignItems: 'center'
   },
   logo: {
