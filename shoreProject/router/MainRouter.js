@@ -4,7 +4,11 @@ import { HomeNavigator as Home } from '../navigation/NavigatorAdmin'
 import { AddSheetNavigator as AddSheet } from '../navigation/NavigatorAdmin'
 import { NotificationNavigator as Notification } from '../navigation/NavigatorAdmin'
 import { ProfileNavigator as Profile } from '../navigation/NavigatorAdmin'
-
+// import Rating from '../screens/main/RatingScreen'
+// import BuySheet from '../screens/main/BuySheetScreen'
+// import Notification from '../screens/main/NotificationScreen'
+// import Profile from '../screens/main/ProfileScreen'
+// import AddSheet from '../screens/main/AddSheetScreen'
 import { Entypo } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
@@ -14,7 +18,7 @@ export default function MainRouter() {
     <Tab.Navigator>
       <Tab.Screen options={{
         tabBarIcon: () => (<Entypo name="home" size={26} color="black" />)
-      }} name="Home" component={Home} />  
+      }} name="Home" component={Home} />
       <Tab.Screen options={{
         tabBarIcon: () => (<Entypo name="circle-with-plus" size={26} color="black" />)
       }} name="AddSheet" component={AddSheet} />
