@@ -9,27 +9,28 @@ export default class App extends React.Component {
         <Image style={styles.logo} source={require("../../assets/sheet1.jpg")}/>
         <View style={{
                         backgroundColor: "white",
-                        padding: 20,
+                        paddingLeft: 80,
+                        paddingRight: 80,
                         marginBottom: 20,
                         marginTop:10
                     }}>
           <Text style={{ fontSize: 30, paddingTop: 20 }} >Software Engineering {"\n"}{"\n"}</Text>
-          <Text style={{ fontSize: 20 }}>ราคา : 30 บาท    ยอดขาย : 3</Text>
-          <Text style={{ fontSize: 15 }}>รายละเอียด : shdbkvjlfdvnmklajsghfjcefcnpire {"\n"}{"\n"}</Text>
+          <Text style={{ fontSize: 20 }}>ราคา : 30 บาท</Text>
+          <Text style={{ fontSize: 20 }}>ยอดขาย : 3</Text>
+          <Text style={{ fontSize: 15 }}>รายละเอียด : shdbkvjlfdvnmklajsgvybenjkmfgirk,iojf,erthehfjcefcnpire {"\n"}{"\n"}</Text>
           <Text style={{ fontSize: 20 }}>Rating : </Text>
           <view style={{
                         padding: 10,
+                        marginButtom: 50,
                         marginLeft: 20,
                     }}>
             <Text style={{ fontSize: 15 }}>ความถูกต้อง : 0000 {"\n"}</Text>
             <Text style={{ fontSize: 15 }}>ความสวยงาม : 00 {"\n"}</Text>
             <Text style={{ fontSize: 15 }}>ความเข้าใจ : 00000{"\n"}{"\n"}{"\n"}{"\n"}</Text>
+            
+          <Button title="ซื้อ" />
           </view>
-          {"\n"}{"\n"}{"\n"}{"\n"}
         </View>
-        <View style={{paddingTop:50}}>
-                <Button title="ซื้อ" />
-            </View>
       </View>
     );
   }
