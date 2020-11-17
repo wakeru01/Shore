@@ -9,8 +9,8 @@ export default class App extends React.Component {
         <Image style={styles.logo} source={require("../../assets/sheet1.jpg")}/>
         <View style={{
                         backgroundColor: "white",
-                        paddingLeft: 80,
-                        paddingRight: 80,
+                        paddingLeft: 50,
+                        paddingRight:50,
                         marginBottom: 20,
                         marginTop:10
                     }}>
@@ -19,7 +19,7 @@ export default class App extends React.Component {
           <Text style={{ fontSize: 20 }}>ยอดขาย : 3</Text>
           <Text style={{ fontSize: 15 }}>รายละเอียด : shdbkvjlfdvnmklajsgvybenjkmfgirk,iojf,erthehfjcefcnpire {"\n"}{"\n"}</Text>
           <Text style={{ fontSize: 20 }}>Rating : </Text>
-          <view style={{
+          <View style={{
                         padding: 10,
                         marginButtom: 50,
                         marginLeft: 20,
@@ -28,8 +28,8 @@ export default class App extends React.Component {
             <Text style={{ fontSize: 15 }}>ความสวยงาม : 00 {"\n"}</Text>
             <Text style={{ fontSize: 15 }}>ความเข้าใจ : 00000{"\n"}{"\n"}{"\n"}{"\n"}</Text>
             
-          <Button title="ซื้อ" />
-          </view>
+          <Button title="ซื้อ"/>
+          </View>
         </View>
       </View>
     );

@@ -29,6 +29,6 @@ firebase.initializeApp(firebaseConfig)
 
 export default function App() {
   return (
-    <NavigationContainer><Root /></NavigationContainer>
+    <NavigationContainer><Root/></NavigationContainer>
   );
 }
