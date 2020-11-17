@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
-import { View, StyleSheet  } from "react-native";
+import { View, StyleSheet, ScrollView  } from "react-native";
 import DropDownPicker from 'react-native-dropdown-picker'
-// import { Entypo } from '@expo/vector-icons'
-
-import { ScrollView } from 'react-native-gesture-handler';
 import { Searchbar } from 'react-native-paper';
 
 const Home = () => {
@@ -14,6 +11,7 @@ const Home = () => {
 
     return (
         <View style={styles.screen}>
+            <ScrollView>
             <Searchbar
                 placeholder="Search"
                 onChangeText={onChangeSearch}
@@ -90,7 +88,8 @@ const Home = () => {
                         country: item.value
                     })}
                 />
-            </View>   
+            </View> 
+            </ScrollView>  
         </View>
     );
 };
