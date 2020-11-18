@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet,Button, TextInput} from "react-native";
+import React, { useState } from 'react';
+import { View, 
+    StyleSheet,
+    TextInput, 
+    Text,
+    ScrollView} from "react-native";
+import { Button } from 'react-native-elements';
 import DropDownPicker from 'react-native-dropdown-picker'
 import * as DocumentPicker from 'expo-document-picker';
 import firebase from 'firebase/app'
@@ -53,7 +60,7 @@ const AddSheet = () => {
 
     return (
         <View style={styles.screen}>
-            
+            <ScrollView>
             <View style={[styles.dropdown, {zIndex: 2}]}>
                 <DropDownPicker
                     items={[
@@ -115,45 +122,39 @@ const AddSheet = () => {
                     onChangeItem={item => setSemester(item.value)}
                 />
             </View>  
-            <View style={{paddingTop:20}}>
-            <View style={{paddingBottom:5}}>เอกสารชีท :</View>
+            <View style={{paddingTop:10}}>
+            <Text style={styles.text}>เอกสารชีท :</Text>
                 <Button 
+                type="outline"
                 title="เพิ่มเอกสารชีท..."
                 color="#989a9c"
                 onPress={wtfss}
                 style={{weight: 20}}
                 
             />
-                <View style={{paddingBottom:5, marginTop: 20,}}>ราคา :</View>
-                <TextInput style={{
-                        backgroundColor: "white",
-                        padding: 10,
-                        marginBottom: 20,
-                    }}
+                <Text style={styles.text}>ราคา:</Text>
+                <TextInput style={styles.input}
                     placeholder="เพิ่มราคาที่นี่ ..."
                 />
-                <View style={{paddingBottom:5}}>รายละเอียด :</View>
-                <TextInput style={{
-                        backgroundColor: "white",
-                        padding: 10,
-                        marginBottom: 10,
-                    }}
-                    placeholder="เพิ่มรายละเอียดที่นี่ ..."
-                    multiline
-                    numberOfLines={7}
+                <Text style={styles.text}>รายละเอียด :</Text>
+                <TextInput style={styles.input} 
+                    placeholder="เพิ่มรายละเอียดที่นี่ ..." 
+                    multiline 
+                    numberOfLines={7} 
                 />
 
             </View> 
-            <View style={{paddingBottom:5}}>ตัวอย่าง :</View>
+            <Text style={styles.text}>ตัวอย่าง :</Text>
             <Button
                 title="เพิ่มตัวอย่างชีท..."
                 color="#989a9c"
                 onPress={handleFilePick}
+                type="outline"
             />
-            <View style={{paddingTop:100}}>
-                <Button 
-                title="เพิ่ม" />
+            <View style={{paddingTop:50}}>
+                <Button title="เพิ่ม" />
             </View>
+            </ScrollView>
         </View>
     );
 };
@@ -164,12 +165,21 @@ const styles = StyleSheet.create({
         backgroundColor: '#EDF5FA',
         flex: 1,
         padding: 20,
-        paddingTop: 20,
     },
     dropdown:{
         // flex: 1,
         flexDirection: "row",
         height: 50,
+    },
+    text:{
+        paddingBottom:5, 
+        fontSize:18, 
+        marginTop:10
+    },
+    input:{
+        backgroundColor: "white",
+        padding: 10,
+        marginBottom: 10,
     }
 });
 
