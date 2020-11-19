@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, 
     StyleSheet,
     TextInput, 
@@ -9,21 +9,51 @@ import DropDownPicker from 'react-native-dropdown-picker'
 import * as DocumentPicker from 'expo-document-picker';
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-
+// import axios from 'axios'
 const AddSheet = () => {
 
     var db = firebase.firestore();
-
     const [searchQuery, setSearchQuery] = React.useState('');
-    const [faculty, setFaculty] = React.useState('it')
-    const [branch, setBranch] = React.useState('dbsa')
-    const [year, setYear] = React.useState('1')
-    const [semester, setSemester] = React.useState('1')
+    const [faculty, setFaculty] = React.useState('')
+    const [stateFaculty, setStateFaculty] = React.useState(false)
+    const [branch, setBranch] = React.useState('')
+    const [year, setYear] = React.useState('')
+    const [semester, setSemester] = React.useState('')
+    const [datafaculty, setDatafaculty] = useState({})
+    const [databranch, setDatabranch] = useState({})
 
     const handleFilePick = async () => {
         const fileResponse = await DocumentPicker.getDocumentAsync();
         console.log(fileResponse);
     }
+
+    useEffect(async () => {
+        const querySnapshot = await db.collection("faculty").get()
+        const faculty = {}
+        querySnapshot.forEach((doc) => {
+            faculty[doc.id] = doc.data()
+        });
+        setDatafaculty(faculty);
+    }, []);
+
+    useEffect(async () => {
+        const querySnapshot = await db.collection("faculty").get().collection(faculty).get()
+        const branch = {}
+        querySnapshot.forEach((doc) => {
+            branch[doc.id] = doc.data()
+        });
+        setDatabranch(branch)
+    }, []);
+
+    const wtfss = async () => {
+        const querySnapshot = await db.collection("faculty").get()
+        const faculty = {}
+        querySnapshot.forEach((doc) => {
+            faculty[doc.id] = doc.data()
+        });
+        console.log(faculty)
+    }
+
     const onChangeSearch = query => setSearchQuery(query);
 
     return (
@@ -32,37 +62,28 @@ const AddSheet = () => {
             <View style={[styles.dropdown, {zIndex: 2}]}>
                 <DropDownPicker
                     items={[
-                        {label: 'it', value: 'it', hidden: true},
-                        {label: 'engineer', value: 'engineer' },
-                        {label: 'art', value: 'art',},
+                        ...Object.keys(datafaculty).map(key => ({label: datafaculty[key].name, value: datafaculty[key].name }))
                     ]}
-                    defaultValue={faculty}
                     containerStyle={{height: 40, flex: 1, marginTop: 10}}
                     style={{backgroundColor: '#fafafa'}}
                     itemStyle={{
                         justifyContent: 'flex-start'
                     }}
                     dropDownStyle={{backgroundColor: '#fafafa'}}
-                    onChangeItem={item => this.setState({
-                        faculty: item.value
-                    })}
+                    onChangeItem={item => setFaculty(item.value)}
+                    // onStateChange={ }
                 />
                 <DropDownPicker
                     items={[
-                        {label: 'dbsa', value: 'dbsa', hidden: true},
-                        {label: 'it', value: 'it' },
-                        {label: 'multi', value: 'multi',},
+                        ...Object.keys(databranch).map(key => ({label: databranch[key].name, value: databranch[key].name }))
                     ]}
-                    defaultValue={branch}
                     containerStyle={{height: 40, flex: 1, marginTop: 10}}
                     style={{backgroundColor: '#fafafa'}}
                     itemStyle={{
                         justifyContent: 'flex-start'
                     }}
                     dropDownStyle={{backgroundColor: '#fafafa'}}
-                    onChangeItem={item => this.setState({
-                        branch: item.value
-                    })}
+                    onChangeItem={item => setBranch(item.value)}
                 />
                 </View>
                 <View style={[styles.dropdown, {zIndex: 1}]}>
@@ -81,9 +102,7 @@ const AddSheet = () => {
                         justifyContent: 'flex-start'
                     }}
                     dropDownStyle={{backgroundColor: '#fafafa'}}
-                    onChangeItem={item => this.setState({
-                        year: item.value
-                    })}
+                    onChangeItem={item => setYear(item.value)}
                 />
                 <DropDownPicker
                     items={[
@@ -98,9 +117,7 @@ const AddSheet = () => {
                         justifyContent: 'flex-start'
                     }}
                     dropDownStyle={{backgroundColor: '#fafafa'}}
-                    onChangeItem={item => this.setState({
-                        semester: item.value
-                    })}
+                    onChangeItem={item => setSemester(item.value)}
                 />
             </View>  
             <View style={{paddingTop:10}}>
@@ -109,7 +126,7 @@ const AddSheet = () => {
                 type="outline"
                 title="เพิ่มเอกสารชีท..."
                 color="#989a9c"
-                onPress={handleFilePick}
+                onPress={wtfss}
                 style={{weight: 20}}
                 
             />
