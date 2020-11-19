@@ -47,7 +47,7 @@ const BuySheet = () => {
                 <Text style={styles.text}>เวลา :</Text>
                 <TextInput style={styles.input} placeholder="เพิ่มเวลาที่นี่ ..."/>
                 <Text style={styles.text}>ราคา :</Text>
-                <TextInput style={styles.input} placeholder="เพิ่มราคาที่นี่ ..." autoCompleteType="cc-number"p7/>
+                <TextInput style={styles.input} placeholder="เพิ่มราคาที่นี่ ..."/>
                 <Button title="ยืนยัน"/>
             </View>
             </ScrollView>

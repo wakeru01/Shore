@@ -4,7 +4,7 @@ import { HomeNavigator as Home } from '../navigation/NavigatorAdmin'
 import { AddSheetNavigator as AddSheet } from '../navigation/NavigatorAdmin'
 import { NotificationNavigator as Notification } from '../navigation/NavigatorAdmin'
 import { ProfileNavigator as Profile } from '../navigation/NavigatorAdmin'
-import Con from '../screens/main/ConditionScreen'
+// import Con from '../screens/ConditionScreen'
 // import Profile from '../screens/main/ProfileScreen'
 // import AddSheet from '../screens/main/AddSheetScreen'
 import { Entypo } from '@expo/vector-icons';
@@ -22,7 +22,7 @@ export default function MainRouter() {
       }} name="AddSheet" component={AddSheet} />
       <Tab.Screen options={{
         tabBarIcon: () => (<Entypo name="bell" size={26} color="black" />)
-      }} name="Notification" component={Con} />
+      }} name="Notification" component={Notification} />
       <Tab.Screen options={{
         tabBarIcon: () => (<Entypo name="user" size={26} color="black" />)
       }} name="Profile" component={Profile} />
