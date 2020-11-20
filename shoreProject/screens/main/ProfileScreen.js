@@ -1,26 +1,64 @@
 import React from "react";
-import { View, StyleSheet, Text, Image } from "react-native";
+import { View, StyleSheet, Text, Image, Dimensions, StatusBar, TouchableOpacity } from "react-native";
+import { TabView, SceneMap } from 'react-native-tab-view';
 
-export default function App() {
-  // เพิ่มโค้ดส่วนนี้
-  return(
+// const Profile = () => {
+// };
+
+// export default Profile;
+
+// export default function App() {
+//   // เพิ่มโค้ดส่วนนี้
+//   return(
+//     <View style={styles.screen}>
+//       <View style={{flexDirection: 'row'}}>
+//         <View><Image style={styles.pic} source={require("../../assets/profile_icon.jpg")} /></View>
+//         <Text style={{ fontSize: 22 }} >Thanida Samniang</Text>
+//         <Image style={styles.edit} source={require("../../assets/edit.png")} />
+//       </View>
+//     </View>
+        
+//   )
+// }
+
+const FirstRoute = () => (
+  <View style={[styles.scene, { backgroundColor: '#ff4081' }]} />
+);
+
+const SecondRoute = () => (
+  <View style={[styles.scene, { backgroundColor: '#673ab7' }]} />
+);
+
+const initialLayout = { width: Dimensions.get('window').width };
+
+export default function TabViewExample() {
+  const [index, setIndex] = React.useState(0);
+  const [routes] = React.useState([
+    { key: 'first', title: 'Buy' },
+    { key: 'second', title: 'Sell' },
+  ]);
+
+  const renderScene = SceneMap({
+    first: FirstRoute,
+    second: SecondRoute,
+  });
+
+  return (
     <View style={styles.screen}>
       <View style={{flexDirection: 'row'}}>
         <View><Image style={styles.pic} source={require("../../assets/profile_icon.jpg")} /></View>
         <Text style={{ fontSize: 22 }} >Thanida Samniang</Text>
         <Image style={styles.edit} source={require("../../assets/edit.png")} />
-      </View>
-      <View style={{flexDirection: 'row'}}>
-        <View style={{width: 180, height: 55, backgroundColor: 'powderblue'}} >
-          <Text style={{ fontSize: 20 }}>BUY</Text>
-        </View>
-        <View style={{width: 180, height: 55, backgroundColor: 'skyblue'}} >
-          <Text style={{ fontSize: 20 }}>SELL</Text>
-        </View>
-      </View>
-      <View></View>
+     </View>
+      <TabView
+        navigationState={{ index, routes }}
+        renderScene={renderScene}
+        onIndexChange={setIndex}
+        initialLayout={initialLayout}
+        style={styles.container}
+      />
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -38,5 +76,11 @@ const styles = StyleSheet.create({
   edit: {
     width: 21,
     height: 21,
-  }
+  },
+  container: {
+    marginTop: StatusBar.currentHeight,
+  },
+  scene: {
+    flex: 1,
+  },
 });
