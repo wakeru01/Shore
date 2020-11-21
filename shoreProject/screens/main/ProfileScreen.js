@@ -1,6 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Text, Image, Dimensions, StatusBar, TouchableOpacity } from "react-native";
 import { TabView, SceneMap } from 'react-native-tab-view';
+// import PhotoUpload from 'react-native-photo-upload';
 
 // const Profile = () => {
 // };
@@ -46,7 +47,9 @@ export default function TabViewExample() {
   return (
     <View style={styles.screen}>
       <View style={{flexDirection: 'row'}}>
-        <View><Image style={styles.pic} source={require("../../assets/profile_icon.jpg")} /></View>
+        <View>
+          <Image style={styles.pic} source={require("../../assets/profile_icon.jpg")} />
+        </View>
         <Text style={{ fontSize: 22 }} >Thanida Samniang</Text>
         <Image style={styles.edit} source={require("../../assets/edit.png")} />
      </View>
@@ -69,7 +72,6 @@ const styles = StyleSheet.create({
       paddingTop: 20,
   },
   pic: {
-    // resizeMode: "cover",
     width: 110,
     height: 110,
   },
