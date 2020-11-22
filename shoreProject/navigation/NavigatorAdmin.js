@@ -7,6 +7,7 @@ import HomeScreen from "../screens/main/HomeScreen";
 import AddSheetScreen from "../screens/main/AddSheetScreen";
 import NotificationScreen from "../screens/main/NotificationScreen";
 import ProfileScreen from "../screens/main/ProfileScreen";
+import RatingScreen from "../screens/RatingScreen";
 import { createStackNavigator } from '@react-navigation/stack'
 
 const Stack = createStackNavigator()
@@ -60,6 +61,7 @@ const NotificationNavigator = () => {
         
       }} initialRouteName="Notification">
         <Stack.Screen name="Notification" component={NotificationScreen} />
+        <Stack.Screen name="Rating" component={RatingScreen} />
       </Stack.Navigator>
     )
 }

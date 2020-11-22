@@ -4,7 +4,6 @@ import { HomeNavigator as Home } from '../navigation/NavigatorAdmin'
 import { AddSheetNavigator as AddSheet } from '../navigation/NavigatorAdmin'
 import { NotificationNavigator as Notification } from '../navigation/NavigatorAdmin'
 import { ProfileNavigator as Profile } from '../navigation/NavigatorAdmin'
-
 import { Entypo } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();

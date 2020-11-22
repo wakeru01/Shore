@@ -16,7 +16,9 @@ export default function RegisterScreen(props) {
     }
     try {
       await firebase.auth().createUserWithEmailAndPassword(email, pass)
-      props.navigation.pop()
+
+      props.navigation.push('Condition')
+      
     } catch (error) {
       var errorCode = error.code;
       var errorMessage = error.message;
@@ -33,12 +35,12 @@ export default function RegisterScreen(props) {
         <TextInput style={styles.input}/>
         <Text style={styles.text}>นามสกุล :</Text>
         <TextInput style={styles.input}/>
-        <Text style={styles.text}>ชื่อผู้ใช้ :</Text>
-        <TextInput style={styles.input}/>
+        <Text style={styles.text}>อีเมล :</Text>
+        <TextInput style={styles.input} onChangeText={email => setEmail(email)}/>
         <Text style={styles.text}>รหัสผ่าน :</Text>
-        <TextInput style={styles.input} onChangeText={pass => setPass(pass)}/>
+        <TextInput style={styles.input} secureTextEntry={true} onChangeText={pass => setPass(pass)}/>
         <Text style={styles.text}>ยืนยันรหัสผ่าน :</Text>
-        <TextInput style={styles.input} onChangeText={confirmPass => setConfirmPass(confirmPass)}/>
+        <TextInput style={styles.input} secureTextEntry={true} onChangeText={confirmPass => setConfirmPass(confirmPass)}/>
         <Text style={styles.text}>เบอร์โทรศัพท์ :</Text>
         <TextInput style={styles.input}/>
         {/* <Text>Email:</Text><TextInput placeholder="insert email" onChangeText={email => setEmail(email)}/>
