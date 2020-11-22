@@ -10,20 +10,20 @@ export default function LoginScreen(props) {
   const navToRegister = () => {
       props.navigation.push('Register')
   }
-  useEffect(() => {
-    firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-          // User is signed in.
-          console.log(user)
-          props.navigation.replace('Main')
-        } else {
-          // No user is signed in.
-        }
-      })
-  })
+  // useEffect(() => {
+  //   firebase.auth().onAuthStateChanged(function(user) {
+  //       if (user) {
+  //         // User is signed in.
+  //         console.log(user)
+  //         props.navigation.replace('Main')
+  //       } else {
+  //         // No user is signed in.
+  //       }
+  //     })
+  // })
   const navToMain = async () => {
     try {
-        // await firebase.auth().signInWithEmailAndPassword(email, pass)
+        await firebase.auth().signInWithEmailAndPassword(email, pass)
         props.navigation.replace('Main')
       } catch (error) {
         var errorCode = error.code;
@@ -45,7 +45,7 @@ export default function LoginScreen(props) {
           <View style={styles.line}/>
           <View style={styles.signUp}>
             <Text style={styles.text}>ไม่มีบัญชีผู้ใช้ใช่หรือไม่?  </Text>
-            <Text style={styles.textSign}>สมัครสมาชิก</Text>
+            <Text style={styles.textSign} onPress={navToRegister}>สมัครสมาชิก</Text>
           </View>
         </View>
       </ImageBackground>
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     borderRadius:3
   },
   line:{
-    borderBottomColor: 'Blue',
+    borderBottomColor: '#0c4ef5',
     borderBottomWidth: 1,
     marginTop:5,
     marginBottom:15
