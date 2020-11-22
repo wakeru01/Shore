@@ -127,19 +127,24 @@ const AddSheet = () => {
                 title="เพิ่มเอกสารชีท..."
                 color="#989a9c"
                 onPress={async () => {
-                    
                     const sheetPic = await DocumentPicker.getDocumentAsync({ multiple: true });
                     console.log(sheetPic);
+                    
+                    for (let index = 0; index < sheetPic.output.length; index++) {
+                        firebase.storage().ref('test' + index + '.png').put(sheetPic.output[index])
+                    }
                     setSheetpic(sheetPic)
                 }}
                 style={{weight: 20}}
             />
                 <Text style={styles.text}>ราคา:</Text>
                 <TextInput style={styles.input}
+                    placeholder="เพิ่มราคาที่นี่ ..."
                     onChangeText={(text) => setPrice(text)}
                 />
                 <Text style={styles.text}>รายละเอียด :</Text>
-                <TextInput style={styles.input}
+                <TextInput style={styles.input} 
+                    placeholder="เพิ่มรายละเอียดที่นี่ ..." 
                     multiline 
                     numberOfLines={7} 
                     onChangeText={(text) => setDetail(text)}
@@ -203,8 +208,12 @@ const styles = StyleSheet.create({
     input:{
         backgroundColor: "white",
         padding: 10,
+<<<<<<< Updated upstream
         marginBottom: 5,
         borderRadius:3
+=======
+        marginBottom: 10,
+>>>>>>> Stashed changes
     }
 });
 
