@@ -124,7 +124,7 @@ const AddSheet = () => {
                 color="#989a9c"
                 onPress={async () => {
                     
-                    const sheetPic = await DocumentPicker.getDocumentAsync(multiple(true));
+                    const sheetPic = await DocumentPicker.getDocumentAsync({ multiple: true });
                     console.log(sheetPic);
                     setSheetpic(sheetPic)
                 }}
