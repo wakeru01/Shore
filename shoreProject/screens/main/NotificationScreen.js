@@ -1,11 +1,13 @@
 import React from "react";
 import { View, StyleSheet, Text, Dimensions, StatusBar, Image, Button, SafeAreaView, Separator } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import { TabView, SceneMap } from 'react-native-tab-view';
 
-export default function App() {
+export default function App({ navigation }) {
   // เพิ่มโค้ดส่วนนี้
   return(
     <View style={styles.screen}>
+      <ScrollView>
       <View style={{flexDirection: 'row'}}>
         <View>
           <Image style={styles.pic} source={require("../../assets/file.png")} />
@@ -16,12 +18,12 @@ export default function App() {
           <View style={{flexDirection: 'row'}} >
             <Button
               title="ยืนยัน"
-              color="#92AFF3"
+              // color="#92AFF3"
               onPress={() => Alert.alert('Left button pressed')}
             />
             <Button
               title="ติดต่อ"
-              color="#e8edfa"
+              color="#e63525"
               onPress={() => Alert.alert('Right button pressed')}
             />
           </View>
@@ -37,7 +39,7 @@ export default function App() {
           <View style={{flexDirection: 'row'}} >
             <Button
               title="ให้คะแนนชีท"
-              onPress={() => Alert.alert('Simple Button pressed')}
+              onPress={() => navigation.navigate('Rating')}
             />
           </View>
         </View>
@@ -53,17 +55,18 @@ export default function App() {
           <View style={{flexDirection: 'row'}} >
             <Button
               title="ยืนยัน"
-              color="#92AFF3"
+              // color="#92AFF3"
               onPress={() => Alert.alert('Left button pressed')}
             />
             <Button
               title="ติดต่อ"
-              color="#e8edfa"
+              color="#e63525"
               onPress={() => Alert.alert('Right button pressed')}
             />
           </View>
         </View>
       </View>
+      </ScrollView>
     </View> 
   )
 }
