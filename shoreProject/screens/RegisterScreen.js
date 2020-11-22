@@ -30,17 +30,17 @@ export default function RegisterScreen(props) {
       </View>
       <View style={styles.container}>
         <Text style={styles.text}>ชื่อ :</Text>
-        <TextInput style={styles.input}/>
+        <TextInput style={styles.input} placeholder="ภาษาไทยหรือภาษาอังกฤษ"/>
         <Text style={styles.text}>นามสกุล :</Text>
-        <TextInput style={styles.input}/>
+        <TextInput style={styles.input} placeholder="ภาษาไทยหรือภาษาอังกฤษ"/>
         <Text style={styles.text}>อีเมล :</Text>
-        <TextInput style={styles.input} onChangeText={email => setEmail(email)}/>
+        <TextInput style={styles.input} onChangeText={email => setEmail(email)} placeholder="excample@email.com"/>
         <Text style={styles.text}>รหัสผ่าน :</Text>
-        <TextInput style={styles.input} secureTextEntry={true} onChangeText={pass => setPass(pass)}/>
+        <TextInput style={styles.input} secureTextEntry={true} onChangeText={pass => setPass(pass)} placeholder="อย่างน้อย8ตัว"/>
         <Text style={styles.text}>ยืนยันรหัสผ่าน :</Text>
-        <TextInput style={styles.input} secureTextEntry={true} onChangeText={confirmPass => setConfirmPass(confirmPass)}/>
+        <TextInput style={styles.input} secureTextEntry={true} onChangeText={confirmPass => setConfirmPass(confirmPass)} placeholder="คอนเฟิร์ม Password"/>
         <Text style={styles.text}>เบอร์โทรศัพท์ :</Text>
-        <TextInput style={styles.input}/>
+        <TextInput style={styles.input} placeholder="ตัวเลขเท่านั้น"/>
         {/* <Text>Email:</Text><TextInput placeholder="insert email" onChangeText={email => setEmail(email)}/>
         <Text>Password:</Text><TextInput placeholder="insert password" onChangeText={pass => setPass(pass)}/>
         <Text>Confirm Password:</Text><TextInput placeholder="insert confirm password" onChangeText={confirmPass => setConfirmPass(confirmPass)}/> */}

@@ -39,8 +39,8 @@ export default function LoginScreen(props) {
           <View style={styles.header}>
             <Text style={styles.textHeader}>เข้าสู่ระบบ</Text>
           </View>
-          <TextInput style={styles.input} onChangeText={email => setEmail(email)} placeholder="ชื่อผู้ใช้"/>
-          <TextInput style={styles.input} onChangeText={pass => setPass(pass)} placeholder="รหัสผ่าน"/>
+          <TextInput style={styles.input} onChangeText={email => setEmail(email)} placeholder="ชื่อผู้ใช้หรืออีเมล"/>
+          <TextInput style={styles.input} secureTextEntry={true} onChangeText={pass => setPass(pass)} placeholder="รหัสผ่าน"/>
           <Button onPress={navToMain} style={styles.button} title="เข้าสู่ระบบ" />
           <View style={styles.line}/>
           <View style={styles.signUp}>
