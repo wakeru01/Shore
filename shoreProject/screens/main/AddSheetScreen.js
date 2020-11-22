@@ -117,6 +117,10 @@ const AddSheet = () => {
                 />
             </View>  
             <View style={{paddingTop:10}}>
+            <Text style={styles.text}>ชื่อวิชา:</Text>
+                <TextInput style={styles.input}
+                    onChangeText={(text) => setPrice(text)}
+                />
             <Text style={styles.text}>เอกสารชีท :</Text>
                 <Button 
                 type="outline"
@@ -193,13 +197,13 @@ const styles = StyleSheet.create({
     },
     text:{
         paddingBottom:5, 
-        fontSize:18, 
+        fontSize:16, 
         marginTop:10
     },
     input:{
         backgroundColor: "white",
         padding: 10,
-        marginBottom: 10,
+        marginBottom: 5,
         borderRadius:3
     }
 });

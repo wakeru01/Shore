@@ -1,5 +1,5 @@
 import React, { useState , useEffect } from 'react';
-import { View, StyleSheet, ScrollView  } from "react-native";
+import { View, StyleSheet, ScrollView, Text, Image  } from "react-native";
 import DropDownPicker from 'react-native-dropdown-picker'
 import { Searchbar } from 'react-native-paper';
 import firebase from 'firebase/app'
@@ -134,7 +134,18 @@ const Home = () => {
                     onChangeItem={item => setSelectedsemester(item.value)}
                 />
             </View>
-            
+            <View style={styles.grideTile}>
+                <View style={styles.imageGride}>
+                    <Image style={styles.pic} source={require("../../assets/file.png")} />
+                </View>
+                <View style={styles.detailGride}>
+                    <Text style={styles.header}>hnimi</Text>
+                    <Text>guyhjk</Text>
+                </View>
+                <View style={styles.detailPrice}>
+                    <Text style={styles.price}>50฿</Text>
+                </View>
+            </View>
             </ScrollView>  
         </View>
     );
@@ -152,6 +163,34 @@ const styles = StyleSheet.create({
         // flex: 1,
         flexDirection: "row",
         height: 50,
+    },
+    grideTile:{
+        backgroundColor: "white",
+        padding:10,
+        marginTop:7,
+        borderRadius:3,
+        flexDirection:'row'
+    },
+    imageGride:{
+        flex: 1,
+    },
+    detailGride:{
+        flex: 3
+    },
+    detailPrice:{
+        flex:1,
+        flexDirection:'row-reverse'
+    },
+    price:{
+        color:"red"
+    },
+    pic:{
+        width:55,
+        height:55,
+    },
+    header:{
+        fontSize:20
     }
+
 });
 
