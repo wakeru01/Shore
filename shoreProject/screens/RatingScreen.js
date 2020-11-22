@@ -3,7 +3,7 @@ import { StyleSheet,
   Text, 
   View, 
   ScrollView} from 'react-native';
-import { Rating, AirbnbRating } from 'react-native-elements';
+import { AirbnbRating } from 'react-native-elements';
 import { Button } from 'react-native-elements';
 
 export default class App extends React.Component {

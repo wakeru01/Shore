@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Button,TextInput, ImageBackground} from 'react-native';
+import { StyleSheet, Text, View,TextInput, ImageBackground} from 'react-native';
 import firebase from 'firebase/app'
+import { Button } from 'react-native-elements';
 import 'firebase/auth'
 
 export default function LoginScreen(props) {
@@ -35,12 +36,17 @@ export default function LoginScreen(props) {
     <View style={styles.container}>
       <ImageBackground source={require('../assets/book6.png')} style={styles.image} >
         <View style={styles.popUpImage}>
-          <Text style={styles.header}>Login</Text>
-
-          <Text style={styles.text}>ชื่อผู้ใช้</Text>
-          <TextInput style={styles.input} placeholder="เพิ่มเวลาที่นี่ ..."/>
-          <Text style={styles.text}>รหัสผ่าน</Text>
-          <TextInput style={styles.input} placeholder="เพิ่มเวลาที่นี่ ..."/>
+          <View style={styles.header}>
+            <Text style={styles.textHeader}>เข้าสู่ระบบ</Text>
+          </View>
+          <TextInput style={styles.input} placeholder="ชื่อผู้ใช้"/>
+          <TextInput style={styles.input} placeholder="รหัสผ่าน"/>
+          <Button onPress={navToMain} style={styles.button} title="เข้าสู่ระบบ" />
+          <View style={styles.line}/>
+          <View style={styles.signUp}>
+            <Text style={styles.text}>ไม่มีบัญชีผู้ใช้ใช่หรือไม่?  </Text>
+            <Text style={styles.textSign}>สมัครสมาชิก</Text>
+          </View>
         </View>
       </ImageBackground>
       {/* <Text>Login Screen</Text>
@@ -56,7 +62,11 @@ export default function LoginScreen(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "column"
+  },
+  signUp:{
+    flexDirection:'row',
+    justifyContent: "center",
+    alignItems:"center",
   },
   image:{
     flex:1,
@@ -64,25 +74,48 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   popUpImage:{
-    justifyContent: "center",
-    alignItems:"center",
+    // justifyContent: "center",
+    // alignItems:"center",
     backgroundColor:"white",
-    padding:10,
-    marginLeft:30,
-    marginRight:30,
+    padding:20,
+    marginLeft:50,
+    marginRight:50,
+    borderRadius: 10
+  },
+  textHeader:{
+    fontSize:30,
+    marginBottom:20,
   },
   header:{
-    fontSize:30
+    justifyContent: "center",
+    alignItems:"center",
   },
   input:{
     backgroundColor: "white",
-    padding: 5,
+    padding:10,
+    paddingBottom: 12,
+    paddingTop:12,
     marginBottom: 10,
     borderColor: 'gray', 
     borderWidth: 1,
     borderRadius:3
   },
+  line:{
+    borderBottomColor: 'Blue',
+    borderBottomWidth: 1,
+    marginTop:5,
+    marginBottom:15
+  },
+  button:{
+    marginTop: 5,
+    marginBottom: 20
+  },
+  textSign:{
+    fontSize: 16,
+    color: "blue"
+  },
   text:{
-    fontSize:18
+    fontSize:16
   }
+
 });

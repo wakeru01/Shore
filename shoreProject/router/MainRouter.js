@@ -4,6 +4,7 @@ import { HomeNavigator as Home } from '../navigation/NavigatorAdmin'
 import { AddSheetNavigator as AddSheet } from '../navigation/NavigatorAdmin'
 import { NotificationNavigator as Notification } from '../navigation/NavigatorAdmin'
 import { ProfileNavigator as Profile } from '../navigation/NavigatorAdmin'
+import RatingScr from '../screens/RatingScreen'
 // import Con from '../screens/ConditionScreen'
 // import Profile from '../screens/main/ProfileScreen'
 // import AddSheet from '../screens/main/AddSheetScreen'
@@ -26,6 +27,9 @@ export default function MainRouter() {
       <Tab.Screen options={{
         tabBarIcon: () => (<Entypo name="user" size={26} color="black" />)
       }} name="Profile" component={Profile} />
+      <Tab.Screen options={{
+        tabBarIcon: () => (<Entypo name="user" size={26} color="black" />)
+      }} name="RatingScr" component={RatingScr} />
     </Tab.Navigator>
   );
 }
