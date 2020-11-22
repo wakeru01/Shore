@@ -132,11 +132,9 @@ const AddSheet = () => {
             />
                 <Text style={styles.text}>ราคา:</Text>
                 <TextInput style={styles.input}
-                    placeholder="เพิ่มราคาที่นี่ ..."
                 />
                 <Text style={styles.text}>รายละเอียด :</Text>
-                <TextInput style={styles.input} 
-                    placeholder="เพิ่มรายละเอียดที่นี่ ..." 
+                <TextInput style={styles.input}
                     multiline 
                     numberOfLines={7} 
                 />
@@ -178,6 +176,7 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         padding: 10,
         marginBottom: 10,
+        borderRadius:3
     }
 });
 

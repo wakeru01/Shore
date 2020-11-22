@@ -10,17 +10,18 @@ export default function LoginScreen(props) {
   const navToRegister = () => {
       props.navigation.push('Register')
   }
-  // useEffect(() => {
-  //   firebase.auth().onAuthStateChanged(function(user) {
-  //       if (user) {
-  //         // User is signed in.
-  //         console.log(user)
-  //         props.navigation.replace('Main')
-  //       } else {
-  //         // No user is signed in.
-  //       }
-  //     })
-  // })
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
+          console.log(user)
+          props.navigation.replace('Main')
+        } else {
+          // No user is signed in.
+        }
+      })
+  })
+  
   const navToMain = async () => {
     try {
         await firebase.auth().signInWithEmailAndPassword(email, pass)
@@ -39,8 +40,8 @@ export default function LoginScreen(props) {
           <View style={styles.header}>
             <Text style={styles.textHeader}>เข้าสู่ระบบ</Text>
           </View>
-          <TextInput style={styles.input} placeholder="ชื่อผู้ใช้"/>
-          <TextInput style={styles.input} placeholder="รหัสผ่าน"/>
+          <TextInput style={styles.input} onChangeText={email => setEmail(email)} placeholder="ชื่อผู้ใช้"/>
+          <TextInput style={styles.input} onChangeText={pass => setPass(pass)} placeholder="รหัสผ่าน"/>
           <Button onPress={navToMain} style={styles.button} title="เข้าสู่ระบบ" />
           <View style={styles.line}/>
           <View style={styles.signUp}>
@@ -49,12 +50,6 @@ export default function LoginScreen(props) {
           </View>
         </View>
       </ImageBackground>
-      {/* <Text>Login Screen</Text>
-      <Text>Email:</Text><TextInput placeholder="insert email" onChangeText={email => setEmail(email)}/>
-      <Text>Password:</Text><TextInput placeholder="insert Password" onChangeText={pass => setPass(pass)}/>
-
-      <Button onPress={navToRegister} title="Register ?" />
-      <Button onPress={navToMain} title="Login" /> */}
     </View>
   );
 }
