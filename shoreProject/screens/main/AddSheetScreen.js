@@ -208,12 +208,8 @@ const styles = StyleSheet.create({
     input:{
         backgroundColor: "white",
         padding: 10,
-<<<<<<< Updated upstream
         marginBottom: 5,
         borderRadius:3
-=======
-        marginBottom: 10,
->>>>>>> Stashed changes
     }
 });
 
