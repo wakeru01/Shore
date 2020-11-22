@@ -17,6 +17,7 @@ export default function RegisterScreen(props) {
     try {
       await firebase.auth().createUserWithEmailAndPassword(email, pass)
       props.navigation.pop()
+      
     } catch (error) {
       var errorCode = error.code;
       var errorMessage = error.message;
