@@ -1,13 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import { View, StyleSheet, ScrollView  } from "react-native";
 import DropDownPicker from 'react-native-dropdown-picker'
 import { Searchbar } from 'react-native-paper';
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 
 const Home = () => {
     const [searchQuery, setSearchQuery] = React.useState('');
+    const [faculty, setFaculty] = React.useState('')
+    const [stateFaculty, setStateFaculty] = React.useState(false)
+    const [branch, setBranch] = React.useState('')
+    const [year, setYear] = React.useState([])
+    const [semester, setSemester] = React.useState([])
+    const [datafaculty, setDatafaculty] = useState({})
+    const [databranch, setDatabranch] = useState({})
+    const [sheets, setSheets] = useState('')
+    const [dataSheets, setDatasheets] = useState({})
+    const [selectedyear, setSelectedyear] = useState({})
+    const [selectedsemester, setSelectedsemester] = useState({})
+    // const [searchQuery, setSearchQuery] = React.useState('');
     const [country, setCountry] = React.useState('uk')
-
+    var db = firebase.firestore()
     const onChangeSearch = query => setSearchQuery(query);
+
+    useEffect(async () => {
+        const querySnapshot = await db.collection("faculty").get()
+        const faculty = {}
+        querySnapshot.forEach((doc) => {
+            faculty[doc.id] = doc.data()
+        });
+        setDatafaculty(faculty);
+    }, []);
 
     return (
         <View style={styles.screen}>
@@ -20,75 +43,98 @@ const Home = () => {
             <View style={[styles.dropdown, {zIndex: 1}]}>
                 <DropDownPicker
                     items={[
-                        {label: 'ภาคเรียน', value: 'usa', hidden: true},
-                        {label: 'UK', value: 'uk' },
-                        {label: 'France', value: 'france',},
+                        ...Object.keys(datafaculty).map(key => ({label: datafaculty[key].name, value: key }))
                     ]}
-                    defaultValue={country}
                     containerStyle={{height: 40, flex: 1, marginTop: 10}}
                     style={{backgroundColor: '#fafafa'}}
                     itemStyle={{
                         justifyContent: 'flex-start'
                     }}
                     dropDownStyle={{backgroundColor: '#fafafa'}}
-                    onChangeItem={item => this.setState({
-                        country: item.value
-                    })}
+                    onChangeItem={ async (item) => {
+                        setFaculty(item.value)
+                        const querySnapshot = await db.collection("faculty").doc(item.value).collection("branch").get();
+                        const branch = {};
+                        querySnapshot.forEach((doc) => {
+                            branch[doc.id] = doc.data()
+                        });
+                        setDatabranch(branch)
+                    }}
+                    // onStateChange={ }
                 />
                 <DropDownPicker
                     items={[
-                        {label: 'USA', value: 'usa', hidden: true},
-                        {label: 'UK', value: 'uk' },
-                        {label: 'France', value: 'france',},
+                        ...Object.keys(databranch).map(key => ({label: databranch[key].name, value: key }))
                     ]}
-                    defaultValue={country}
                     containerStyle={{height: 40, flex: 1, marginTop: 10}}
                     style={{backgroundColor: '#fafafa'}}
                     itemStyle={{
                         justifyContent: 'flex-start'
                     }}
                     dropDownStyle={{backgroundColor: '#fafafa'}}
-                    onChangeItem={item => this.setState({
-                        country: item.value
-                    })}
+                    onChangeItem={ async (item) => {
+                        setBranch(item.value)
+                        const querySnapshot = await db.collection("faculty").doc(faculty).collection("branch").doc(item.value).collection("sheets").get();
+                        const sheets = {};
+                        let year = [];
+                        querySnapshot.forEach((doc) => {
+                            console.log(doc.data())
+                            sheets[doc.id] = doc.data()
+                            if(!year.includes(doc.data().year)){
+                                year = [...year, doc.data().year]
+                                console.log(year)
+                            }
+                        });
+                        year.sort()
+                        setYear(year)
+                        setDatasheets(sheets)
+                    }}
                 />
                 </View>
                 <View style={styles.dropdown}>
                 <DropDownPicker
                     items={[
-                        {label: 'USA', value: 'usa', hidden: true},
-                        {label: 'UK', value: 'uk' },
-                        {label: 'France', value: 'france',},
+                        ...year.map(y => ({label: y.toString(), value: y }))
                     ]}
-                    defaultValue={country}
                     containerStyle={{height: 40, flex: 1, marginTop: 10}}
                     style={{backgroundColor: '#fafafa'}}
                     itemStyle={{
                         justifyContent: 'flex-start'
                     }}
                     dropDownStyle={{backgroundColor: '#fafafa'}}
-                    onChangeItem={item => this.setState({
-                        country: item.value
-                    })}
+                    onChangeItem={ async (item) => {
+                        let semester = []
+                        setSelectedyear(item.value)
+                        const thisyear = Object.keys(dataSheets).filter((id) =>{
+                            return dataSheets[id].year == item.value
+                        })
+                        thisyear.forEach((id) => {
+                            if(!semester.includes(dataSheets[id].semester)){
+                                semester = [...semester, dataSheets[id].semester]
+                        }})
+                        setSemester(semester)
+                        // const querySnapshot = await db.collection("faculty").doc(item.value).collection("branch").get();
+                        // const branch = {};
+                        // querySnapshot.forEach((doc) => {
+                        //     branch[doc.id] = doc.data()
+                        // });
+                        // setDatabranch(branch)
+                    }}
                 />
                 <DropDownPicker
                     items={[
-                        {label: 'USA', value: 'usa', hidden: true},
-                        {label: 'UK', value: 'uk' },
-                        {label: 'France', value: 'france',},
+                        ...semester.map(s => ({label: s.toString(), value: s }))
                     ]}
-                    defaultValue={country}
                     containerStyle={{height: 40, flex: 1, marginTop: 10}}
                     style={{backgroundColor: '#fafafa'}}
                     itemStyle={{
                         justifyContent: 'flex-start'
                     }}
                     dropDownStyle={{backgroundColor: '#fafafa'}}
-                    onChangeItem={item => this.setState({
-                        country: item.value
-                    })}
+                    onChangeItem={item => setSelectedsemester(item.value)}
                 />
-            </View> 
+            </View>
+            
             </ScrollView>  
         </View>
     );

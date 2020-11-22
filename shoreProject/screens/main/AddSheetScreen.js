@@ -9,23 +9,34 @@ import DropDownPicker from 'react-native-dropdown-picker'
 import * as DocumentPicker from 'expo-document-picker';
 import firebase from 'firebase/app'
 import 'firebase/firestore'
+import 'firebase/storage'
+import 'firebase/auth'
 // import axios from 'axios'
 const AddSheet = () => {
-
-    var db = firebase.firestore();
+    const user = firebase.auth().currentUser
     const [searchQuery, setSearchQuery] = React.useState('');
     const [faculty, setFaculty] = React.useState('')
     const [stateFaculty, setStateFaculty] = React.useState(false)
     const [branch, setBranch] = React.useState('')
-    const [year, setYear] = React.useState('')
-    const [semester, setSemester] = React.useState('')
+    const [year, setYear] = React.useState([2015,2016,2017,2018,2019,2020])
+    const [semester, setSemester] = React.useState([1,2])
     const [datafaculty, setDatafaculty] = useState({})
     const [databranch, setDatabranch] = useState({})
+    const [sheets, setSheets] = useState('')
+    const [dataSheets, setDatasheets] = useState({})
+    const [selectedyear, setSelectedyear] = useState({})
+    const [selectedsemester, setSelectedsemester] = useState({})
+    const [price, setPrice] = React.useState()
+    const [detail, setDetail] = React.useState('')
+    const sheetRef = firebase.firestore().collection('sheets').doc()
+    const [sheetpic, setSheetpic] = useState({})
+    const [sheetex, setSheetex] = useState({})
 
-    const handleFilePick = async () => {
-        const fileResponse = await DocumentPicker.getDocumentAsync();
-        console.log(fileResponse);
-    }
+    var db = firebase.firestore()
+    // const handleFilePick = async () => {
+    //     const fileResponse = await DocumentPicker.getDocumentAsync();
+    //     console.log(fileResponse);
+    // }
 
     useEffect(async () => {
         const querySnapshot = await db.collection("faculty").get()
@@ -36,24 +47,6 @@ const AddSheet = () => {
         setDatafaculty(faculty);
     }, []);
 
-    useEffect(async () => {
-        const querySnapshot = await db.collection("faculty").get().collection(faculty).get()
-        const branch = {}
-        querySnapshot.forEach((doc) => {
-            branch[doc.id] = doc.data()
-        });
-        setDatabranch(branch)
-    }, []);
-
-    const wtfss = async () => {
-        const querySnapshot = await db.collection("faculty").get()
-        const faculty = {}
-        querySnapshot.forEach((doc) => {
-            faculty[doc.id] = doc.data()
-        });
-        console.log(faculty)
-    }
-
     const onChangeSearch = query => setSearchQuery(query);
 
     return (
@@ -62,7 +55,7 @@ const AddSheet = () => {
             <View style={[styles.dropdown, {zIndex: 2}]}>
                 <DropDownPicker
                     items={[
-                        ...Object.keys(datafaculty).map(key => ({label: datafaculty[key].name, value: datafaculty[key].name }))
+                        ...Object.keys(datafaculty).map(key => ({label: datafaculty[key].name, value: key }))
                     ]}
                     containerStyle={{height: 40, flex: 1, marginTop: 10}}
                     style={{backgroundColor: '#fafafa'}}
@@ -70,12 +63,19 @@ const AddSheet = () => {
                         justifyContent: 'flex-start'
                     }}
                     dropDownStyle={{backgroundColor: '#fafafa'}}
-                    onChangeItem={item => setFaculty(item.value)}
-                    // onStateChange={ }
+                    onChangeItem={ async (item) => {
+                        setFaculty(item.value)
+                        const querySnapshot = await db.collection("faculty").doc(item.value).collection("branch").get();
+                        const branch = {};
+                        querySnapshot.forEach((doc) => {
+                            branch[doc.id] = doc.data()
+                        });
+                        setDatabranch(branch)
+                    }}
                 />
                 <DropDownPicker
                     items={[
-                        ...Object.keys(databranch).map(key => ({label: databranch[key].name, value: databranch[key].name }))
+                        ...Object.keys(databranch).map(key => ({label: databranch[key].name, value: key }))
                     ]}
                     containerStyle={{height: 40, flex: 1, marginTop: 10}}
                     style={{backgroundColor: '#fafafa'}}
@@ -83,41 +83,37 @@ const AddSheet = () => {
                         justifyContent: 'flex-start'
                     }}
                     dropDownStyle={{backgroundColor: '#fafafa'}}
-                    onChangeItem={item => setBranch(item.value)}
+                    onChangeItem={ async (item) => {
+                        setBranch(item.value)
+                    }}
                 />
                 </View>
                 <View style={[styles.dropdown, {zIndex: 1}]}>
                 <DropDownPicker
                     items={[
-                        {label: '1', value: '1', hidden: true},
-                        {label: '2', value: '2' },
-                        {label: '3', value: '3',},
-                        {label: '4', value: '4',},
-
+                        ...year.map(y => ({label: y.toString(), value: y }))
                     ]}
-                    defaultValue={year}
                     containerStyle={{height: 40, flex: 1, marginTop: 10}}
                     style={{backgroundColor: '#fafafa'}}
                     itemStyle={{
                         justifyContent: 'flex-start'
                     }}
                     dropDownStyle={{backgroundColor: '#fafafa'}}
-                    onChangeItem={item => setYear(item.value)}
+                    onChangeItem={ async (item) => {
+                        setSelectedyear(item.value)
+                    }}
                 />
                 <DropDownPicker
                     items={[
-                        {label: '1', value: '1', hidden: true},
-                        {label: '2', value: '2' },
-                        {label: 'summer', value: 'summer',},
+                        ...semester.map(s => ({label: s.toString(), value: s }))
                     ]}
-                    defaultValue={semester}
                     containerStyle={{height: 40, flex: 1, marginTop: 10}}
                     style={{backgroundColor: '#fafafa'}}
                     itemStyle={{
                         justifyContent: 'flex-start'
                     }}
                     dropDownStyle={{backgroundColor: '#fafafa'}}
-                    onChangeItem={item => setSemester(item.value)}
+                    onChangeItem={item => setSelectedsemester(item.value)}
                 />
             </View>  
             <View style={{paddingTop:10}}>
@@ -126,19 +122,25 @@ const AddSheet = () => {
                 type="outline"
                 title="เพิ่มเอกสารชีท..."
                 color="#989a9c"
-                onPress={wtfss}
+                onPress={async () => {
+                    
+                    const sheetPic = await DocumentPicker.getDocumentAsync(multiple(true));
+                    console.log(sheetPic);
+                    setSheetpic(sheetPic)
+                }}
                 style={{weight: 20}}
-                
             />
                 <Text style={styles.text}>ราคา:</Text>
                 <TextInput style={styles.input}
                     placeholder="เพิ่มราคาที่นี่ ..."
+                    onChangeText={(text) => setPrice(text)}
                 />
                 <Text style={styles.text}>รายละเอียด :</Text>
                 <TextInput style={styles.input} 
                     placeholder="เพิ่มรายละเอียดที่นี่ ..." 
                     multiline 
                     numberOfLines={7} 
+                    onChangeText={(text) => setDetail(text)}
                 />
 
             </View> 
@@ -146,11 +148,33 @@ const AddSheet = () => {
             <Button
                 title="เพิ่มตัวอย่างชีท..."
                 color="#989a9c"
-                onPress={handleFilePick}
+                // onPress={handleFilePick}
+                onPress={async () => {
+                    const sheetEx = await DocumentPicker.getDocumentAsync();
+                    console.log(sheetEx);
+                    setSheetex(sheetEx)
+                }}
                 type="outline"
             />
             <View style={{paddingTop:50}}>
-                <Button title="เพิ่ม" />
+                <Button title="เพิ่ม" onPress={ async () => {
+                    db.collection("faculty").doc(faculty).collection("branch").doc(branch).collection("sheets").doc().set({
+                        price:price,
+                        detail:detail,
+                        semester: selectedsemester,
+                        year: selectedyear,
+                        userid: user.uid
+                    })
+                    .then(function() {
+                        console.log("Document successfully written!");
+                    })
+                    .catch(function(error) {
+                        console.error("Error writing document: ", error);
+                    });
+                    console.log('sheetPic', sheetpic.uri)
+                    firebase.storage().ref(`sheets/${sheetRef.id}/sheet.png`).putString(sheetpic.uri, 'data_url')
+                    firebase.storage().ref(`sheets/${sheetRef.id}/sheetex.png`).putString(sheetex.uri, 'data_url')
+                }}/>
             </View>
             </ScrollView>
         </View>
