@@ -1,7 +1,8 @@
 import React from "react";
-import { View, StyleSheet, Text, Dimensions, StatusBar, Image, Button, SafeAreaView, Separator } from "react-native";
+import { View, StyleSheet, Text, Dimensions, StatusBar, Image, SafeAreaView, Separator } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { TabView, SceneMap } from 'react-native-tab-view';
+import { Button } from 'react-native-elements';
 
 export default function App({ navigation }) {
   // เพิ่มโค้ดส่วนนี้
@@ -23,8 +24,10 @@ export default function App({ navigation }) {
             />
             <Button
               title="ติดต่อ"
-              color="#e63525"
+              type="outline"
+              color="#989a9c"
               onPress={() => Alert.alert('Right button pressed')}
+              style={styles.button}
             />
           </View>
         </View>
@@ -60,8 +63,10 @@ export default function App({ navigation }) {
             />
             <Button
               title="ติดต่อ"
+              type="outline"
               color="#e63525"
               onPress={() => Alert.alert('Right button pressed')}
+              style={styles.button}
             />
           </View>
         </View>
@@ -82,6 +87,9 @@ const styles = StyleSheet.create({
     width: 110,
     height: 110,
   },
+  button:{
+    marginLeft:5
+  }
   // separator: {
   //   marginVertical: 8,
   //   borderBottomColor: '#737373',
