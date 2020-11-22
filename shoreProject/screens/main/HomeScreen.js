@@ -139,8 +139,17 @@ const Home = () => {
                     <Image style={styles.pic} source={require("../../assets/file.png")} />
                 </View>
                 <View style={styles.detailGride}>
-                    <Text style={styles.header}>hnimi</Text>
-                    <Text>guyhjk</Text>
+                    <Text style={styles.header}>Moblie Programming</Text>
+                    <View style={styles.ratingStr}>
+                        <Image style={styles.picProfile} source={require("../../assets/profile_icon.jpg")} />
+                        <Text>Rungwaraporn khuthanon</Text>
+                    </View>
+                    <View style={styles.ratingStr}>
+                        <Text>Rating : </Text>
+                        <Image style={styles.picStar} source={require("../../assets/star.png")} />
+                        <Image style={styles.picStar} source={require("../../assets/star.png")} />
+                        <Image style={styles.picStar} source={require("../../assets/star.png")} />
+                    </View>
                 </View>
                 <View style={styles.detailPrice}>
                     <Text style={styles.price}>50฿</Text>
@@ -160,13 +169,13 @@ const styles = StyleSheet.create({
         paddingTop: 20,
     },
     dropdown:{
-        // flex: 1,
         flexDirection: "row",
         height: 50,
     },
     grideTile:{
         backgroundColor: "white",
         padding:10,
+        paddingLeft:2,
         marginTop:7,
         borderRadius:3,
         flexDirection:'row'
@@ -185,11 +194,25 @@ const styles = StyleSheet.create({
         color:"red"
     },
     pic:{
-        width:55,
-        height:55,
+        width:70,
+        height:70,
+        justifyContent:'center',
+        alignItems:'center'
     },
     header:{
-        fontSize:20
+        fontSize:18
+    },
+    picProfile:{
+        width:20,
+        height:20,
+        marginRight:3
+    },
+    picStar:{
+        width:20,
+        height:20,
+    },
+    ratingStr:{
+        flexDirection:'row'
     }
 
 });
