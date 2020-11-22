@@ -5,7 +5,8 @@ import 'firebase/auth'
 import { Button } from 'react-native-elements';
 import * as DocumentPicker from 'expo-document-picker';
 
-export default function RegisterScreen() {
+
+export default function RegisterScreen(props) {
     const [toggleCheckBox, setToggleCheckBox] = useState(false)
 
     const handleFilePick = async () => {
@@ -31,8 +32,8 @@ export default function RegisterScreen() {
         />
         <Text style={styles.label}>ยอมรับเงื่อนไขการใช้บริการ</Text>
       </View>
-     <Button  title="ยืนยัน" onpress={()=>{
-       props.navigation.pop()
+     <Button  title="ยืนยัน" onPress={()=>{
+        props.navigation.navigate('Login')
      }}style={styles.button}/>
     </ScrollView>
   );
