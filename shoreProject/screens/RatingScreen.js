@@ -17,17 +17,17 @@ export default class App extends React.Component {
         <View style={styles.container}>
             <View style={styles.rating}>
                 <Text style={styles.text}>ความถูกต้อง :</Text>
-                <AirbnbRating style={styles.star}/>
+                <AirbnbRating style={styles.star} size={26} reviewSize={18}/>
                 <View style={styles.line}/>
             </View>
             <View style={styles.rating}>
                 <Text style={styles.text}>ความสวยงาม :</Text>
-                <AirbnbRating style={styles.star}/>
+                <AirbnbRating style={styles.star} size={26} reviewSize={18}/>
                 <View style={styles.line}/>
             </View>
             <View style={styles.rating}>
                 <Text style={styles.text}>ความเข้าใจ :</Text>
-                <AirbnbRating style={styles.star}/>
+                <AirbnbRating style={styles.star} size={26} reviewSize={18}/>
                 <View style={styles.line}/>
             </View>
             <Button style={styles.button} title="ยืนยัน"/>
@@ -43,13 +43,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#EDF5FA',
         flex: 1,
         padding: 10,
-        paddingTop: 10,
     },
     container:{
         backgroundColor: "white",
-        padding:20,
-        marginLeft:30,
-        marginRight:30,
+        padding:10,
+        margin:30
     },
     rating:{
         marginTop: 20
@@ -65,11 +63,12 @@ const styles = StyleSheet.create({
         marginBottom:7
     },
     star:{
-        alignContent:'center',
         alignItems:'center',
+
     },
     button:{
-        marginTop: 50
+        marginTop: 40,
+        marginBottom: 20
     }
 });
 

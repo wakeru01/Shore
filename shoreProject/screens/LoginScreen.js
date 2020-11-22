@@ -105,11 +105,11 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   textSign:{
-    fontSize: 16,
+    fontSize: 15,
     color: "blue"
   },
   text:{
-    fontSize:16
+    fontSize:15
   }
 
 });

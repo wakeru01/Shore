@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     borderRadius:3
   },
   text:{
-    fontSize: 18, 
+    fontSize: 16, 
     marginBottom:7,
     marginTop:7
   },
