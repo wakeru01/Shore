@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Button,TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button,TextInput, ImageBackground} from 'react-native';
 import firebase from 'firebase/app'
 import 'firebase/auth'
 
@@ -33,12 +33,22 @@ export default function LoginScreen(props) {
 }
   return (
     <View style={styles.container}>
-      <Text>Login Screen</Text>
+      <ImageBackground source={require('../assets/book6.png')} style={styles.image} >
+        <View style={styles.popUpImage}>
+          <Text style={styles.header}>Login</Text>
+
+          <Text style={styles.text}>ชื่อผู้ใช้</Text>
+          <TextInput style={styles.input} placeholder="เพิ่มเวลาที่นี่ ..."/>
+          <Text style={styles.text}>รหัสผ่าน</Text>
+          <TextInput style={styles.input} placeholder="เพิ่มเวลาที่นี่ ..."/>
+        </View>
+      </ImageBackground>
+      {/* <Text>Login Screen</Text>
       <Text>Email:</Text><TextInput placeholder="insert email" onChangeText={email => setEmail(email)}/>
       <Text>Password:</Text><TextInput placeholder="insert Password" onChangeText={pass => setPass(pass)}/>
 
       <Button onPress={navToRegister} title="Register ?" />
-      <Button onPress={navToMain} title="Login" />
+      <Button onPress={navToMain} title="Login" /> */}
     </View>
   );
 }
@@ -46,8 +56,33 @@ export default function LoginScreen(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "column"
   },
+  image:{
+    flex:1,
+    resizeMode: "cover",
+    justifyContent: "center"
+  },
+  popUpImage:{
+    justifyContent: "center",
+    alignItems:"center",
+    backgroundColor:"white",
+    padding:10,
+    marginLeft:30,
+    marginRight:30,
+  },
+  header:{
+    fontSize:30
+  },
+  input:{
+    backgroundColor: "white",
+    padding: 5,
+    marginBottom: 10,
+    borderColor: 'gray', 
+    borderWidth: 1,
+    borderRadius:3
+  },
+  text:{
+    fontSize:18
+  }
 });
