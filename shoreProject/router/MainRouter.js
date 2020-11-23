@@ -4,15 +4,12 @@ import { HomeNavigator as Home } from '../navigation/NavigatorAdmin'
 import { AddSheetNavigator as AddSheet } from '../navigation/NavigatorAdmin'
 import { NotificationNavigator as Notification } from '../navigation/NavigatorAdmin'
 import { ProfileNavigator as Profile } from '../navigation/NavigatorAdmin'
-<<<<<<< Updated upstream
 
-=======
 import PicRouter from '../router/PicRouter'
 
 import RatingScr from '../screens/RatingScreen'
 
 // import RatingScr from '../screens/RatingScreen';
->>>>>>> Stashed changes
 // import Con from '../screens/ConditionScreen'
 import Con from '../screens/ConditionScreen'
 // import Profile from '../screens/main/ProfileScreen'

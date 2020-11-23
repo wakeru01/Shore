@@ -47,15 +47,9 @@ export default function RegisterScreen(props) {
       </View>
       <View style={styles.container}>
         <Text style={styles.text}>ชื่อ :</Text>
-<<<<<<< Updated upstream
-        <TextInput style={styles.input} placeholder="ภาษาไทยหรือภาษาอังกฤษ"/>
+        <TextInput style={styles.input} onChangeText={pass => setName(pass)} placeholder="ภาษาไทยหรือภาษาอังกฤษ"/>
         <Text style={styles.text}>นามสกุล :</Text>
-        <TextInput style={styles.input} placeholder="ภาษาไทยหรือภาษาอังกฤษ"/>
-=======
-        <TextInput style={styles.input} onChangeText={pass => setName(pass)}/>
-        <Text style={styles.text}>นามสกุล :</Text>
-        <TextInput style={styles.input} onChangeText={pass => setSur(pass)}/>
->>>>>>> Stashed changes
+        <TextInput style={styles.input} onChangeText={pass => setSur(pass)} placeholder="ภาษาไทยหรือภาษาอังกฤษ"/>
         <Text style={styles.text}>อีเมล :</Text>
         <TextInput style={styles.input} onChangeText={email => setEmail(email)} placeholder="excample@email.com"/>
         <Text style={styles.text}>รหัสผ่าน :</Text>

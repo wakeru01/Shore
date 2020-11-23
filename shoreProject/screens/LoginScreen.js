@@ -26,10 +26,7 @@ export default function LoginScreen(props) {
   const navToMain = async () => {
     try {
         // await firebase.auth().signInWithEmailAndPassword(email, pass)
-<<<<<<< Updated upstream
-=======
         // console.log(user.displayName)
->>>>>>> Stashed changes
         props.navigation.replace('Main')
       } catch (error) {
         var errorCode = error.code;

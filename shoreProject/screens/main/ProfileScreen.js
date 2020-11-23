@@ -20,37 +20,22 @@ import 'firebase/auth'
 //         <Image style={styles.edit} source={require("../../assets/edit.png")} />
 //       </View>
 //     </View>
-
+        
 //   )
 // }
 
 const FirstRoute = () => (
-  <View style={[styles.scene, { backgroundColor: '#abe7f5' }]} />
+  <View style={[styles.scene, { backgroundColor: '#ff4081' }]} />
 );
-// const navToEditProfile = (props) => {
-//   props.navigation.push('EditProfile')
-// }
+
 const SecondRoute = () => (
-  <View style={[styles.scene, { backgroundColor: '#9dd4f5' }]} />
+  <View style={[styles.scene, { backgroundColor: '#673ab7' }]} />
 );
 
 const initialLayout = { width: Dimensions.get('window').width };
 
 export default function Profile(props) {
-<<<<<<< Updated upstream
-=======
   const user = firebase.auth().currentUser;
-
-  useEffect(async () => {
-    const user = await firebase.auth().currentUser;
-}, []);
-  const pro = async () => {
-    const user = await firebase.auth().currentUser;
-    console.log(user.displayName)
-    console.log(user.email)
-    console.log(user.uid)
-  }
->>>>>>> Stashed changes
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     { key: 'first', title: 'Buy' },
@@ -61,35 +46,22 @@ export default function Profile(props) {
     first: FirstRoute,
     second: SecondRoute,
   });
-
   const navToEditProfile = () => {
     props.navigation.push('EditProfile')
   }
-
   return (
     <View style={styles.screen}>
-<<<<<<< Updated upstream
       <View style={{ flexDirection: 'row' }}>
         <View>
           <TouchableOpacity >
             <Image style={styles.pic} source={require("../../assets/profile_icon.jpg")} />
           </TouchableOpacity>
         </View>
-        <Text style={{ fontSize: 22 }} >Thanida Samniang</Text>
+        <Text style={{ fontSize: 22 }}>{user.displayName}</Text>
         <TouchableOpacity onPress={navToEditProfile}>
           <Image style={styles.edit} source={require("../../assets/edit.png")} />
         </TouchableOpacity>
       </View>
-=======
-      <View style={{flexDirection: 'row'}}>
-        <TouchableOpacity onPress={pro}>
-          <Image style={styles.pic} source={require("../../assets/profile_icon.jpg")} />
-        </TouchableOpacity>
-        <Text style={{ fontSize: 22 }} >{user.displayName}
-        </Text>
-        <Image style={styles.edit} source={require("../../assets/edit.png")} />
-     </View>
->>>>>>> Stashed changes
       <TabView
         navigationState={{ index, routes }}
         renderScene={renderScene}
@@ -103,10 +75,10 @@ export default function Profile(props) {
 
 const styles = StyleSheet.create({
   screen: {
-    backgroundColor: '#EDF5FA',
-    flex: 1,
-    padding: 10,
-    paddingTop: 20,
+      backgroundColor: '#EDF5FA',
+      flex: 1,
+      padding: 10,
+      paddingTop: 20,
   },
   pic: {
     width: 110,
