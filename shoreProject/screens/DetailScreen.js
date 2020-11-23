@@ -11,11 +11,12 @@ export default class App extends React.Component {
   render() {
     return (
         <ScrollView>
-        <Image style={styles.logo} source={require("./assets/sheet1.jpg")}/>
-        <View style={styles.container}>
+        <Image style={styles.logo} source={require(".././assets/sheet1.jpg")}/>
           <Text style={{ fontSize: 30, paddingTop: 20 }} >Software Engineering {"\n"}{"\n"}</Text>
-          <Text style={{ fontSize: 20 }}>ราคา : 30 บาท</Text>
-          <Text style={{ fontSize: 20 }}>ยอดขาย : 3</Text>
+          <View style={{ flexDirection: "row"}}>
+            <Text style={{ fontSize: 20, flex:1 }}>ราคา : 30 บาท</Text>
+            <Text style={{ fontSize: 20, flex:1 }}>ยอดขาย : 3</Text>
+          </View>
           <Text style={{ fontSize: 15 }}>รายละเอียด : shdbkvjlfdvnmklajsgvybenjkmfgirk,iojf,erthehfjcefcnpire {"\n"}{"\n"}</Text>
           <Text style={{ fontSize: 20 }}>Rating : </Text>
           <View style={styles.rating}>
@@ -33,8 +34,8 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container:{
     backgroundColor: "white",
-    paddingLeft: 60,
-    paddingRight:60,
+    paddingLeft: 50,
+    paddingRight:50,
     paddingBottom:100,
     marginTop:10
   },

@@ -1,12 +1,15 @@
 import React, { useState , useEffect } from 'react';
-import { View, StyleSheet, ScrollView, Text, Image  } from "react-native";
+import { View, StyleSheet, ScrollView, Text, Image, TouchableOpacity } from "react-native";
 import DropDownPicker from 'react-native-dropdown-picker'
 import { Searchbar } from 'react-native-paper';
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import sheet1 from '../assets/sheet1.jpg';
 
-const Home = () => {
+import 'firebase/firestore' 
+
+
+const Home = (props) => {
     const [searchQuery, setSearchQuery] = React.useState('');
     const [faculty, setFaculty] = React.useState('')
     const [stateFaculty, setStateFaculty] = React.useState(false)
@@ -33,9 +36,9 @@ const Home = () => {
         setDatafaculty(faculty);
     }, []);
 
-    const navToDetail = () => {
+    const navDetail = () => {
         props.navigation.push('Detail')
-      }
+    }
 
     return (
         <View style={styles.screen}>
@@ -118,12 +121,6 @@ const Home = () => {
                                 semester = [...semester, dataSheets[id].semester]
                         }})
                         setSemester(semester)
-                        // const querySnapshot = await db.collection("faculty").doc(item.value).collection("branch").get();
-                        // const branch = {};
-                        // querySnapshot.forEach((doc) => {
-                        //     branch[doc.id] = doc.data()
-                        // });
-                        // setDatabranch(branch)
                     }}
                 />
                 <DropDownPicker
@@ -159,7 +156,10 @@ const Home = () => {
                 </View>
                 <View style={styles.detailPrice}>
                     <Text style={styles.price}>50฿</Text>
-                    <Image style={styles.picNext} source={require("../../assets/next.png")} />
+                    <TouchableOpacity onPress={navDetail}>
+                        <Image style={styles.picNext} source={require("../../assets/next.png")} /> 
+                    </TouchableOpacity>
+                    
                 </View>
             </View>
             </TouchableOpacity>
