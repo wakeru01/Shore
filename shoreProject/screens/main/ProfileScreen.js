@@ -57,7 +57,7 @@ export default function Profile(props) {
             <Image style={styles.pic} source={require("../../assets/profile_icon.jpg")} />
           </TouchableOpacity>
         </View>
-        <Text style={{ fontSize: 22 }}>{user.displayName}</Text>
+          <Text style={{ fontSize: 22}}>{user.displayName}</Text>
         <TouchableOpacity onPress={navToEditProfile}>
           <Image style={styles.edit} source={require("../../assets/edit.png")} />
         </TouchableOpacity>
@@ -81,13 +81,15 @@ const styles = StyleSheet.create({
       paddingTop: 20,
   },
   pic: {
-    width: 110,
-    height: 110,
+    width: 80,
+    height: 80,
+    alignItems:'center',
+    justifyContent:'center'
   },
   edit: {
     width: 13,
     height: 13,
-    marginLeft:10
+    marginLeft:10,
   },
   container: {
     marginTop: StatusBar.currentHeight,
