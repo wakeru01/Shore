@@ -2,9 +2,9 @@ import React from "react";
 import { View, StyleSheet, Text, Dimensions, StatusBar, Image, SafeAreaView, Separator } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { TabView, SceneMap } from 'react-native-tab-view';
-import { Button } from 'react-native-elements';
+import { Button, Divider } from 'react-native-elements';
 
-export default function App({ navigation }) {
+export default function Notification({ navigation }) {
   // เพิ่มโค้ดส่วนนี้
   return(
     <View style={styles.screen}>
@@ -32,7 +32,7 @@ export default function App({ navigation }) {
           </View>
         </View>
       </View>
-      {/* <Separator /> */}
+      <Divider style={{ backgroundColor: '#717680' }} />
       <View style={{flexDirection: 'row'}}>
         <View>
           <Image style={styles.pic} source={require("../../assets/file.png")} />
@@ -47,7 +47,7 @@ export default function App({ navigation }) {
           </View>
         </View>
       </View>
-      {/* <Separator /> */}
+      <Divider style={{ backgroundColor: '#717680' }} />
       <View style={{flexDirection: 'row'}}>
         <View>
           <Image style={styles.pic} source={require("../../assets/file.png")} />
@@ -71,6 +71,7 @@ export default function App({ navigation }) {
           </View>
         </View>
       </View>
+      <Divider style={{ backgroundColor: '#717680' }} />
       </ScrollView>
     </View> 
   )
@@ -89,11 +90,6 @@ const styles = StyleSheet.create({
   },
   button:{
     marginLeft:5
-  }
-  // separator: {
-  //   marginVertical: 8,
-  //   borderBottomColor: '#737373',
-  //   borderBottomWidth: StyleSheet.hairlineWidth,
-  // },
+  },
 });
 
