@@ -22,7 +22,7 @@ const AddSheet = (props) => {
     const [stateFaculty, setStateFaculty] = React.useState(false)
     const [branch, setBranch] = React.useState('')
     const [year, setYear] = React.useState([2015,2016,2017,2018,2019,2020])
-    const [semester, setSemester] = React.useState([1,2])
+    const [semester, setSemester] = React.useState(['1','2','summer'])
     const [datafaculty, setDatafaculty] = useState({})
     const [databranch, setDatabranch] = useState({})
     const [sheets, setSheets] = useState('')

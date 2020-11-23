@@ -57,7 +57,7 @@ export default function Profile(props) {
             <Image style={styles.pic} source={require("../../assets/profile_icon.jpg")} />
           </TouchableOpacity>
         </View>
-        <Text style={{ fontSize: 22 }}>Thanida</Text>
+        <Text style={{ fontSize: 22 }}>{user.displayName}</Text>
         <TouchableOpacity onPress={navToEditProfile}>
           <Image style={styles.edit} source={require("../../assets/edit.png")} />
         </TouchableOpacity>
