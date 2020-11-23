@@ -4,6 +4,7 @@ import DropDownPicker from 'react-native-dropdown-picker'
 import { Searchbar } from 'react-native-paper';
 import firebase from 'firebase/app'
 import 'firebase/firestore'
+import sheet1 from '../assets/sheet1.jpg';
 
 const Home = () => {
     const [searchQuery, setSearchQuery] = React.useState('');
@@ -31,6 +32,10 @@ const Home = () => {
         });
         setDatafaculty(faculty);
     }, []);
+
+    const navToDetail = () => {
+        props.navigation.push('Detail')
+      }
 
     return (
         <View style={styles.screen}>
@@ -134,6 +139,7 @@ const Home = () => {
                     onChangeItem={item => setSelectedsemester(item.value)}
                 />
             </View>
+            <TouchableOpacity onPress={navToDetail}>
             <View style={styles.grideTile}>
                 <View style={styles.imageGride}>
                     <Image style={styles.pic} source={require("../../assets/file.png")} />
@@ -156,6 +162,7 @@ const Home = () => {
                     <Image style={styles.picNext} source={require("../../assets/next.png")} />
                 </View>
             </View>
+            </TouchableOpacity>
             </ScrollView>  
         </View>
     );

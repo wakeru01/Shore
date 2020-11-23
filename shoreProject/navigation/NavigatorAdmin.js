@@ -9,7 +9,9 @@ import NotificationScreen from "../screens/main/NotificationScreen";
 import ProfileScreen from "../screens/main/ProfileScreen";
 import RatingScreen from "../screens/RatingScreen";
 import EditProfileScreen from "../screens/EditProfileScreen";
+import DetailScreen from "../screens/DetailScreen";
 import { createStackNavigator } from '@react-navigation/stack'
+import sheet1 from '../assets/sheet1.jpg';
 
 const Stack = createStackNavigator()
 
@@ -21,6 +23,7 @@ const HomeNavigator = () => {
         
       }} initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
+        {/* <Stack.Screen name="Detail" component={DetailScreen} /> */}
       </Stack.Navigator>
     )
 }
