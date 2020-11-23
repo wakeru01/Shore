@@ -7,6 +7,8 @@ import 'firebase/auth'
 export default function LoginScreen(props) {
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
+  const user = firebase.auth().currentUser;
+
   const navToRegister = () => {
       props.navigation.push('Register')
   }
@@ -24,6 +26,7 @@ export default function LoginScreen(props) {
   const navToMain = async () => {
     try {
         // await firebase.auth().signInWithEmailAndPassword(email, pass)
+        // console.log(user.displayName)
         props.navigation.replace('Main')
       } catch (error) {
         var errorCode = error.code;

@@ -8,14 +8,31 @@ export default function RegisterScreen(props) {
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
-
+  const [name, setName] = useState('');
+  const [sur, setSur] = useState('');
+  const user = firebase.auth().currentUser;
   const cond = async () => {
     if(pass != confirmPass){
       alert("Password and confirm password does not match")
       return
     }
     try {
-      await firebase.auth().createUserWithEmailAndPassword(email, pass)
+      firebase.auth().createUserWithEmailAndPassword(email, pass)
+      .then(function(result) {
+        return result.user.updateProfile({
+          displayName: name + ' '+ sur
+        })
+      }).catch(function(error) {
+        console.log(error);
+      });
+      // await firebase.auth().createUserWithEmailAndPassword(email, pass)
+      // user.updateProfile({
+      //   displayName: name + ' ' + sur,
+      // }).then(function() {
+      //   console.log(user.displayName)
+      // }).catch(function(error) {
+      //   // An error happened.
+      // });
       props.navigation.push('Condition')
     } catch (error) {
       var errorCode = error.code;
@@ -30,9 +47,9 @@ export default function RegisterScreen(props) {
       </View>
       <View style={styles.container}>
         <Text style={styles.text}>ชื่อ :</Text>
-        <TextInput style={styles.input} placeholder="ภาษาไทยหรือภาษาอังกฤษ"/>
+        <TextInput style={styles.input} onChangeText={pass => setName(pass)} placeholder="ภาษาไทยหรือภาษาอังกฤษ"/>
         <Text style={styles.text}>นามสกุล :</Text>
-        <TextInput style={styles.input} placeholder="ภาษาไทยหรือภาษาอังกฤษ"/>
+        <TextInput style={styles.input} onChangeText={pass => setSur(pass)} placeholder="ภาษาไทยหรือภาษาอังกฤษ"/>
         <Text style={styles.text}>อีเมล :</Text>
         <TextInput style={styles.input} onChangeText={email => setEmail(email)} placeholder="excample@email.com"/>
         <Text style={styles.text}>รหัสผ่าน :</Text>

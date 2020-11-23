@@ -22,7 +22,7 @@ const Home = (props) => {
     const [dataSheets, setDatasheets] = useState({})
     const [selectedyear, setSelectedyear] = useState({})
     const [selectedsemester, setSelectedsemester] = useState({})
-    // const [searchQuery, setSearchQuery] = React.useState('');
+    // const [searchQuery, setSearchQuery] = React.useState('')
     const [country, setCountry] = React.useState('uk')
     var db = firebase.firestore()
     const onChangeSearch = query => setSearchQuery(query);

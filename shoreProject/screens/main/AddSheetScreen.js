@@ -11,8 +11,11 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/storage'
 import 'firebase/auth'
+import {ImageBrowser} from 'expo-image-picker-multiple'
+import Constants from 'expo-constants';
+
 // import axios from 'axios'
-const AddSheet = () => {
+const AddSheet = (props) => {
     const user = firebase.auth().currentUser
     const [searchQuery, setSearchQuery] = React.useState('');
     const [faculty, setFaculty] = React.useState('')
@@ -28,15 +31,19 @@ const AddSheet = () => {
     const [selectedsemester, setSelectedsemester] = useState({})
     const [price, setPrice] = React.useState()
     const [detail, setDetail] = React.useState('')
+    const [subject, setSubject] = React.useState('')
     const sheetRef = firebase.firestore().collection('sheets').doc()
     const [sheetpic, setSheetpic] = useState({})
     const [sheetex, setSheetex] = useState({})
-
+    // const [image, setImage] = useState(null);
     var db = firebase.firestore()
     // const handleFilePick = async () => {
     //     const fileResponse = await DocumentPicker.getDocumentAsync();
     //     console.log(fileResponse);
     // }
+    const navToAddPic = () => {
+        props.navigation.push('AddPic')
+    }
 
     useEffect(async () => {
         const querySnapshot = await db.collection("faculty").get()
@@ -46,7 +53,7 @@ const AddSheet = () => {
         });
         setDatafaculty(faculty);
     }, []);
-
+    
     const onChangeSearch = query => setSearchQuery(query);
 
     return (
@@ -119,22 +126,24 @@ const AddSheet = () => {
             <View style={{paddingTop:10}}>
             <Text style={styles.text}>ชื่อวิชา:</Text>
                 <TextInput style={styles.input}
-                    onChangeText={(text) => setPrice(text)}
+                    onChangeText={(text) => setSubject(text)}
                 />
             <Text style={styles.text}>เอกสารชีท :</Text>
                 <Button 
                 type="outline"
                 title="เพิ่มเอกสารชีท..."
                 color="#989a9c"
-                onPress={async () => {
-                    const sheetPic = await DocumentPicker.getDocumentAsync({ multiple: true });
-                    console.log(sheetPic);
-                    
-                    for (let index = 0; index < sheetPic.output.length; index++) {
-                        firebase.storage().ref('test' + index + '.png').put(sheetPic.output[index])
-                    }
-                    setSheetpic(sheetPic)
-                }}
+                onPress={
+                    // async () => {
+                    // const sheetPic = await DocumentPicker.getDocumentAsync({ multiple: true });
+                    // console.log(sheetPic);
+                    // for (let index = 0; index < sheetPic.output.length; index++) {
+                    //     firebase.storage().ref('test' + index + '.png').put(sheetPic.output[index])
+                    // }
+                    // setSheetpic(sheetPic)
+                    // }
+                    navToAddPic
+                }
                 style={{weight: 20}}
             />
                 <Text style={styles.text}>ราคา:</Text>
@@ -164,6 +173,7 @@ const AddSheet = () => {
             <View style={{paddingTop:50}}>
                 <Button title="เพิ่ม" onPress={ async () => {
                     db.collection("faculty").doc(faculty).collection("branch").doc(branch).collection("sheets").doc().set({
+                        subject: subject,
                         price:price,
                         detail:detail,
                         semester: selectedsemester,
@@ -206,8 +216,7 @@ const styles = StyleSheet.create({
     input:{
         backgroundColor: "white",
         padding: 10,
-        marginBottom: 5,
-        borderRadius:3
+        marginBottom: 10,
     }
 });
 
