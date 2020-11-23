@@ -40,7 +40,7 @@ const Home = () => {
                 onChangeText={onChangeSearch}
                 value={searchQuery}
             />
-            <View style={[styles.dropdown, {zIndex: 1}]}>
+            <View style={[styles.dropdown, {zIndex: 2}]}>
                 <DropDownPicker
                     items={[
                         ...Object.keys(datafaculty).map(key => ({label: datafaculty[key].name, value: key }))
@@ -67,7 +67,7 @@ const Home = () => {
                         ...Object.keys(databranch).map(key => ({label: databranch[key].name, value: key }))
                     ]}
                     containerStyle={{height: 40, flex: 1, marginTop: 10}}
-                    style={{backgroundColor: '#fafafa'}}
+                    style={{backgroundColor: '#fafafa'}, {zIndex: 2}}
                     itemStyle={{
                         justifyContent: 'flex-start'
                     }}
@@ -97,7 +97,7 @@ const Home = () => {
                         ...year.map(y => ({label: y.toString(), value: y }))
                     ]}
                     containerStyle={{height: 40, flex: 1, marginTop: 10}}
-                    style={{backgroundColor: '#fafafa'}}
+                    style={{backgroundColor: '#fafafa'}, {zIndex: 1}}
                     itemStyle={{
                         justifyContent: 'flex-start'
                     }}
@@ -126,7 +126,7 @@ const Home = () => {
                         ...semester.map(s => ({label: s.toString(), value: s }))
                     ]}
                     containerStyle={{height: 40, flex: 1, marginTop: 10}}
-                    style={{backgroundColor: '#fafafa'}}
+                    style={{backgroundColor: '#fafafa'}, {zIndex: 1}}
                     itemStyle={{
                         justifyContent: 'flex-start'
                     }}
@@ -153,6 +153,7 @@ const Home = () => {
                 </View>
                 <View style={styles.detailPrice}>
                     <Text style={styles.price}>50฿</Text>
+                    <Image style={styles.picNext} source={require("../../assets/next.png")} />
                 </View>
             </View>
             </ScrollView>  
@@ -186,12 +187,16 @@ const styles = StyleSheet.create({
     detailGride:{
         flex: 3
     },
+    picNext:{
+        width:20,
+        height:20,
+    },
     detailPrice:{
-        flex:1,
-        flexDirection:'row-reverse'
+        flexDirection:'column'
     },
     price:{
-        color:"red"
+        color:"red",
+        flex:1,
     },
     pic:{
         width:70,
@@ -212,7 +217,8 @@ const styles = StyleSheet.create({
         height:20,
     },
     ratingStr:{
-        flexDirection:'row'
+        flexDirection:'row',
+        marginTop:5
     }
 
 });
