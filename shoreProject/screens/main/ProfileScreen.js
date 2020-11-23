@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, StyleSheet, Text, Image, Dimensions, StatusBar, TouchableOpacity } from "react-native";
 import { TabView, SceneMap } from 'react-native-tab-view';
+import firebase from 'firebase/app'
+import 'firebase/auth'
 // import PhotoUpload from 'react-native-photo-upload';
 
 // const Profile = () => {
@@ -35,6 +37,20 @@ const SecondRoute = () => (
 const initialLayout = { width: Dimensions.get('window').width };
 
 export default function Profile(props) {
+<<<<<<< Updated upstream
+=======
+  const user = firebase.auth().currentUser;
+
+  useEffect(async () => {
+    const user = await firebase.auth().currentUser;
+}, []);
+  const pro = async () => {
+    const user = await firebase.auth().currentUser;
+    console.log(user.displayName)
+    console.log(user.email)
+    console.log(user.uid)
+  }
+>>>>>>> Stashed changes
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     { key: 'first', title: 'Buy' },
@@ -52,6 +68,7 @@ export default function Profile(props) {
 
   return (
     <View style={styles.screen}>
+<<<<<<< Updated upstream
       <View style={{ flexDirection: 'row' }}>
         <View>
           <TouchableOpacity >
@@ -63,6 +80,16 @@ export default function Profile(props) {
           <Image style={styles.edit} source={require("../../assets/edit.png")} />
         </TouchableOpacity>
       </View>
+=======
+      <View style={{flexDirection: 'row'}}>
+        <TouchableOpacity onPress={pro}>
+          <Image style={styles.pic} source={require("../../assets/profile_icon.jpg")} />
+        </TouchableOpacity>
+        <Text style={{ fontSize: 22 }} >{user.displayName}
+        </Text>
+        <Image style={styles.edit} source={require("../../assets/edit.png")} />
+     </View>
+>>>>>>> Stashed changes
       <TabView
         navigationState={{ index, routes }}
         renderScene={renderScene}

@@ -4,7 +4,15 @@ import { HomeNavigator as Home } from '../navigation/NavigatorAdmin'
 import { AddSheetNavigator as AddSheet } from '../navigation/NavigatorAdmin'
 import { NotificationNavigator as Notification } from '../navigation/NavigatorAdmin'
 import { ProfileNavigator as Profile } from '../navigation/NavigatorAdmin'
+<<<<<<< Updated upstream
 
+=======
+import PicRouter from '../router/PicRouter'
+
+import RatingScr from '../screens/RatingScreen'
+
+// import RatingScr from '../screens/RatingScreen';
+>>>>>>> Stashed changes
 // import Con from '../screens/ConditionScreen'
 import Con from '../screens/ConditionScreen'
 // import Profile from '../screens/main/ProfileScreen'
@@ -21,7 +29,7 @@ export default function MainRouter() {
       }} name="Home" component={Home} />
       <Tab.Screen options={{
         tabBarIcon: () => (<Entypo name="circle-with-plus" size={26} color="black" />)
-      }} name="AddSheet" component={AddSheet} />
+      }} name="PicRouter" component={PicRouter} />
       <Tab.Screen options={{
         tabBarIcon: () => (<Entypo name="bell" size={26} color="black" />)
       }} name="Notification" component={Notification} />
@@ -29,5 +37,6 @@ export default function MainRouter() {
         tabBarIcon: () => (<Entypo name="user" size={26} color="black" />)
       }} name="Profile" component={Profile} />
     </Tab.Navigator>
+    
   );
 }
