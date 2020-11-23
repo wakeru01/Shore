@@ -8,7 +8,7 @@ export default function Notification({ navigation }) {
   return (
     <View style={styles.screen}>
       <ScrollView>
-        <View style={styles.grideTile}>
+        <View style={styles.gridTile}>
           <View style={styles.imageGride}>
             <Image style={styles.pic} source={require("../../assets/file.png")} />
           </View>
@@ -29,7 +29,7 @@ export default function Notification({ navigation }) {
             </View>
           </View>
         </View>
-        <View style={styles.grideTile}>
+        <View style={styles.gridTile}>
           <View style={styles.imageGride}>
             <Image style={styles.pic} source={require("../../assets/file.png")} />
           </View>
@@ -50,7 +50,7 @@ export default function Notification({ navigation }) {
             </View>
           </View>
         </View>
-        <View style={styles.grideTile}>
+        <View style={styles.gridTile}>
           <View style={styles.imageGride}>
             <Image style={styles.pic} source={require("../../assets/file.png")} />
           </View>
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
   button: {
     marginLeft: 5,
   },
-  grideTile: {
+  gridTile: {
     backgroundColor: "white",
     padding: 10,
     paddingLeft: 2,
