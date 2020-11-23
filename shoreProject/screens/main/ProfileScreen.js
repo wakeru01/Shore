@@ -85,8 +85,9 @@ const styles = StyleSheet.create({
     height: 110,
   },
   edit: {
-    width: 21,
-    height: 21,
+    width: 13,
+    height: 13,
+    marginLeft:10
   },
   container: {
     marginTop: StatusBar.currentHeight,
