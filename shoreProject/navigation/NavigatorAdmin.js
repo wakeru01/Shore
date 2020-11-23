@@ -11,6 +11,7 @@ import RatingScreen from "../screens/RatingScreen";
 import DetailScreen from "../screens/DetailScreen";
 import EditProfileScreen from "../screens/EditProfileScreen";
 import BuySheetScreen from "../screens/BuySheetScreen";
+import ConditionScreen from "../screens/ConditionScreen";
 import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator()
@@ -39,6 +40,7 @@ const AddSheetNavigator = () => {
         
       }} initialRouteName="AddSheet">
         <Stack.Screen name="AddSheet" component={AddSheetScreen} />
+        <Stack.Screen name="Condition" component={ConditionScreen} />
       </Stack.Navigator>
     )
 }
@@ -54,6 +56,8 @@ const NotificationNavigator = () => {
       }} initialRouteName="Notification">
         <Stack.Screen name="Notification" component={NotificationScreen} />
         <Stack.Screen name="Rating" component={RatingScreen} />
+        <Stack.Screen name="Buysheet" component={BuySheetScreen} />
+        <Stack.Screen name="Home" component={HomeScreen} />
       </Stack.Navigator>
     )
 }

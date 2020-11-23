@@ -20,7 +20,7 @@ const BuySheet = (props) => {
     }
 
     const navTohome = () => {
-        props.navigation.push('Home')
+        props.navigation.popToTop('Home')
     }
     
     return (
