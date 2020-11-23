@@ -10,7 +10,7 @@ import { Button } from 'react-native-elements';
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 
-const BuySheet = () => {
+const BuySheet = (props) => {
 
     var db = firebase.firestore();
 
@@ -18,6 +18,11 @@ const BuySheet = () => {
         const fileResponse = await DocumentPicker.getDocumentAsync();
         console.log(fileResponse);
     }
+
+    const navTohome = () => {
+        props.navigation.push('Home')
+    }
+    
     return (
         <View style={styles.screen}>
             <ScrollView>
@@ -48,7 +53,7 @@ const BuySheet = () => {
                 <TextInput style={styles.input} placeholder="เพิ่มเวลาที่นี่ ..."/>
                 <Text style={styles.text}>ราคา :</Text>
                 <TextInput style={styles.input} placeholder="เพิ่มราคาที่นี่ ..."/>
-                <Button title="ยืนยัน"/>
+                <Button title="ยืนยัน" onPress={navTohome}/>
             </View>
             </ScrollView>
         </View>

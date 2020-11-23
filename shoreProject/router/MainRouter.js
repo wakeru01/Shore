@@ -26,7 +26,7 @@ export default function MainRouter() {
       }} name="Home" component={Home} />
       <Tab.Screen options={{
         tabBarIcon: () => (<Entypo name="circle-with-plus" size={26} color="black" />)
-      }} name="PicRouter" component={PicRouter} />
+      }} name="AddSheet" component={PicRouter} />
       <Tab.Screen options={{
         tabBarIcon: () => (<Entypo name="bell" size={26} color="black" />)
       }} name="Notification" component={Notification} />

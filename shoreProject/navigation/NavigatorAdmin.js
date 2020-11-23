@@ -10,6 +10,7 @@ import ProfileScreen from "../screens/main/ProfileScreen";
 import RatingScreen from "../screens/RatingScreen";
 import DetailScreen from "../screens/DetailScreen";
 import EditProfileScreen from "../screens/EditProfileScreen";
+import BuySheetScreen from "../screens/BuySheetScreen";
 import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator()
@@ -23,6 +24,7 @@ const HomeNavigator = () => {
       }} initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Detail" component={DetailScreen} />
+        <Stack.Screen name="Buysheet" component={BuySheetScreen} />
       </Stack.Navigator>
     )
 }
@@ -36,7 +38,7 @@ const AddSheetNavigator = () => {
         headerTintColor: "white",
         
       }} initialRouteName="AddSheet">
-        <Stack.Screen name="Add Sheet" component={AddSheetScreen} />
+        <Stack.Screen name="AddSheet" component={AddSheetScreen} />
       </Stack.Navigator>
     )
 }
@@ -66,59 +68,9 @@ const ProfileNavigator = () => {
         
       }} initialRouteName="Profile">
         <Stack.Screen name="Profile" component={ProfileScreen} />
-        <Stack.Screen name="EditProfile" component={EditProfileScreen} />
+        <Stack.Screen name="Edit Profile" component={EditProfileScreen} />
       </Stack.Navigator>
     )
 }
 
 export {ProfileNavigator}
-
-
-
-// const NotificationNavigator = createStackNavigator(
-//     {
-//       Notifications: {
-//         screen: NotificationScreen,
-//       },
-//     },
-//     {
-//       defaultNavigationOptions: {
-//         headerStyle: { backgroundColor: "#4a148c", },
-//         headerTintColor: "white",
-//         headerShown: false
-//       },
-//     }
-// );
-
-
-// const AdminTabNavigator = createBottomTabNavigator(
-//   {
-//     Home: {
-//       screen: HomeNavigator,
-//       navigationOptions:{
-//         tabBarIcon: (tabInfo) => {
-//           return (<Entypo name="home" size={26} color="black" />);
-//         },
-//       },
-//     },
-//     Notofication: {
-//       screen: NotificationNavigator,
-//       navigationOptions:{
-//         tabBarIcon: (tabInfo) => {
-//           return (<Entypo name="bell" size={26} color="black" />);
-//         },
-//       },
-//     },
-//   },
-//   {
-//     tabBarOptions: {
-//       activeTintColor: "darkblue",
-//       labelStyle: { fontSize: 1, },
-//       style: { backgroundColor: "lightblue", },
-//       },      
-//   },
-// );
-
-
-
-// export default createAppContainer(AdminTabNavigator);
