@@ -10,9 +10,7 @@ import ProfileScreen from "../screens/main/ProfileScreen";
 import RatingScreen from "../screens/RatingScreen";
 import DetailScreen from "../screens/DetailScreen";
 import EditProfileScreen from "../screens/EditProfileScreen";
-import DetailScreen from "../screens/DetailScreen";
-import { createStackNavigator } from '@react-navigation/stack'
-import sheet1 from '../assets/sheet1.jpg';
+import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator()
 

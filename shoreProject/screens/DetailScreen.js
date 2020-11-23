@@ -11,7 +11,8 @@ export default class App extends React.Component {
   render() {
     return (
         <ScrollView>
-        <Image style={styles.logo} source={require(".././assets/sheet1.jpg")}/>
+        <Image style={styles.logo} source={require("../assets/sheet1.jpg")}/>
+        <View style={styles.container}>
           <Text style={{ fontSize: 30, paddingTop: 20 }} >Software Engineering {"\n"}{"\n"}</Text>
           <View style={{ flexDirection: "row"}}>
             <Text style={{ fontSize: 20, flex:1 }}>ราคา : 30 บาท</Text>

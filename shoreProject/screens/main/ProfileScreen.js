@@ -25,11 +25,11 @@ import 'firebase/auth'
 // }
 
 const FirstRoute = () => (
-  <View style={[styles.scene, { backgroundColor: '#ff4081' }]} />
+  <View style={[styles.scene, { backgroundColor: '#9dd4f5' }]} />
 );
 
 const SecondRoute = () => (
-  <View style={[styles.scene, { backgroundColor: '#673ab7' }]} />
+  <View style={[styles.scene, { backgroundColor: '#77c4f2' }]} />
 );
 
 const initialLayout = { width: Dimensions.get('window').width };
@@ -57,7 +57,7 @@ export default function Profile(props) {
             <Image style={styles.pic} source={require("../../assets/profile_icon.jpg")} />
           </TouchableOpacity>
         </View>
-        <Text style={{ fontSize: 22 }}>{user.displayName}</Text>
+        <Text style={{ fontSize: 22 }}>Thanida</Text>
         <TouchableOpacity onPress={navToEditProfile}>
           <Image style={styles.edit} source={require("../../assets/edit.png")} />
         </TouchableOpacity>

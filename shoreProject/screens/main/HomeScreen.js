@@ -4,7 +4,7 @@ import DropDownPicker from 'react-native-dropdown-picker'
 import { Searchbar } from 'react-native-paper';
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-import sheet1 from '../assets/sheet1.jpg';
+// import sheet1 from '../assets/sheet1.jpg';
 
 import 'firebase/firestore' 
 
@@ -136,7 +136,6 @@ const Home = (props) => {
                     onChangeItem={item => setSelectedsemester(item.value)}
                 />
             </View>
-            <TouchableOpacity onPress={navToDetail}>
             <View style={styles.grideTile}>
                 <View style={styles.imageGride}>
                     <Image style={styles.pic} source={require("../../assets/file.png")} />
@@ -162,7 +161,6 @@ const Home = (props) => {
                     
                 </View>
             </View>
-            </TouchableOpacity>
             </ScrollView>  
         </View>
     );
