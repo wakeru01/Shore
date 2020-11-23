@@ -3,33 +3,28 @@ import { View, StyleSheet, Text, Image, Dimensions, StatusBar, TouchableOpacity 
 import { TabView, SceneMap } from 'react-native-tab-view';
 import firebase from 'firebase/app'
 import 'firebase/auth'
-// import PhotoUpload from 'react-native-photo-upload';
-
-// const Profile = () => {
-// };
-
-// export default Profile;
-
-// export default function App() {
-//   // เพิ่มโค้ดส่วนนี้
-//   return(
-//     <View style={styles.screen}>
-//       <View style={{flexDirection: 'row'}}>
-//         <View><Image style={styles.pic} source={require("../../assets/profile_icon.jpg")} /></View>
-//         <Text style={{ fontSize: 22 }} >Thanida Samniang</Text>
-//         <Image style={styles.edit} source={require("../../assets/edit.png")} />
-//       </View>
-//     </View>
-        
-//   )
-// }
 
 const FirstRoute = () => (
-  <View style={[styles.scene, { backgroundColor: '#9dd4f5' }]} />
+  <View>
+    <View style={[styles.scene, { backgroundColor: 'white' }]} />
+      <View style={styles.gridTile}>
+        <View style={styles.imageGride}>
+            <Image style={styles.pic} source={require("../../assets/file.png")} />
+        </View>
+      </View>
+  </View>
 );
 
 const SecondRoute = () => (
-  <View style={[styles.scene, { backgroundColor: '#77c4f2' }]} />
+  <View>
+    <View style={[styles.scene, { backgroundColor: 'white' }]} />
+    <View style={styles.grid}>
+      <View style={styles.gridTile}></View>
+      <View style={styles.gridTile}></View>
+      <View style={styles.gridTile}></View>
+      <View style={styles.gridTile}></View>
+    </View>
+  </View>
 );
 
 const initialLayout = { width: Dimensions.get('window').width };
@@ -38,8 +33,8 @@ export default function Profile(props) {
   const user = firebase.auth().currentUser;
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: 'first', title: 'Buy' },
-    { key: 'second', title: 'Sell' },
+    { key: 'first', title: 'ขาย' },
+    { key: 'second', title: 'ซื้อ' },
   ]);
 
   const renderScene = SceneMap({
@@ -81,10 +76,8 @@ const styles = StyleSheet.create({
       paddingTop: 20,
   },
   pic: {
-    width: 80,
-    height: 80,
-    alignItems:'center',
-    justifyContent:'center'
+    width: 100,
+    height: 100
   },
   edit: {
     width: 13,
@@ -96,5 +89,15 @@ const styles = StyleSheet.create({
   },
   scene: {
     flex: 1,
+  },
+  gridTile: {
+    flex:4,
+    flexDirection: 'row',
+  },
+  imageGride:{
+      flex: 1,
+  },
+  header:{
+      fontSize:18
   },
 });
