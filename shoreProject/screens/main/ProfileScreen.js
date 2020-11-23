@@ -18,21 +18,23 @@ import { TabView, SceneMap } from 'react-native-tab-view';
 //         <Image style={styles.edit} source={require("../../assets/edit.png")} />
 //       </View>
 //     </View>
-        
+
 //   )
 // }
 
 const FirstRoute = () => (
-  <View style={[styles.scene, { backgroundColor: '#ff4081' }]} />
+  <View style={[styles.scene, { backgroundColor: '#abe7f5' }]} />
 );
-
+// const navToEditProfile = (props) => {
+//   props.navigation.push('EditProfile')
+// }
 const SecondRoute = () => (
-  <View style={[styles.scene, { backgroundColor: '#673ab7' }]} />
+  <View style={[styles.scene, { backgroundColor: '#9dd4f5' }]} />
 );
 
 const initialLayout = { width: Dimensions.get('window').width };
 
-export default function TabViewExample() {
+export default function Profile(props) {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     { key: 'first', title: 'Buy' },
@@ -44,15 +46,23 @@ export default function TabViewExample() {
     second: SecondRoute,
   });
 
+  const navToEditProfile = () => {
+    props.navigation.push('EditProfile')
+  }
+
   return (
     <View style={styles.screen}>
-      <View style={{flexDirection: 'row'}}>
+      <View style={{ flexDirection: 'row' }}>
         <View>
-          <Image style={styles.pic} source={require("../../assets/profile_icon.jpg")} />
+          <TouchableOpacity >
+            <Image style={styles.pic} source={require("../../assets/profile_icon.jpg")} />
+          </TouchableOpacity>
         </View>
         <Text style={{ fontSize: 22 }} >Thanida Samniang</Text>
-        <Image style={styles.edit} source={require("../../assets/edit.png")} />
-     </View>
+        <TouchableOpacity onPress={navToEditProfile}>
+          <Image style={styles.edit} source={require("../../assets/edit.png")} />
+        </TouchableOpacity>
+      </View>
       <TabView
         navigationState={{ index, routes }}
         renderScene={renderScene}
@@ -66,10 +76,10 @@ export default function TabViewExample() {
 
 const styles = StyleSheet.create({
   screen: {
-      backgroundColor: '#EDF5FA',
-      flex: 1,
-      padding: 10,
-      paddingTop: 20,
+    backgroundColor: '#EDF5FA',
+    flex: 1,
+    padding: 10,
+    paddingTop: 20,
   },
   pic: {
     width: 110,
