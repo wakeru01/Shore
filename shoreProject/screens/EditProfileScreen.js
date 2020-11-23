@@ -5,8 +5,10 @@ import 'firebase/auth'
 import { Button } from 'react-native-elements';
 import * as DocumentPicker from 'expo-document-picker';
 
-export default function RegisterScreen() {
+export default function EditProfileScreen(props) {
   const user = firebase.auth().currentUser;
+  const str = user.displayName;
+  const res = str.split(" ");
   const [tel, setTel] = useState('');
   const [account, setAccount] = useState('');
   const [accountNo, setAccountNo] = useState('');
@@ -23,19 +25,19 @@ export default function RegisterScreen() {
   return (
     <ScrollView style={styles.screen}>
       <View style={styles.headerText}>
-      <Text style={styles.header}>แก้ไขโปรไฟล์</Text>
+        <Text style={styles.header}>แก้ไขโปรไฟล์</Text>
       </View>
       <View style={styles.container}>
-        <Text style={styles.text} onChangeText={pass => setName(pass)}>ชื่อ :</Text>
-        <TextInput style={styles.input}/>
-        <Text style={styles.text} onChangeText={pass => setSur(pass)}>นามสกุล :</Text>
-        <TextInput style={styles.input}/>
-        <Text style={styles.text} onChangeText={pass => setTel(pass)}>เบอร์โทรศัพท์ :</Text>
-        <TextInput style={styles.input}/>
-        <Text style={styles.text} onChangeText={pass => setAccountNo(pass)}>เลขที่บัญชี/พร้อมเพย์ :</Text>
-        <TextInput style={styles.input}/>
-        <Text style={styles.text} onChangeText={pass => setAccount(pass)}>ชื่อบัญชี :</Text>
-        <TextInput style={styles.input}/>
+        <Text style={styles.text} >ชื่อ :</Text>
+        <TextInput style={styles.input} placeholder={res[0]} onChangeText={pass => setName(pass)}/>
+        <Text style={styles.text} >นามสกุล :</Text>
+        <TextInput style={styles.input} placeholder={res[1]} onChangeText={pass => setSur(pass)}/>
+        <Text style={styles.text} >เบอร์โทรศัพท์ :</Text>
+        <TextInput style={styles.input} onChangeText={pass => setTel(pass)}/>
+        <Text style={styles.text} >เลขที่บัญชี/พร้อมเพย์ :</Text>
+        <TextInput style={styles.input} onChangeText={pass => setAccountNo(pass)}/>
+        <Text style={styles.text} >ชื่อบัญชี :</Text>
+        <TextInput style={styles.input} onChangeText={pass => setAccount(pass)}/>
         <Text style={styles.text}>รูปภาพ :</Text>
           <Button
             title="เลือกรูปภาพ..."
@@ -44,6 +46,7 @@ export default function RegisterScreen() {
             type="outline"
           />
         <Button title="ยืนยัน" style={styles.button} onPress={()=>{
+          
           user.updateProfile({
               displayName: name + ' ' + sur,
             }).then(function() {
@@ -52,14 +55,14 @@ export default function RegisterScreen() {
               // An error happened.
           })
           db.collection("userCollection").doc().set({
-            name: name,
-            sur: sur,
             tel: tel,
             accountNo: accountNo,
-            account: account
+            account: account,
+            uid:user.uid
           })
           .then(function() {
               console.log("Document successfully written!");
+              props.navigation.pop()
           })
           .catch(function(error) {
               console.error("Error writing document: ", error);
