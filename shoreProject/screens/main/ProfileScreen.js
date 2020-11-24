@@ -1,23 +1,89 @@
 import React, { useEffect } from "react";
-import { View, StyleSheet, Text, Image, Dimensions, StatusBar, TouchableOpacity, SafeAreaView } from "react-native";
+import { View, StyleSheet, Text, Image, Dimensions, StatusBar, TouchableOpacity,ScrollView } from "react-native";
 import { TabView, SceneMap } from 'react-native-tab-view';
 import firebase from 'firebase/app'
 import 'firebase/auth'
-import EditProfileScreen from "../EditProfileScreen";
-import { ScrollView } from "react-native-gesture-handler";
+import 'firebase/firestore'
+import { FlatList } from 'react-native-gesture-handler';
+
+export default function Profile(props) {
+  var db = firebase.firestore()
+    
+    const [keepSheet, setSheet] = React.useState([]);
+  useEffect(() => {
+    const didMount = async () => {
+        let keepSheet = []
+        const db = firebase.firestore()
+        const user = firebase.auth().currentUser
+        const docs = await db.collectionGroup('sheets').where('userid', '==', user.uid).get()
+        docs.forEach(s => {
+            keepSheet = [...keepSheet, {...s.data(), id: s.id}]
+        })
+        console.log(keepSheet)
+        setSheet(keepSheet)
+    }
+    didMount()
+  }, []);
+
+  const renderBuy = ({ item }) => (
+    <ScrollView>
+    <View style={styles.gridTile}>
+            <View style={styles.imageGride}>
+                <Image style={styles.pic} source={require("../../assets/file.png")} />
+            </View>
+            <View style={styles.detailGride}>
+                <Text style={styles.header}>วิชา : {item.subject}</Text>
+                <Text>คณะ : เทคโนโลยีสารสนเทศ</Text>
+                <Text>ภาควิชา : เทคโนโลยีสารสนเทศ</Text>
+                <Text>ปีการศึกษา : 2018</Text>
+                <Text>ภาคเรียนที่ : 2</Text>
+                <Text>ราคา : 50 บาท</Text>
+            </View>
+            <View style={styles.detailPrice}>
+            <TouchableOpacity onPress={() => {
+                }}>
+                <Image style={styles.picNext} source={require("../../assets/x.png")} />
+            </TouchableOpacity>
+            </View>
+        </View>
+        </ScrollView>
+);
+
+// const renderItem = ({ item }) => (
+//   <ScrollView>
+//   <View style={styles.gridTile}>
+//           <View style={styles.imageGride}>
+//               <Image style={styles.pic} source={require("../../assets/file.png")} />
+//           </View>
+//           <View style={styles.detailGride}>
+//               <Text style={styles.header}>วิชา : {item.subject}</Text>
+//               <Text>คณะ : เทคโนโลยีสารสนเทศ</Text>
+//               <Text>ภาควิชา : เทคโนโลยีสารสนเทศ</Text>
+//               <Text>ปีการศึกษา : 2018</Text>
+//               <Text>ภาคเรียนที่ : 2</Text>
+//               <Text>ราคา : 50 บาท</Text>
+//           </View>
+//           <View style={styles.detailPrice}>
+//           <TouchableOpacity onPress={() => {
+//               }}>
+//               <Image style={styles.picNext} source={require("../../assets/x.png")} />
+//           </TouchableOpacity>
+//           </View>
+//       </View>
+//       </ScrollView>
+// );
+
 
 const FirstRoute = () => (
   <View>
     <View style={[styles.scene, { backgroundColor: 'white' }]} />
-      <ScrollView>
-      <View style={styles.gridTile}>
-        <View style={styles.imageGride} style={{flexDirection : 'row'}}>
-            <Image style={styles.file} source={require("../../assets/file.png")} />
-            <Image style={styles.file} source={require("../../assets/file.png")} />
-            <Image style={styles.file} source={require("../../assets/file.png")} />
-        </View> 
-      </View>
-      </ScrollView>
+    <ScrollView>
+      <Text>cvghbjk</Text>
+                {/* <FlatList
+                    data={keepSheet}
+                    renderItem={renderItem}
+                /> */}
+            </ScrollView>
   </View>
 );
 
@@ -25,25 +91,21 @@ const SecondRoute = () => (
   <View>
     <View style={[styles.scene, { backgroundColor: 'white' }]} />
     <ScrollView>
-      <View style={styles.gridTile}>
-        <View style={styles.imageGride} style={{flexDirection : 'row'}}>
-            <Image style={styles.file} source={require("../../assets/file.png")} />
-            <Image style={styles.file} source={require("../../assets/file.png")} />
-            <Image style={styles.file} source={require("../../assets/file.png")} />
-        </View> 
-      </View>
-      </ScrollView>
+                <FlatList
+                    data={keepSheet}
+                    renderItem={renderBuy}
+                />
+    </ScrollView>
   </View>
 );
 
 const initialLayout = { width: Dimensions.get('window').width };
 
-export default function Profile(props) {
   const user = firebase.auth().currentUser;
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: 'first', title: 'ขาย' },
-    { key: 'second', title: 'ซื้อ' },
+    { key: 'first', title: 'ซื้อ' },
+    { key: 'second', title: 'ขาย' },
   ]);
 
   const renderScene = SceneMap({
@@ -53,34 +115,15 @@ export default function Profile(props) {
   const navToEditProfile = () => {
     props.navigation.push('EditProfile')
   }
-
-  // state = {
-  //   photo: null,
-  // }
-
-  // handleChoosePhoto = () => {
-  //   const options = {
-  //     noData: true,
-  //   }
-  //   ImagePicker.launchImageLibrary(options, response => {
-  //     if (response.uri) {
-  //       this.setState({ photo: response })
-  //     }
-  //   })
-  // }
-  // const { photo } = this.state
+  console.log(user)
   return (
     <View style={styles.screen}>
+      <ScrollView>
       <View style={{ flexDirection: 'row' }}>
-        <View style={{ flexDirection: 'columm' }}>
+        <View>
+          <TouchableOpacity >
             <Image style={styles.pic} source={require("../../assets/profile_icon.jpg")} />
-            {/* {photo && (
-              <Image
-                source={{ uri: photo.uri }}
-                style={{ width: 300, height: 300 }}
-              />
-            )}
-            <Button style={{ fontSize: 15}} title="Choose Photo" onPress={this.handleChoosePhoto} /> */}
+          </TouchableOpacity>
         </View>
           <Text style={{ fontSize: 22}}>{user.displayName}</Text>
         <TouchableOpacity onPress={navToEditProfile}>
@@ -94,6 +137,7 @@ export default function Profile(props) {
         initialLayout={initialLayout}
         style={styles.container}
       />
+      </ScrollView>
     </View>
   );
 }
@@ -106,8 +150,10 @@ const styles = StyleSheet.create({
       paddingTop: 20,
   },
   pic: {
-    width: 100,
-    height: 100
+    width: 80,
+    height: 80,
+    alignItems:'center',
+    justifyContent:'center'
   },
   edit: {
     width: 13,
@@ -121,17 +167,32 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   gridTile: {
-    flex:4,
-    flexDirection: 'row',
-  },
-  imageGride:{
-      flex: 1,
+    flex:1,
+    backgroundColor: "white",
+    padding: 10,
+    paddingLeft: 2,
+    marginTop: 7,
+    borderRadius: 3,
+    flexDirection: 'row'
   },
   header:{
       fontSize:18
   },
-  file:{
-    width: 120,
-    height: 120
+  imageGride: {
+    flex: 1,
+},
+  detailGride: {
+      flex: 2
   },
-});
+  picNext: {
+      width: 10,
+      height: 10,
+  },
+  detailPrice: {
+      flexDirection: 'column'
+  },
+  pic: {
+      width: 100,
+      height: 100
+  },
+  });

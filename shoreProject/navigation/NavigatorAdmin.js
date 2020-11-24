@@ -1,5 +1,4 @@
 import React from "react";
-// import { createStackNavigator } from "react-navigation-stack";
 import { createAppContainer } from "react-navigation";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import { Entypo } from '@expo/vector-icons';
@@ -13,7 +12,7 @@ import EditProfileScreen from "../screens/EditProfileScreen";
 import BuySheetScreen from "../screens/BuySheetScreen";
 import ConditionScreen from "../screens/ConditionScreen";
 import { createStackNavigator } from '@react-navigation/stack';
-import {Button} from 'react-native-elements';
+import {Button} from 'react-native';
 
 const Stack = createStackNavigator()
 
@@ -42,6 +41,7 @@ const AddSheetNavigator = () => {
       }} initialRouteName="AddSheet">
         <Stack.Screen name="AddSheet" component={AddSheetScreen} />
         <Stack.Screen name="Condition" component={ConditionScreen} />
+        <Stack.Screen name="Home" component={HomeScreen} />
       </Stack.Navigator>
     )
 }

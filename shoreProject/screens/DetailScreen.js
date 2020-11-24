@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import { Button } from 'react-native-elements';
 import * as firebase from 'firebase'
-// import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/storage'
 import 'firebase/auth'
@@ -18,7 +17,7 @@ export default function DetailScreen(props) {
 
   const { id } = props.route.params;
   const [snap, setSnap] = React.useState(null);
-  
+
   useEffect(() => {
     (async () => {
       var db = firebase.firestore()
@@ -39,12 +38,12 @@ export default function DetailScreen(props) {
   if(snap === null){
     return <Text>Loading</Text>
   }
-  
+
   return (
     <ScrollView>
       <Image style={styles.logo} source={require("../assets/sheet1.jpg")} />
       <View style={styles.container}>
-  <Text style={{ fontSize: 30, paddingTop: 20 }} >{snap.subject}{"\n"}{"\n"}</Text>
+        <Text style={{ fontSize: 30, paddingTop: 20 }} >{snap.subject}{"\n"}{"\n"}</Text>
         <View style={{ flexDirection: "row" }}>
           <Text style={{ fontSize: 20, flex: 1 }}>ราคา : {snap.price} บาท</Text>
         </View>
@@ -61,7 +60,7 @@ export default function DetailScreen(props) {
       </View>
     </ScrollView>
   );
-  
+
 
 }
 

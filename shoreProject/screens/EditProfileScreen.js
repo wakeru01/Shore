@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View,TextInput, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, ScrollView } from 'react-native';
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import { Button } from 'react-native-elements';
@@ -44,31 +44,30 @@ export default function EditProfileScreen(props) {
       </View>
       <View style={styles.container}>
         <Text style={styles.text} >ชื่อ :</Text>
-        <TextInput style={styles.input} placeholder={res[0]} onChangeText={pass => setName(pass)}/>
+        <TextInput style={styles.input} placeholder={res[0]} onChangeText={pass => setName(pass)} />
         <Text style={styles.text} >นามสกุล :</Text>
-        <TextInput style={styles.input} placeholder={res[1]} onChangeText={pass => setSur(pass)}/>
+        <TextInput style={styles.input} placeholder={res[1]} onChangeText={pass => setSur(pass)} />
         <Text style={styles.text} >เบอร์โทรศัพท์ :</Text>
-        <TextInput style={styles.input} onChangeText={pass => setTel(pass)}/>
+        <TextInput style={styles.input} onChangeText={pass => setTel(pass)} />
         <Text style={styles.text} >เลขที่บัญชี/พร้อมเพย์ :</Text>
-        <TextInput style={styles.input} onChangeText={pass => setAccountNo(pass)}/>
+        <TextInput style={styles.input} onChangeText={pass => setAccountNo(pass)} />
         <Text style={styles.text} >ชื่อบัญชี :</Text>
         <TextInput style={styles.input} onChangeText={pass => setAccount(pass)}/>
         <Text style={styles.text} >ธนาคาร :</Text>
         <TextInput style={styles.input} onChangeText={pass => setBank(pass)}/>
         <Text style={styles.text}>รูปภาพ :</Text>
-          <Button
-            title="เลือกรูปภาพ..."
-            color="#989a9c"
-            onPress={handleFilePick}
-            type="outline"
-          />
-        <Button title="ยืนยัน" style={styles.button} onPress={()=>{
+        <Button
+          title="เลือกรูปภาพ..."
+          color="#989a9c"
+          onPress={handleFilePick}
+          type="outline"
+        />
+        <Button title="ยืนยัน" style={styles.button} onPress={() => {
           user.updateProfile({
             displayName: name + ' ' + sur,
-          }).then(function() {
+          }).then(function () {
             console.log(user.displayName)
-          }).catch(function(error) {
-            // An error happened.
+          }).catch(function (error) {
           })
             db.collection("userCollection").doc(user.uid).set({
               tel: tel,
@@ -80,53 +79,52 @@ export default function EditProfileScreen(props) {
             .then(function() {
                 console.log("Document successfully updated!");
             })
-            .catch(function(error) {
-                // The document probably doesn't exist.
-                console.error("Error updating document: ", error);
+            .catch(function (error) {
+              console.error("Error updating document: ", error);
             });
-            props.navigation.pop()
-        }}/>
-     </View>
+          props.navigation.pop()
+        }} />
+      </View>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  screen:{
+  screen: {
     flex: 1,
     backgroundColor: '#EDF5FA',
     padding: 20,
   },
   container: {
     backgroundColor: "white",
-    padding:30,
-    marginLeft:20,
-    marginRight:20,
+    padding: 30,
+    marginLeft: 20,
+    marginRight: 20,
   },
-  header:{
-    fontSize:30,
+  header: {
+    fontSize: 30,
     margin: 20,
   },
-  input:{
+  input: {
     backgroundColor: "white",
     padding: 10,
     marginBottom: 20,
-    borderColor: '#4893c2', 
+    borderColor: '#4893c2',
     borderWidth: 1,
-    borderRadius:3
+    borderRadius: 3
   },
-  text:{
-    fontSize: 18, 
-    marginBottom:7,
-    marginTop:7
+  text: {
+    fontSize: 18,
+    marginBottom: 7,
+    marginTop: 7
   },
-  button:{
-    marginTop:30,
-    marginBottom:20
+  button: {
+    marginTop: 30,
+    marginBottom: 20
   },
-  headerText:{
+  headerText: {
     alignItems: 'center',
     justifyContent: 'center',
   }
-    
+
 });
