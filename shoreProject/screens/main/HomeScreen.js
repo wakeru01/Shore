@@ -10,24 +10,8 @@ import 'firebase/firestore'
 import { FlatList } from 'react-native-gesture-handler';
 import { lessOrEq } from 'react-native-reanimated';
 
-
 const Home = (props) => {
     const [searchQuery, setSearchQuery] = React.useState('');
-    const [faculty, setFaculty] = React.useState('')
-    const [stateFaculty, setStateFaculty] = React.useState(false)
-    const [branch, setBranch] = React.useState('')
-    const [year, setYear] = React.useState([])
-    const [semester, setSemester] = React.useState([])
-    const [datafaculty, setDatafaculty] = useState({})
-    const [databranch, setDatabranch] = useState({})
-    const [sheets, setSheets] = useState('')
-    const [dataSheets, setDatasheets] = useState({})
-    const [selectedyear, setSelectedyear] = useState({})
-    const [selectedsemester, setSelectedsemester] = useState({})
-    const [subject, setSubject] = useState('')
-
-    // const [searchQuery, setSearchQuery] = React.useState('')
-    const [country, setCountry] = React.useState('uk')
     var db = firebase.firestore()
     
     const [keepSheet, setSheet] = React.useState([]);
@@ -61,7 +45,6 @@ const Home = (props) => {
         }
         didMount()
     }, []);
-    // console.log(keepSheet);
     const navDetail = (payload) => {
         props.navigation.push('Detail', {
             id: payload

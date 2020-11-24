@@ -13,6 +13,7 @@ import 'firebase/firestore'
 import 'firebase/storage'
 import 'firebase/auth'
 
+
 export default function DetailScreen(props) {
 
   const { id } = props.route.params;
@@ -29,10 +30,12 @@ export default function DetailScreen(props) {
       setSnap(data)
     })()
   }, [])
-  const navBuysheet = () => {
-    props.navigation.push('Buysheet')
-  }
-  // console.log(snap === null);
+
+  const navToBuySheet = (payload) => {
+    props.navigation.push('BuySheet', {
+      uid: payload
+    })
+}
   if(snap === null){
     return <Text>Loading</Text>
   }
@@ -52,10 +55,9 @@ export default function DetailScreen(props) {
           <Text style={{ fontSize: 15 }}>ความสวยงาม : 00 {"\n"}</Text>
           <Text style={{ fontSize: 15 }}>ความเข้าใจ : 00000{"\n"}{"\n"}{"\n"}{"\n"}</Text>
         </View>
-        <Button
-          title="ซื้อ"
-          onPress={navBuysheet}
-        />
+        <Button title="ซื้อ" onPress={() => {navToBuySheet(snap.uid)}}></Button>
+        
+        
       </View>
     </ScrollView>
   );

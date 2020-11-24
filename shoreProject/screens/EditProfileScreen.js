@@ -12,6 +12,8 @@ export default function EditProfileScreen(props) {
   const [tel, setTel] = useState('');
   const [account, setAccount] = useState('');
   const [accountNo, setAccountNo] = useState('');
+  const [bank, setBank] = useState('');
+
   const [pass, setPass] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
   const [name, setName] = useState('');
@@ -51,6 +53,8 @@ export default function EditProfileScreen(props) {
         <TextInput style={styles.input} onChangeText={pass => setAccountNo(pass)}/>
         <Text style={styles.text} >ชื่อบัญชี :</Text>
         <TextInput style={styles.input} onChangeText={pass => setAccount(pass)}/>
+        <Text style={styles.text} >ธนาคาร :</Text>
+        <TextInput style={styles.input} onChangeText={pass => setBank(pass)}/>
         <Text style={styles.text}>รูปภาพ :</Text>
           <Button
             title="เลือกรูปภาพ..."
@@ -70,6 +74,8 @@ export default function EditProfileScreen(props) {
               tel: tel,
               accountNo: accountNo,
               account: account,
+              bank: bank,
+              uid: user.uid
             },{merge: true})
             .then(function() {
                 console.log("Document successfully updated!");

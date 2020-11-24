@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { View, 
     StyleSheet,
     TextInput,
@@ -11,18 +11,53 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 
 const BuySheet = (props) => {
-
+    
     var db = firebase.firestore();
-
+    const user = firebase.auth().currentUser;
+    const { uid } = props.route.params
+    const [snap, setSnap] = React.useState(null);
+    const [time, setTime] = useState('');
+    const [price, setPrice] = useState('');
+    useEffect(
+        async () => {
+          var db = firebase.firestore()
+          var data = {};
+          const docs = await db.collectionGroup('userCollection').get()
+          docs.forEach(s => {
+            if (s.uid === uid) data = s.data()
+          })
+          setSnap(data)
+        }, [])
+   
     const handleFilePick = async () => {
         const fileResponse = await DocumentPicker.getDocumentAsync();
         console.log(fileResponse);
     }
 
     const navTohome = () => {
-        props.navigation.popToTop('Home')
+        db.collection("log").doc(user.uid).set({
+            time: time,
+            price: price,
+            uid: user.uid
+          })
+          .then(function() {
+            try {
+                // await firebase.auth().signInWithEmailAndPassword(email, pass)
+                props.navigation.replace('Main')
+              } catch (error) {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                alert(errorMessage)
+              }
+          })
+          .catch(function(error) {
+              // The document probably doesn't exist.
+              console.error("Error updating document: ", error);
+          })
     }
-    
+    if(snap === null){
+        return <Text>Loading</Text>
+      }
     return (
         <View style={styles.screen}>
             <ScrollView>
@@ -31,15 +66,15 @@ const BuySheet = (props) => {
             </View>
             <View style={styles.showText}>
                 <Text style={styles.text}>เลขที่บัญชี/พร้อมเพย์ :</Text>
-                <View style={styles.textSole}>61070190</View>
+                <View style={styles.textSole}>{snap.accountNo}</View>
                 <View style={styles.line}/>
 
                 <Text style={styles.text}>ชื่อบัญชี :</Text>
-                <View style={styles.textSole}>นางสาวรุ่งวราพร คุตะนนท์</View>
+                <View style={styles.textSole}>{ snap.account }</View>
                 <View style={styles.line}/>
 
                 <Text style={styles.text}>ธนาคาร :</Text>
-                <View style={styles.textSole}>กรุงไทย</View>
+                <View style={styles.textSole}>{ snap.bank }</View>
                 <View style={styles.line}/>
 
                 <Text style={styles.text}>หลักฐานการโอนเงิน :</Text>
@@ -50,9 +85,9 @@ const BuySheet = (props) => {
                     type="outline"
                 />
                 <Text style={styles.text}>เวลา :</Text>
-                <TextInput style={styles.input} placeholder="เพิ่มเวลาที่นี่ ..."/>
+                <TextInput style={styles.input} placeholder="เพิ่มเวลาที่นี่ ..." onChangeText={pass => setTime(pass)}/>
                 <Text style={styles.text}>ราคา :</Text>
-                <TextInput style={styles.input} placeholder="เพิ่มราคาที่นี่ ..."/>
+                <TextInput style={styles.input} placeholder="เพิ่มราคาที่นี่ ..." onChangeText={pass => setPrice(pass)}/>
                 <Button title="ยืนยัน" onPress={navTohome}/>
             </View>
             </ScrollView>

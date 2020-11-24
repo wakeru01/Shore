@@ -26,7 +26,7 @@ const HomeNavigator = () => {
       }} initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Detail" component={DetailScreen} />
-        <Stack.Screen name="Buysheet" component={BuySheetScreen} />
+        <Stack.Screen name="BuySheet" component={BuySheetScreen} />
       </Stack.Navigator>
     )
 }
@@ -70,7 +70,6 @@ const ProfileNavigator = (props) => {
       <Stack.Navigator screenOptions={{
         headerStyle: { backgroundColor: "#3198cc", },
         headerTintColor: "white",
-        
       }} initialRouteName="Profile">
         <Stack.Screen name="Profile" component={ProfileScreen} 
           options={{
@@ -83,7 +82,7 @@ const ProfileNavigator = (props) => {
               />
             ),
         }}/>
-        <Stack.Screen name="Edit Profile" component={EditProfileScreen} />
+        <Stack.Screen name="EditProfile" component={EditProfileScreen} />
       </Stack.Navigator>
     )
 }
