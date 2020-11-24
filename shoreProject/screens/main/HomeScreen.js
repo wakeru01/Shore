@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView, Text, Image, TouchableOpacity } from "react-native";
 import DropDownPicker from 'react-native-dropdown-picker'
 import { Searchbar } from 'react-native-paper';
@@ -6,7 +6,9 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 // import sheet1 from '../assets/sheet1.jpg';
 
-import 'firebase/firestore' 
+import 'firebase/firestore'
+import { FlatList } from 'react-native-gesture-handler';
+import { lessOrEq } from 'react-native-reanimated';
 
 
 const Home = (props) => {
@@ -22,10 +24,14 @@ const Home = (props) => {
     const [dataSheets, setDatasheets] = useState({})
     const [selectedyear, setSelectedyear] = useState({})
     const [selectedsemester, setSelectedsemester] = useState({})
+    const [subject, setSubject] = useState('')
+
     // const [searchQuery, setSearchQuery] = React.useState('')
     const [country, setCountry] = React.useState('uk')
     var db = firebase.firestore()
     const onChangeSearch = query => setSearchQuery(query);
+    const [keepSheet, setSheet] = React.useState([]);
+    // const DATA;
 
     useEffect(async () => {
         const querySnapshot = await db.collection("faculty").get()
@@ -33,135 +39,182 @@ const Home = (props) => {
         querySnapshot.forEach((doc) => {
             faculty[doc.id] = doc.data()
         });
+
+        const branches = {}
+        for (let fac in faculty) {
+            const fquerySnapshot = await db.collection("faculty").doc(fac).collection("branch").get()
+            fquerySnapshot.forEach((doc) => {
+                branches[doc.id] = { ...doc.data(), facId: fac }
+            });
+            console.log(branches);
+        }
+
+        const sheet = {}
+        const sheet2 = []
+        for (let fac in branches) {
+            const nquerySnapshot = await db.collection("faculty").doc(branches[fac].facId).collection("branch").doc(fac).collection("sheets").get()
+            // console .log(nquerySnapshot);
+            nquerySnapshot.forEach((doc) => {
+                sheet[doc.id] = doc.data()
+                // sheet.push({
+                //     [doc.id] : doc.data()
+                // })
+            });
+        }
+        Object.entries(sheet).map(([key, value]) => {
+            sheet2.push({ [key]: value });
+        })
+        setSheet(sheet2);
+
+        // console.log(sheet2);
         setDatafaculty(faculty);
     }, []);
-
-    const navDetail = () => {
-        props.navigation.push('Detail')
+    // console.log(keepSheet);
+    const navDetail = (payload) => {
+        props.navigation.push('Detail', {
+            facId: "45USSRt1dWFhwGTy56ba",
+            branchId: "0woF7tKATdrzpCZpG4d1",
+            sheetsId: "Gmi787fsGRuHsH9QRytv",
+            subject: payload
+        })
     }
+
+    const renderItem = ({ item }) => (
+        // console.log(Object.keys(item)) //sheetId
+        // console.log()
+        <View style={styles.gridTile}>
+            <View style={styles.imageGride}>
+                <Image style={styles.pic} source={require("../../assets/file.png")} />
+            </View>
+            <View style={styles.detailGride}>
+                <Text style={styles.header}>{Object.values(item)[0].subject}</Text>
+                <View style={styles.ratingStr}>
+                    <Image style={styles.picProfile} source={require("../../assets/profile_icon.jpg")} />
+                    <Text>Rungwaraporn Khuthanon</Text>
+                </View>
+                <View style={styles.ratingStr}>
+                    <Text>Rating : </Text>
+                    <Image style={styles.picStar} source={require("../../assets/star.png")} />
+                    <Image style={styles.picStar} source={require("../../assets/star.png")} />
+                    <Image style={styles.picStar} source={require("../../assets/star.png")} />
+                </View>
+            </View>
+            <View style={styles.detailPrice}>
+                <Text style={styles.price}>{Object.values(item)[0].price}฿</Text>
+                <TouchableOpacity onPress={() => {
+                    setSubject(Object.values(item)[0].subject)
+                    navDetail(Object.values(item)[0].subject)
+                }}>
+                <Image style={styles.picNext} source={require("../../assets/next.png")} />
+                </TouchableOpacity>
+
+            </View>
+        </View>
+    );
 
     return (
         <View style={styles.screen}>
             <ScrollView>
-            <Searchbar
-                placeholder="ค้นหา"
-                onChangeText={onChangeSearch}
-                value={searchQuery}
-            />
-            <View style={[styles.dropdown, {zIndex: 2}]}>
-                <DropDownPicker
-                    items={[
-                        ...Object.keys(datafaculty).map(key => ({label: datafaculty[key].name, value: key }))
-                    ]}
-                    containerStyle={{height: 40, flex: 1, marginTop: 10}}
-                    style={{backgroundColor: '#fafafa'}}
-                    itemStyle={{
-                        justifyContent: 'flex-start'
-                    }}
-                    dropDownStyle={{backgroundColor: '#fafafa'}}
-                    onChangeItem={ async (item) => {
-                        setFaculty(item.value)
-                        const querySnapshot = await db.collection("faculty").doc(item.value).collection("branch").get();
-                        const branch = {};
-                        querySnapshot.forEach((doc) => {
-                            branch[doc.id] = doc.data()
-                        });
-                        setDatabranch(branch)
-                    }}
+                <Searchbar
+                    placeholder="ค้นหา"
+                    onChangeText={onChangeSearch}
+                    value={searchQuery}
+                />
+                <View style={[styles.dropdown, { zIndex: 2 }]}>
+                    <DropDownPicker
+                        items={[
+                            ...Object.keys(datafaculty).map(key => ({ label: datafaculty[key].name, value: key }))
+                        ]}
+                        containerStyle={{ height: 40, flex: 1, marginTop: 10 }}
+                        style={{ backgroundColor: '#fafafa' }}
+                        itemStyle={{
+                            justifyContent: 'flex-start'
+                        }}
+                        dropDownStyle={{ backgroundColor: '#fafafa' }}
+                        onChangeItem={async (item) => {
+                            setFaculty(item.value)
+                            const querySnapshot = await db.collection("faculty").doc(item.value).collection("branch").get();
+                            const branch = {};
+                            querySnapshot.forEach((doc) => {
+                                branch[doc.id] = doc.data()
+                            });
+                            setDatabranch(branch)
+                        }}
                     // onStateChange={ }
-                />
-                <DropDownPicker
-                    items={[
-                        ...Object.keys(databranch).map(key => ({label: databranch[key].name, value: key }))
-                    ]}
-                    containerStyle={{height: 40, flex: 1, marginTop: 10}}
-                    style={{backgroundColor: '#fafafa'}, {zIndex: 2}}
-                    itemStyle={{
-                        justifyContent: 'flex-start'
-                    }}
-                    dropDownStyle={{backgroundColor: '#fafafa'}}
-                    onChangeItem={ async (item) => {
-                        setBranch(item.value)
-                        const querySnapshot = await db.collection("faculty").doc(faculty).collection("branch").doc(item.value).collection("sheets").get();
-                        const sheets = {};
-                        let year = [];
-                        querySnapshot.forEach((doc) => {
-                            console.log(doc.data())
-                            sheets[doc.id] = doc.data()
-                            if(!year.includes(doc.data().year)){
-                                year = [...year, doc.data().year]
-                                console.log(year)
-                            }
-                        });
-                        year.sort()
-                        setYear(year)
-                        setDatasheets(sheets)
-                    }}
-                />
+                    />
+                    <DropDownPicker
+                        items={[
+                            ...Object.keys(databranch).map(key => ({ label: databranch[key].name, value: key }))
+                        ]}
+                        containerStyle={{ height: 40, flex: 1, marginTop: 10 }}
+                        style={{ backgroundColor: '#fafafa' }, { zIndex: 2 }}
+                        itemStyle={{
+                            justifyContent: 'flex-start'
+                        }}
+                        dropDownStyle={{ backgroundColor: '#fafafa' }}
+                        onChangeItem={async (item) => {
+                            setBranch(item.value)
+                            const querySnapshot = await db.collection("faculty").doc(faculty).collection("branch").doc(item.value).collection("sheets").get();
+                            const sheets = {};
+                            let year = [];
+                            querySnapshot.forEach((doc) => {
+                                console.log(doc.data())
+                                sheets[doc.id] = doc.data()
+                                if (!year.includes(doc.data().year)) {
+                                    year = [...year, doc.data().year]
+                                    console.log(year)
+                                }
+                            });
+                            year.sort()
+                            setYear(year)
+                            setDatasheets(sheets)
+                        }}
+                    />
                 </View>
                 <View style={styles.dropdown}>
-                <DropDownPicker
-                    items={[
-                        ...year.map(y => ({label: y.toString(), value: y }))
-                    ]}
-                    containerStyle={{height: 40, flex: 1, marginTop: 10}}
-                    style={{backgroundColor: '#fafafa'}, {zIndex: 1}}
-                    itemStyle={{
-                        justifyContent: 'flex-start'
-                    }}
-                    dropDownStyle={{backgroundColor: '#fafafa'}}
-                    onChangeItem={ async (item) => {
-                        let semester = []
-                        setSelectedyear(item.value)
-                        const thisyear = Object.keys(dataSheets).filter((id) =>{
-                            return dataSheets[id].year == item.value
-                        })
-                        thisyear.forEach((id) => {
-                            if(!semester.includes(dataSheets[id].semester)){
-                                semester = [...semester, dataSheets[id].semester]
-                        }})
-                        setSemester(semester)
-                    }}
+                    <DropDownPicker
+                        items={[
+                            ...year.map(y => ({ label: y.toString(), value: y }))
+                        ]}
+                        containerStyle={{ height: 40, flex: 1, marginTop: 10 }}
+                        style={{ backgroundColor: '#fafafa' }, { zIndex: 1 }}
+                        itemStyle={{
+                            justifyContent: 'flex-start'
+                        }}
+                        dropDownStyle={{ backgroundColor: '#fafafa' }}
+                        onChangeItem={async (item) => {
+                            let semester = []
+                            setSelectedyear(item.value)
+                            const thisyear = Object.keys(dataSheets).filter((id) => {
+                                return dataSheets[id].year == item.value
+                            })
+                            thisyear.forEach((id) => {
+                                if (!semester.includes(dataSheets[id].semester)) {
+                                    semester = [...semester, dataSheets[id].semester]
+                                }
+                            })
+                            setSemester(semester)
+                        }}
+                    />
+                    <DropDownPicker
+                        items={[
+                            ...semester.map(s => ({ label: s.toString(), value: s }))
+                        ]}
+                        containerStyle={{ height: 40, flex: 1, marginTop: 10 }}
+                        style={{ backgroundColor: '#fafafa' }, { zIndex: 1 }}
+                        itemStyle={{
+                            justifyContent: 'flex-start'
+                        }}
+                        dropDownStyle={{ backgroundColor: '#fafafa' }}
+                        onChangeItem={item => setSelectedsemester(item.value)}
+                    />
+                </View>
+                <FlatList
+                    data={keepSheet}
+                    renderItem={renderItem}
+                // keyExtractor={item => item.id}
                 />
-                <DropDownPicker
-                    items={[
-                        ...semester.map(s => ({label: s.toString(), value: s }))
-                    ]}
-                    containerStyle={{height: 40, flex: 1, marginTop: 10}}
-                    style={{backgroundColor: '#fafafa'}, {zIndex: 1}}
-                    itemStyle={{
-                        justifyContent: 'flex-start'
-                    }}
-                    dropDownStyle={{backgroundColor: '#fafafa'}}
-                    onChangeItem={item => setSelectedsemester(item.value)}
-                />
-            </View>
-            <View style={styles.gridTile}>
-                <View style={styles.imageGride}>
-                    <Image style={styles.pic} source={require("../../assets/file.png")} />
-                </View>
-                <View style={styles.detailGride}>
-                    <Text style={styles.header}>Moblie Programming</Text>
-                    <View style={styles.ratingStr}>
-                        <Image style={styles.picProfile} source={require("../../assets/profile_icon.jpg")} />
-                        <Text>Rungwaraporn khuthanon</Text>
-                    </View>
-                    <View style={styles.ratingStr}>
-                        <Text>Rating : </Text>
-                        <Image style={styles.picStar} source={require("../../assets/star.png")} />
-                        <Image style={styles.picStar} source={require("../../assets/star.png")} />
-                        <Image style={styles.picStar} source={require("../../assets/star.png")} />
-                    </View>
-                </View>
-                <View style={styles.detailPrice}>
-                    <Text style={styles.price}>50฿</Text>
-                    <TouchableOpacity onPress={navDetail}>
-                        <Image style={styles.picNext} source={require("../../assets/next.png")} /> 
-                    </TouchableOpacity>
-                    
-                </View>
-            </View>
-            </ScrollView>  
+            </ScrollView>
         </View>
     );
 };
@@ -174,56 +227,56 @@ const styles = StyleSheet.create({
         padding: 20,
         paddingTop: 20,
     },
-    dropdown:{
+    dropdown: {
         flexDirection: "row",
         height: 50,
     },
-    gridTile:{
+    gridTile: {
         backgroundColor: "white",
-        padding:10,
-        paddingLeft:2,
-        marginTop:7,
-        borderRadius:3,
-        flexDirection:'row'
+        padding: 10,
+        paddingLeft: 2,
+        marginTop: 7,
+        borderRadius: 3,
+        flexDirection: 'row'
     },
-    imageGride:{
+    imageGride: {
         flex: 1,
     },
-    detailGride:{
+    detailGride: {
         flex: 3
     },
-    picNext:{
-        width:20,
-        height:20,
+    picNext: {
+        width: 20,
+        height: 20,
     },
-    detailPrice:{
-        flexDirection:'column'
+    detailPrice: {
+        flexDirection: 'column'
     },
-    price:{
-        color:"red",
-        flex:1,
+    price: {
+        color: "red",
+        flex: 1,
     },
-    pic:{
-        width:70,
-        height:70,
-        justifyContent:'center',
-        alignItems:'center'
+    pic: {
+        width: 70,
+        height: 70,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
-    header:{
-        fontSize:18
+    header: {
+        fontSize: 18
     },
-    picProfile:{
-        width:20,
-        height:20,
-        marginRight:3
+    picProfile: {
+        width: 20,
+        height: 20,
+        marginRight: 3
     },
-    picStar:{
-        width:20,
-        height:20,
+    picStar: {
+        width: 20,
+        height: 20,
     },
-    ratingStr:{
-        flexDirection:'row',
-        marginTop:5
+    ratingStr: {
+        flexDirection: 'row',
+        marginTop: 5
     }
 
 });
