@@ -30,8 +30,11 @@ const Home = (props) => {
     const [country, setCountry] = React.useState('uk')
     var db = firebase.firestore()
     const onChangeSearch = query => setSearchQuery(query);
+    
     const [keepSheet, setSheet] = React.useState([]);
     // const DATA;
+
+
 
     useEffect(async () => {
         const querySnapshot = await db.collection("faculty").get()
@@ -89,8 +92,8 @@ const Home = (props) => {
             <View style={styles.detailGride}>
                 <Text style={styles.header}>{Object.values(item)[0].subject}</Text>
                 <View style={styles.ratingStr}>
-                    <Image style={styles.picProfile} source={require("../../assets/profile_icon.jpg")} />
-                    <Text>Rungwaraporn Khuthanon</Text>
+                    <Image style={styles.picProfile} source={require("../../assets/dot.png")} />
+                    <Text> ปีการศึกษา : {Object.values(item)[0].year} ภาคเรียนที่ :{Object.values(item)[0].semester}</Text>
                 </View>
                 <View style={styles.ratingStr}>
                     <Text>Rating : </Text>
@@ -120,7 +123,7 @@ const Home = (props) => {
                     onChangeText={onChangeSearch}
                     value={searchQuery}
                 />
-                <View style={[styles.dropdown, { zIndex: 2 }]}>
+                {/* <View style={[styles.dropdown, { zIndex: 2 }]}>
                     <DropDownPicker
                         items={[
                             ...Object.keys(datafaculty).map(key => ({ label: datafaculty[key].name, value: key }))
@@ -208,7 +211,7 @@ const Home = (props) => {
                         dropDownStyle={{ backgroundColor: '#fafafa' }}
                         onChangeItem={item => setSelectedsemester(item.value)}
                     />
-                </View>
+                </View> */}
                 <FlatList
                     data={keepSheet}
                     renderItem={renderItem}
@@ -266,8 +269,8 @@ const styles = StyleSheet.create({
         fontSize: 18
     },
     picProfile: {
-        width: 20,
-        height: 20,
+        width: 15,
+        height: 15,
         marginRight: 3
     },
     picStar: {
