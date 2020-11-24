@@ -13,6 +13,7 @@ import EditProfileScreen from "../screens/EditProfileScreen";
 import BuySheetScreen from "../screens/BuySheetScreen";
 import ConditionScreen from "../screens/ConditionScreen";
 import { createStackNavigator } from '@react-navigation/stack';
+import {Button} from 'react-native-elements';
 
 const Stack = createStackNavigator()
 
@@ -64,14 +65,24 @@ const NotificationNavigator = () => {
 
 export {NotificationNavigator}
 
-const ProfileNavigator = () => {
+const ProfileNavigator = (props) => {
   return (
       <Stack.Navigator screenOptions={{
         headerStyle: { backgroundColor: "#3198cc", },
         headerTintColor: "white",
         
       }} initialRouteName="Profile">
-        <Stack.Screen name="Profile" component={ProfileScreen} />
+        <Stack.Screen name="Profile" component={ProfileScreen} 
+          options={{
+            headerRight: () => (
+              <Button
+                onPress={() => props.navigation.navigate('Login')}
+                title="Log Out"
+                // fontsize="10"
+                color="#3198cc"
+              />
+            ),
+        }}/>
         <Stack.Screen name="Edit Profile" component={EditProfileScreen} />
       </Stack.Navigator>
     )
