@@ -19,7 +19,10 @@ export default function RegisterScreen(props) {
       <Text style={styles.header}>ข้อตกลงและเงื่อนไข</Text>
       </View>
       <View style={styles.container}>
-        <Text style={styles.text}>ข้อตกลงระหว่างท่าน และShore </Text>
+        <Text style={styles.text}>สงวนลิขสิทธิ์ส่งต่อชีทที่ได้รับ ตามพระราชบัญญัติลิขสิทธิ์ พ.ศ.2537
+        ห้ามคัดลอก ทำซำ้ ดัดแปลงหีรือนำส่วนใดส่วนหนึ่งในชีทไปเผยแพร่
+        ไม่ว่ากรณีใดๆทั้งสิ้น โดยไม่ได้รับอนุญาต จาก Shore หากฝ่าฝืน
+        จะดำเนินคดีตามกฎหมาย</Text>
      </View>
      <View style={styles.checkboxContainer}>
         <CheckBox
@@ -62,7 +65,7 @@ const styles = StyleSheet.create({
     borderRadius:3
   },
   text:{
-    fontSize: 18, 
+    fontSize: 16, 
     marginBottom:7,
     marginTop:7
   },
