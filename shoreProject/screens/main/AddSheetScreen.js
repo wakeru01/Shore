@@ -189,6 +189,7 @@ const AddSheet = (props) => {
                     // console.log('sheetPic', sheetpic.uri)
                     // firebase.storage().ref(`sheets/${sheetRef.id}/sheet.png`).putString(sheetpic.uri, 'data_url')
                     // firebase.storage().ref(`sheets/${sheetRef.id}/sheetex.png`).putString(sheetex.uri, 'data_url')
+                    props.navigation.navigate('Condition')
                 }}/>
             </View>
             </ScrollView>

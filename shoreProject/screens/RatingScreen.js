@@ -7,11 +7,11 @@ import { Rating, AirbnbRating } from 'react-native-ratings';
 // import { AirbnbRating } from 'react-native-elements';
 import { Button } from 'react-native-elements';
 
-export default class App extends React.Component {
-    ratingCompleted(rating) {
-        console.log("Rating is: " + rating)
-    }
-  render() {
+export default function Rating( props ) {
+    // const ratingCompleted = (rating) => {
+    //     console.log("Rating is: " + rating)
+    //   }
+//   render() {
     return (
         <View style={styles.screen}>
         <ScrollView>
@@ -36,12 +36,12 @@ export default class App extends React.Component {
                 <AirbnbRating style={styles.star} size={26} reviewSize={18}/>
                 <View style={styles.line}/>
             </View>
-            <Button style={styles.button} title="ยืนยัน"/>
+            <Button style={styles.button} title="ยืนยัน" onPress={() => props.navigation.popToTop()} />
             </View>
         </ScrollView>
         </View>
     );
-  }
+//   }
 }
 
 const styles = StyleSheet.create({

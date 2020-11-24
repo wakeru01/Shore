@@ -10,7 +10,10 @@ import ProfileScreen from "../screens/main/ProfileScreen";
 import RatingScreen from "../screens/RatingScreen";
 import DetailScreen from "../screens/DetailScreen";
 import EditProfileScreen from "../screens/EditProfileScreen";
+import BuySheetScreen from "../screens/BuySheetScreen";
+import ConditionScreen from "../screens/ConditionScreen";
 import { createStackNavigator } from '@react-navigation/stack';
+import {Button} from 'react-native-elements';
 
 const Stack = createStackNavigator()
 
@@ -23,6 +26,7 @@ const HomeNavigator = () => {
       }} initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Detail" component={DetailScreen} />
+        <Stack.Screen name="Buysheet" component={BuySheetScreen} />
       </Stack.Navigator>
     )
 }
@@ -36,7 +40,8 @@ const AddSheetNavigator = () => {
         headerTintColor: "white",
         
       }} initialRouteName="AddSheet">
-        <Stack.Screen name="Add Sheet" component={AddSheetScreen} />
+        <Stack.Screen name="AddSheet" component={AddSheetScreen} />
+        <Stack.Screen name="Condition" component={ConditionScreen} />
       </Stack.Navigator>
     )
 }
@@ -52,73 +57,35 @@ const NotificationNavigator = () => {
       }} initialRouteName="Notification">
         <Stack.Screen name="Notification" component={NotificationScreen} />
         <Stack.Screen name="Rating" component={RatingScreen} />
+        <Stack.Screen name="Buysheet" component={BuySheetScreen} />
+        <Stack.Screen name="Home" component={HomeScreen} />
       </Stack.Navigator>
     )
 }
 
 export {NotificationNavigator}
 
-const ProfileNavigator = () => {
+const ProfileNavigator = (props) => {
   return (
       <Stack.Navigator screenOptions={{
         headerStyle: { backgroundColor: "#3198cc", },
         headerTintColor: "white",
         
       }} initialRouteName="Profile">
-        <Stack.Screen name="Profile" component={ProfileScreen} />
-        <Stack.Screen name="EditProfile" component={EditProfileScreen} />
+        <Stack.Screen name="Profile" component={ProfileScreen} 
+          options={{
+            headerRight: () => (
+              <Button
+                onPress={() => props.navigation.navigate('Login')}
+                title="Log Out"
+                // fontsize="10"
+                color="#3198cc"
+              />
+            ),
+        }}/>
+        <Stack.Screen name="Edit Profile" component={EditProfileScreen} />
       </Stack.Navigator>
     )
 }
 
 export {ProfileNavigator}
-
-
-
-// const NotificationNavigator = createStackNavigator(
-//     {
-//       Notifications: {
-//         screen: NotificationScreen,
-//       },
-//     },
-//     {
-//       defaultNavigationOptions: {
-//         headerStyle: { backgroundColor: "#4a148c", },
-//         headerTintColor: "white",
-//         headerShown: false
-//       },
-//     }
-// );
-
-
-// const AdminTabNavigator = createBottomTabNavigator(
-//   {
-//     Home: {
-//       screen: HomeNavigator,
-//       navigationOptions:{
-//         tabBarIcon: (tabInfo) => {
-//           return (<Entypo name="home" size={26} color="black" />);
-//         },
-//       },
-//     },
-//     Notofication: {
-//       screen: NotificationNavigator,
-//       navigationOptions:{
-//         tabBarIcon: (tabInfo) => {
-//           return (<Entypo name="bell" size={26} color="black" />);
-//         },
-//       },
-//     },
-//   },
-//   {
-//     tabBarOptions: {
-//       activeTintColor: "darkblue",
-//       labelStyle: { fontSize: 1, },
-//       style: { backgroundColor: "lightblue", },
-//       },      
-//   },
-// );
-
-
-
-// export default createAppContainer(AdminTabNavigator);

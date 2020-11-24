@@ -5,10 +5,12 @@ import { StyleSheet,
   Image,
   ScrollView} from 'react-native';
 import { Button } from 'react-native-elements';
+export default function DetailScreen(props) {
 
+    const navBuysheet = () => {
+      props.navigation.push('Buysheet')
+    }
 
-export default class App extends React.Component {
-  render() {
     return (
         <ScrollView>
         <Image style={styles.logo} source={require("../assets/sheet1.jpg")}/>
@@ -25,11 +27,14 @@ export default class App extends React.Component {
             <Text style={{ fontSize: 15 }}>ความสวยงาม : 00 {"\n"}</Text>
             <Text style={{ fontSize: 15 }}>ความเข้าใจ : 00000{"\n"}{"\n"}{"\n"}{"\n"}</Text>
           </View>
-          <Button title="ซื้อ"/>
+          <Button 
+            title="ซื้อ"
+            onPress={navBuysheet}
+          />
         </View>
         </ScrollView>
     );
-  }
+  
 }
 
 const styles = StyleSheet.create({

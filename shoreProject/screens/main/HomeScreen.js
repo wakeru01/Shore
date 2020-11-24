@@ -44,7 +44,7 @@ const Home = (props) => {
         <View style={styles.screen}>
             <ScrollView>
             <Searchbar
-                placeholder="Search"
+                placeholder="ค้นหา"
                 onChangeText={onChangeSearch}
                 value={searchQuery}
             />
@@ -136,7 +136,7 @@ const Home = (props) => {
                     onChangeItem={item => setSelectedsemester(item.value)}
                 />
             </View>
-            <View style={styles.grideTile}>
+            <View style={styles.gridTile}>
                 <View style={styles.imageGride}>
                     <Image style={styles.pic} source={require("../../assets/file.png")} />
                 </View>
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         height: 50,
     },
-    grideTile:{
+    gridTile:{
         backgroundColor: "white",
         padding:10,
         paddingLeft:2,
