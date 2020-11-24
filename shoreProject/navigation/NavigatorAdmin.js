@@ -83,7 +83,7 @@ const ProfileNavigator = (props) => {
               />
             ),
         }}/>
-        <Stack.Screen name="Edit Profile" component={EditProfileScreen} />
+        <Stack.Screen name="EditProfile" component={EditProfileScreen} />
       </Stack.Navigator>
     )
 }

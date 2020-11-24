@@ -3,9 +3,6 @@ import { View, StyleSheet, ScrollView, Text, Image, TouchableOpacity } from "rea
 import { Searchbar } from 'react-native-paper';
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-
-
-import 'firebase/firestore'
 import { FlatList } from 'react-native-gesture-handler';
 
 
