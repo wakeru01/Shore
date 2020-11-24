@@ -3,13 +3,14 @@ import { StyleSheet,
   Text, 
   View, 
   ScrollView} from 'react-native';
-import { AirbnbRating } from 'react-native-elements';
+import { Rating, AirbnbRating } from 'react-native-ratings';
+// import { AirbnbRating } from 'react-native-elements';
 import { Button } from 'react-native-elements';
 
 export default class App extends React.Component {
     ratingCompleted(rating) {
         console.log("Rating is: " + rating)
-      }
+    }
   render() {
     return (
         <View style={styles.screen}>
@@ -18,6 +19,11 @@ export default class App extends React.Component {
             <View style={styles.rating}>
                 <Text style={styles.text}>ความถูกต้อง :</Text>
                 <AirbnbRating style={styles.star} size={26} reviewSize={18}/>
+                <Rating
+                    showRating
+                    onFinishRating={this.ratingCompleted}
+                    style={{ paddingVertical: 10 }}
+                    />
                 <View style={styles.line}/>
             </View>
             <View style={styles.rating}>

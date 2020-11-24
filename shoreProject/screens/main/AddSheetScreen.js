@@ -186,9 +186,9 @@ const AddSheet = (props) => {
                     .catch(function(error) {
                         console.error("Error writing document: ", error);
                     });
-                    console.log('sheetPic', sheetpic.uri)
-                    firebase.storage().ref(`sheets/${sheetRef.id}/sheet.png`).putString(sheetpic.uri, 'data_url')
-                    firebase.storage().ref(`sheets/${sheetRef.id}/sheetex.png`).putString(sheetex.uri, 'data_url')
+                    // console.log('sheetPic', sheetpic.uri)
+                    // firebase.storage().ref(`sheets/${sheetRef.id}/sheet.png`).putString(sheetpic.uri, 'data_url')
+                    // firebase.storage().ref(`sheets/${sheetRef.id}/sheetex.png`).putString(sheetex.uri, 'data_url')
                 }}/>
             </View>
             </ScrollView>
