@@ -56,7 +56,7 @@ export default function Notification({ navigation }) {
           </View>
           <View style={styles.detailGride}>
             <View style={{ flexDirection: 'colum' }}>
-              <Text style={{ fontSize: 18 }} >Thanida Samniang</Text>
+              <Text style={{ fontSize: 18 }} >Rungwaraporn Khuthanon</Text>
               <Text style={{ fontSize: 17}} >ยืนยันการซื้อชีท</Text>
               <View style={{ flexDirection: 'row' }} >
                 <Button

@@ -38,7 +38,7 @@ const SecondRoute = () => (
 
 const initialLayout = { width: Dimensions.get('window').width };
 
-export default function Profile({props}) {
+export default function Profile(props) {
   const user = firebase.auth().currentUser;
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([

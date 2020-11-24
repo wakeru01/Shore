@@ -13,7 +13,7 @@ import EditProfileScreen from "../screens/EditProfileScreen";
 import BuySheetScreen from "../screens/BuySheetScreen";
 import ConditionScreen from "../screens/ConditionScreen";
 import { createStackNavigator } from '@react-navigation/stack';
-import {Button} from 'react-native-elements';
+import {Button} from 'react-native';
 
 const Stack = createStackNavigator()
 
@@ -83,7 +83,7 @@ const ProfileNavigator = (props) => {
               />
             ),
         }}/>
-        <Stack.Screen name="Edit Profile" component={EditProfileScreen} />
+        <Stack.Screen name="EditProfile" component={EditProfileScreen} />
       </Stack.Navigator>
     )
 }
