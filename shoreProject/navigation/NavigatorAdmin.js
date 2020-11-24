@@ -42,6 +42,7 @@ const AddSheetNavigator = () => {
       }} initialRouteName="AddSheet">
         <Stack.Screen name="AddSheet" component={AddSheetScreen} />
         <Stack.Screen name="Condition" component={ConditionScreen} />
+        <Stack.Screen name="Home" component={HomeScreen} />
       </Stack.Navigator>
     )
 }

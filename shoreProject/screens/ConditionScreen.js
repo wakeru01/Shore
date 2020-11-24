@@ -34,7 +34,7 @@ export default function RegisterScreen(props) {
         <Text style={styles.label}>ยอมรับเงื่อนไขการใช้บริการ</Text>
       </View>
      <Button  title="ยืนยัน" onPress={()=>{
-        props.navigation.navigate('Login')
+        props.navigation.navigate('Home')
      }}style={styles.button}/>
     </ScrollView>
   );
