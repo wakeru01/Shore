@@ -19,9 +19,7 @@ export default function RegisterScreen(props) {
       <Text style={styles.header}>ข้อตกลงและเงื่อนไข</Text>
       </View>
       <View style={styles.container}>
-        <Text style={styles.text}>jhberncijrpofckep[ckfgjnefioofkebcoierjkvrtrthvbrjkvrhjbnkmlefhebrfhbjnwkmldcfghvjbknghjhjok
-        ghjkl;'trcvbnmdrfcghjnokmplxfcgvhbjnkdfghjbknlzexfcgvht
-        fdfgvhjbknlm;,dfxgchvjbknlmdxxfcgvhbjknlm;ertryuiuirdfyguhjkyvgbhjnkgvhbj</Text>
+        <Text style={styles.text}>ข้อตกลงระหว่างท่าน และShore </Text>
      </View>
      <View style={styles.checkboxContainer}>
         <CheckBox
