@@ -15,19 +15,18 @@ import 'firebase/auth'
 
 export default function DetailScreen(props) {
 
-  const { facId, branchId, sheetsId , subject} = props.route.params;
+  const { id } = props.route.params;
   const [snap, setSnap] = React.useState(null);
   
   useEffect(() => {
     (async () => {
       var db = firebase.firestore()
       var data = {};
-      const querySnapshot = await db.collection("faculty")
-        .doc(facId).collection("branch")
-        .doc(branchId).collection("sheets").doc(sheetsId).get()
-      data = (querySnapshot.data())
+      const docs = await db.collectionGroup('sheets').get()
+      docs.forEach(s => {
+        if (s.id === id) data = s.data()
+      })
       setSnap(data)
-
     })()
   }, [])
   const navBuysheet = () => {
@@ -37,30 +36,29 @@ export default function DetailScreen(props) {
   if(snap === null){
     return <Text>Loading</Text>
   }
-  else{
-    return (
-      <ScrollView>
-        <Image style={styles.logo} source={require("../assets/sheet1.jpg")} />
-        <View style={styles.container}>
-    <Text style={{ fontSize: 30, paddingTop: 20 }} >{subject}{"\n"}{"\n"}</Text>
-          <View style={{ flexDirection: "row" }}>
-            <Text style={{ fontSize: 20, flex: 1 }}>ราคา : {snap.price} บาท</Text>
-          </View>
-          <Text style={{ fontSize: 15 }}>รายละเอียด : {snap.detail}{"\n"}{"\n"}</Text>
-          <Text style={{ fontSize: 20 }}>Rating : </Text>
-          <View style={styles.rating}>
-            <Text style={{ fontSize: 15 }}>ความถูกต้อง : 0000 {"\n"}</Text>
-            <Text style={{ fontSize: 15 }}>ความสวยงาม : 00 {"\n"}</Text>
-            <Text style={{ fontSize: 15 }}>ความเข้าใจ : 00000{"\n"}{"\n"}{"\n"}{"\n"}</Text>
-          </View>
-          <Button
-            title="ซื้อ"
-            onPress={navBuysheet}
-          />
+  
+  return (
+    <ScrollView>
+      <Image style={styles.logo} source={require("../assets/sheet1.jpg")} />
+      <View style={styles.container}>
+  <Text style={{ fontSize: 30, paddingTop: 20 }} >{snap.subject}{"\n"}{"\n"}</Text>
+        <View style={{ flexDirection: "row" }}>
+          <Text style={{ fontSize: 20, flex: 1 }}>ราคา : {snap.price} บาท</Text>
         </View>
-      </ScrollView>
-    );
-  }
+        <Text style={{ fontSize: 15 }}>รายละเอียด : {snap.detail}{"\n"}{"\n"}</Text>
+        <Text style={{ fontSize: 20 }}>Rating : </Text>
+        <View style={styles.rating}>
+          <Text style={{ fontSize: 15 }}>ความถูกต้อง : 0000 {"\n"}</Text>
+          <Text style={{ fontSize: 15 }}>ความสวยงาม : 00 {"\n"}</Text>
+          <Text style={{ fontSize: 15 }}>ความเข้าใจ : 00000{"\n"}{"\n"}{"\n"}{"\n"}</Text>
+        </View>
+        <Button
+          title="ซื้อ"
+          onPress={navBuysheet}
+        />
+      </View>
+    </ScrollView>
+  );
   
 
 }

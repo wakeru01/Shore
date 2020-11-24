@@ -29,56 +29,42 @@ const Home = (props) => {
     // const [searchQuery, setSearchQuery] = React.useState('')
     const [country, setCountry] = React.useState('uk')
     var db = firebase.firestore()
-    const onChangeSearch = query => setSearchQuery(query);
     
     const [keepSheet, setSheet] = React.useState([]);
+    const [filterSheet, setFilterSheet] = React.useState([]);
     // const DATA;
 
-
-
-    useEffect(async () => {
-        const querySnapshot = await db.collection("faculty").get()
-        const faculty = {}
-        querySnapshot.forEach((doc) => {
-            faculty[doc.id] = doc.data()
-        });
-
-        const branches = {}
-        for (let fac in faculty) {
-            const fquerySnapshot = await db.collection("faculty").doc(fac).collection("branch").get()
-            fquerySnapshot.forEach((doc) => {
-                branches[doc.id] = { ...doc.data(), facId: fac }
-            });
-            console.log(branches);
+    const onChangeSearch = query => {
+        setSearchQuery(query)
+        console.log(query)
+        if (query !== '') {
+            const filtered = keepSheet.filter(s => {
+                return s.subject.toLowerCase().includes(query.toLowerCase())
+            })
+            setFilterSheet(filtered)
+        } else {
+            setFilterSheet(keepSheet)
         }
+    }
 
-        const sheet = {}
-        const sheet2 = []
-        for (let fac in branches) {
-            const nquerySnapshot = await db.collection("faculty").doc(branches[fac].facId).collection("branch").doc(fac).collection("sheets").get()
-            // console .log(nquerySnapshot);
-            nquerySnapshot.forEach((doc) => {
-                sheet[doc.id] = doc.data()
-                // sheet.push({
-                //     [doc.id] : doc.data()
-                // })
-            });
+    useEffect(() => {
+        const didMount = async () => {
+            let keepSheet = []
+            const db = firebase.firestore()
+            const docs = await db.collectionGroup('sheets').get()
+            docs.forEach(s => {
+                keepSheet = [...keepSheet, {...s.data(), id: s.id}]
+            })
+            console.log(keepSheet)
+            setSheet(keepSheet)
+            setFilterSheet(keepSheet)
         }
-        Object.entries(sheet).map(([key, value]) => {
-            sheet2.push({ [key]: value });
-        })
-        setSheet(sheet2);
-
-        // console.log(sheet2);
-        setDatafaculty(faculty);
+        didMount()
     }, []);
     // console.log(keepSheet);
     const navDetail = (payload) => {
         props.navigation.push('Detail', {
-            facId: "45USSRt1dWFhwGTy56ba",
-            branchId: "0woF7tKATdrzpCZpG4d1",
-            sheetsId: "Gmi787fsGRuHsH9QRytv",
-            subject: payload
+            id: payload
         })
     }
 
@@ -90,10 +76,10 @@ const Home = (props) => {
                 <Image style={styles.pic} source={require("../../assets/file.png")} />
             </View>
             <View style={styles.detailGride}>
-                <Text style={styles.header}>{Object.values(item)[0].subject}</Text>
+                <Text style={styles.header}>{item.subject}</Text>
                 <View style={styles.ratingStr}>
                     <Image style={styles.picProfile} source={require("../../assets/dot.png")} />
-                    <Text> ปีการศึกษา : {Object.values(item)[0].year} ภาคเรียนที่ :{Object.values(item)[0].semester}</Text>
+                    <Text> ปีการศึกษา : {item.year} ภาคเรียนที่ :{item.semester}</Text>
                 </View>
                 <View style={styles.ratingStr}>
                     <Text>Rating : </Text>
@@ -103,10 +89,10 @@ const Home = (props) => {
                 </View>
             </View>
             <View style={styles.detailPrice}>
-                <Text style={styles.price}>{Object.values(item)[0].price}฿</Text>
+                <Text style={styles.price}>{item.price}฿</Text>
                 <TouchableOpacity onPress={() => {
-                    setSubject(Object.values(item)[0].subject)
-                    navDetail(Object.values(item)[0].subject)
+                    // setSubject(item.subject)
+                    navDetail(item.id)
                 }}>
                 <Image style={styles.picNext} source={require("../../assets/next.png")} />
                 </TouchableOpacity>
@@ -213,7 +199,7 @@ const Home = (props) => {
                     />
                 </View> */}
                 <FlatList
-                    data={keepSheet}
+                    data={filterSheet}
                     renderItem={renderItem}
                 // keyExtractor={item => item.id}
                 />
