@@ -50,32 +50,24 @@ import { FlatList } from 'react-native-gesture-handler';
   // }
 //   const renderItem = ({ item }) => (
 //     <View style={styles.gridTile}>
-//         <View style={styles.imageGride}>
-//             <Image style={styles.pic} source={require("../../assets/file.png")} />
-//         </View>
-//         <View style={styles.detailGride}>
-//             <Text style={styles.header}>{item.subject}</Text>
-//             <View style={styles.ratingStr}>
-//                 <Image style={styles.picProfile} source={require("../../assets/dot.png")} />
-//                 <Text> ปีการศึกษา : {item.year}  ภาคเรียนที่ : {item.semester}</Text>
+//             <View style={styles.imageGride}>
+//                 <Image style={styles.pic} source={require("../../assets/file.png")} />
 //             </View>
-//             <View style={styles.ratingStr}>
-//                 <Text>Rating : </Text>
-//                 <Image style={styles.picStar} source={require("../../assets/star.png")} />
-//                 <Image style={styles.picStar} source={require("../../assets/star.png")} />
-//                 <Image style={styles.picStar} source={require("../../assets/star.png")} />
+//             <View style={styles.detailGride}>
+//                 <Text style={styles.header}>วิชา : Mobile Device</Text>
+//                 <Text>คณะ : เทคโนโลยีสารสนเทศ</Text>
+//                 <Text>ภาควิชา : เทคโนโลยีสารสนเทศ</Text>
+//                 <Text>ปีการศึกษา : 2018</Text>
+//                 <Text>ภาคเรียนที่ : 2</Text>
+//                 <Text>ราคา : 50 บาท</Text>
 //             </View>
-//         </View>
-//         <View style={styles.detailPrice}>
-//             <Text style={styles.price}>{item.price}฿</Text>
+//             <View style={styles.detailPrice}>
 //             <TouchableOpacity onPress={() => {
-//                 navDetail(item.id)
-//             }}>
-//             <Image style={styles.picNext} source={require("../../assets/next.png")} />
+//                 }}>
+//                 <Image style={styles.picNext} source={require("../../assets/x.png")} />
 //             </TouchableOpacity>
-
+//             </View>
 //         </View>
-//     </View>
 // );
 
 const FirstRoute = () => (
