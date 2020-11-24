@@ -178,7 +178,8 @@ const AddSheet = (props) => {
                         detail:detail,
                         semester: selectedsemester,
                         year: selectedyear,
-                        userid: user.uid
+                        userid: user.uid,
+                        createby: user.displayName
                     })
                     .then(function() {
                         console.log("Document successfully written!");
