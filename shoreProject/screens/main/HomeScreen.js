@@ -3,16 +3,13 @@ import { View, StyleSheet, ScrollView, Text, Image, TouchableOpacity } from "rea
 import { Searchbar } from 'react-native-paper';
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-
-
-import 'firebase/firestore'
 import { FlatList } from 'react-native-gesture-handler';
 
 
 const Home = (props) => {
     const [searchQuery, setSearchQuery] = React.useState('');
     var db = firebase.firestore()
-    
+
     const [keepSheet, setSheet] = React.useState([]);
     const [filterSheet, setFilterSheet] = React.useState([]);
 
@@ -35,7 +32,7 @@ const Home = (props) => {
             const db = firebase.firestore()
             const docs = await db.collectionGroup('sheets').get()
             docs.forEach(s => {
-                keepSheet = [...keepSheet, {...s.data(), id: s.id}]
+                keepSheet = [...keepSheet, { ...s.data(), id: s.id }]
             })
             console.log(keepSheet)
             setSheet(keepSheet)
@@ -72,7 +69,7 @@ const Home = (props) => {
                 <TouchableOpacity onPress={() => {
                     navDetail(item.id)
                 }}>
-                <Image style={styles.picNext} source={require("../../assets/next.png")} />
+                    <Image style={styles.picNext} source={require("../../assets/next.png")} />
                 </TouchableOpacity>
 
             </View>
@@ -87,7 +84,7 @@ const Home = (props) => {
                     onChangeText={onChangeSearch}
                     value={searchQuery}
                 />
-                
+
                 <FlatList
                     data={filterSheet}
                     renderItem={renderItem}
