@@ -1,84 +1,38 @@
 import React, { useEffect } from "react";
-import { View, StyleSheet, Text, Image, Dimensions, StatusBar, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text, Image, Dimensions, StatusBar, TouchableOpacity,ScrollView } from "react-native";
 import { TabView, SceneMap } from 'react-native-tab-view';
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
 import { FlatList } from 'react-native-gesture-handler';
 
-// import PhotoUpload from 'react-native-photo-upload';
-
-// const Profile = () => {
-// };
-
-// export default Profile;
-
-// export default function App() {
-//   // เพิ่มโค้ดส่วนนี้
-//   return(
-//     <View style={styles.screen}>
-//       <View style={{flexDirection: 'row'}}>
-//         <View><Image style={styles.pic} source={require("../../assets/profile_icon.jpg")} /></View>
-//         <Text style={{ fontSize: 22 }} >Thanida Samniang</Text>
-//         <Image style={styles.edit} source={require("../../assets/edit.png")} />
-//       </View>
-//     </View>
-        
-//   )
-// }
-  // var db = firebase.firestore()
+export default function Profile(props) {
+  var db = firebase.firestore()
     
-  //   const [keepSheet, setSheet] = React.useState([]);
-  // useEffect(() => {
-  //   const didMount = async () => {
-  //       let keepSheet = []
-  //       const db = firebase.firestore()
-  //       const docs = await db.collectionGroup('sheets').get()
-  //       docs.forEach(s => {
-  //           keepSheet = [...keepSheet, {...s.data(), id: s.id}]
-  //       })
-  //       console.log(keepSheet)
-  //       setSheet(keepSheet)
-  //       setFilterSheet(keepSheet)
-  //   }
-  //   didMount()
-  // }, []);
-  // const navDetail = (payload) => {
-  //   props.navigation.push('Detail', {
-  //       id: payload
-  //   })
-  // }
-//   const renderItem = ({ item }) => (
-//     <View style={styles.gridTile}>
-//             <View style={styles.imageGride}>
-//                 <Image style={styles.pic} source={require("../../assets/file.png")} />
-//             </View>
-//             <View style={styles.detailGride}>
-//                 <Text style={styles.header}>วิชา : Mobile Device</Text>
-//                 <Text>คณะ : เทคโนโลยีสารสนเทศ</Text>
-//                 <Text>ภาควิชา : เทคโนโลยีสารสนเทศ</Text>
-//                 <Text>ปีการศึกษา : 2018</Text>
-//                 <Text>ภาคเรียนที่ : 2</Text>
-//                 <Text>ราคา : 50 บาท</Text>
-//             </View>
-//             <View style={styles.detailPrice}>
-//             <TouchableOpacity onPress={() => {
-//                 }}>
-//                 <Image style={styles.picNext} source={require("../../assets/x.png")} />
-//             </TouchableOpacity>
-//             </View>
-//         </View>
-// );
+    const [keepSheet, setSheet] = React.useState([]);
+  useEffect(() => {
+    const didMount = async () => {
+        let keepSheet = []
+        const db = firebase.firestore()
+        const user = firebase.auth().currentUser
+        const docs = await db.collectionGroup('sheets').where('userid', '==', user.uid).get()
+        docs.forEach(s => {
+            keepSheet = [...keepSheet, {...s.data(), id: s.id}]
+        })
+        console.log(keepSheet)
+        setSheet(keepSheet)
+    }
+    didMount()
+  }, []);
 
-const FirstRoute = () => (
-  <View>
-    <View style={[styles.scene, { backgroundColor: 'white' }]} />
+  const renderBuy = ({ item }) => (
+    <ScrollView>
     <View style={styles.gridTile}>
             <View style={styles.imageGride}>
                 <Image style={styles.pic} source={require("../../assets/file.png")} />
             </View>
             <View style={styles.detailGride}>
-                <Text style={styles.header}>วิชา : Mobile Device</Text>
+                <Text style={styles.header}>วิชา : {item.subject}</Text>
                 <Text>คณะ : เทคโนโลยีสารสนเทศ</Text>
                 <Text>ภาควิชา : เทคโนโลยีสารสนเทศ</Text>
                 <Text>ปีการศึกษา : 2018</Text>
@@ -92,37 +46,61 @@ const FirstRoute = () => (
             </TouchableOpacity>
             </View>
         </View>
+        </ScrollView>
+);
+
+// const renderItem = ({ item }) => (
+//   <ScrollView>
+//   <View style={styles.gridTile}>
+//           <View style={styles.imageGride}>
+//               <Image style={styles.pic} source={require("../../assets/file.png")} />
+//           </View>
+//           <View style={styles.detailGride}>
+//               <Text style={styles.header}>วิชา : {item.subject}</Text>
+//               <Text>คณะ : เทคโนโลยีสารสนเทศ</Text>
+//               <Text>ภาควิชา : เทคโนโลยีสารสนเทศ</Text>
+//               <Text>ปีการศึกษา : 2018</Text>
+//               <Text>ภาคเรียนที่ : 2</Text>
+//               <Text>ราคา : 50 บาท</Text>
+//           </View>
+//           <View style={styles.detailPrice}>
+//           <TouchableOpacity onPress={() => {
+//               }}>
+//               <Image style={styles.picNext} source={require("../../assets/x.png")} />
+//           </TouchableOpacity>
+//           </View>
+//       </View>
+//       </ScrollView>
+// );
+
+
+const FirstRoute = () => (
+  <View>
+    <View style={[styles.scene, { backgroundColor: 'white' }]} />
+    <ScrollView>
+      <Text>cvghbjk</Text>
+                {/* <FlatList
+                    data={keepSheet}
+                    renderItem={renderItem}
+                /> */}
+            </ScrollView>
   </View>
 );
 
 const SecondRoute = () => (
   <View>
     <View style={[styles.scene, { backgroundColor: 'white' }]} />
-    <View style={styles.gridTile}>
-            <View style={styles.imageGride}>
-                <Image style={styles.pic} source={require("../../assets/file.png")} />
-            </View>
-            <View style={styles.detailGride}>
-                <Text style={styles.header}>วิชา : Human Design</Text>
-                <Text>คณะ : เทคโนโลยีสารสนเทศ</Text>
-                <Text>ภาควิชา : เทคโนโลยีสารสนเทศ</Text>
-                <Text>ปีการศึกษา : 2018</Text>
-                <Text>ภาคเรียนที่ : 2</Text>
-                <Text>ราคา : 50 บาท</Text>
-            </View>
-            <View style={styles.detailPrice}>
-            <TouchableOpacity onPress={() => {
-                }}>
-                <Image style={styles.picNext} source={require("../../assets/x.png")} />
-            </TouchableOpacity>
-            </View>
-        </View>
+    <ScrollView>
+                <FlatList
+                    data={keepSheet}
+                    renderItem={renderBuy}
+                />
+    </ScrollView>
   </View>
 );
 
 const initialLayout = { width: Dimensions.get('window').width };
 
-export default function Profile(props) {
   const user = firebase.auth().currentUser;
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
@@ -137,8 +115,10 @@ export default function Profile(props) {
   const navToEditProfile = () => {
     props.navigation.push('EditProfile')
   }
+  console.log(user)
   return (
     <View style={styles.screen}>
+      <ScrollView>
       <View style={{ flexDirection: 'row' }}>
         <View>
           <TouchableOpacity >
@@ -157,6 +137,7 @@ export default function Profile(props) {
         initialLayout={initialLayout}
         style={styles.container}
       />
+      </ScrollView>
     </View>
   );
 }
