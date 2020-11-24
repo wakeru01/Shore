@@ -3,37 +3,31 @@ import { StyleSheet,
   Text, 
   View, 
   ScrollView} from 'react-native';
-import { Rating, AirbnbRating } from 'react-native-ratings';
+import { Rating as Rate, AirbnbRating } from 'react-native-ratings';
 // import { AirbnbRating } from 'react-native-elements';
 import { Button } from 'react-native-elements';
 
 export default function Rating( props ) {
-    // const ratingCompleted = (rating) => {
-    //     console.log("Rating is: " + rating)
-    //   }
-//   render() {
+    const ratingCompleted = (rating) => {
+        console.log("Rating is: " + rating)
+    }
     return (
         <View style={styles.screen}>
         <ScrollView>
         <View style={styles.container}>
             <View style={styles.rating}>
                 <Text style={styles.text}>ความถูกต้อง :</Text>
-                <AirbnbRating style={styles.star} size={26} reviewSize={18}/>
-                <Rating
-                    showRating
-                    onFinishRating={this.ratingCompleted}
-                    style={{ paddingVertical: 10 }}
-                    />
+                <AirbnbRating style={styles.star} onFinishRating={ratingCompleted} size={26} reviewSize={18} />
                 <View style={styles.line}/>
             </View>
             <View style={styles.rating}>
                 <Text style={styles.text}>ความสวยงาม :</Text>
-                <AirbnbRating style={styles.star} size={26} reviewSize={18}/>
+                <AirbnbRating style={styles.star} onFinishRating={ratingCompleted} size={26} reviewSize={18} />
                 <View style={styles.line}/>
             </View>
             <View style={styles.rating}>
                 <Text style={styles.text}>ความเข้าใจ :</Text>
-                <AirbnbRating style={styles.star} size={26} reviewSize={18}/>
+                <AirbnbRating style={styles.star} onFinishRating={ratingCompleted} size={26} reviewSize={18} />
                 <View style={styles.line}/>
             </View>
             <Button style={styles.button} title="ยืนยัน" onPress={() => props.navigation.popToTop()} />
