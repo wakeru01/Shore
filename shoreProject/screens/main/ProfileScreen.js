@@ -1,35 +1,44 @@
 import React, { useEffect } from "react";
-import { View, StyleSheet, Text, Image, Dimensions, StatusBar, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text, Image, Dimensions, StatusBar, TouchableOpacity, SafeAreaView } from "react-native";
 import { TabView, SceneMap } from 'react-native-tab-view';
 import firebase from 'firebase/app'
 import 'firebase/auth'
+import EditProfileScreen from "../EditProfileScreen";
+import { ScrollView } from "react-native-gesture-handler";
 
 const FirstRoute = () => (
   <View>
     <View style={[styles.scene, { backgroundColor: 'white' }]} />
+      <ScrollView>
       <View style={styles.gridTile}>
-        <View style={styles.imageGride}>
-            <Image style={styles.pic} source={require("../../assets/file.png")} />
-        </View>
+        <View style={styles.imageGride} style={{flexDirection : 'row'}}>
+            <Image style={styles.file} source={require("../../assets/file.png")} />
+            <Image style={styles.file} source={require("../../assets/file.png")} />
+            <Image style={styles.file} source={require("../../assets/file.png")} />
+        </View> 
       </View>
+      </ScrollView>
   </View>
 );
 
 const SecondRoute = () => (
   <View>
     <View style={[styles.scene, { backgroundColor: 'white' }]} />
-    <View style={styles.grid}>
-      <View style={styles.gridTile}></View>
-      <View style={styles.gridTile}></View>
-      <View style={styles.gridTile}></View>
-      <View style={styles.gridTile}></View>
-    </View>
+    <ScrollView>
+      <View style={styles.gridTile}>
+        <View style={styles.imageGride} style={{flexDirection : 'row'}}>
+            <Image style={styles.file} source={require("../../assets/file.png")} />
+            <Image style={styles.file} source={require("../../assets/file.png")} />
+            <Image style={styles.file} source={require("../../assets/file.png")} />
+        </View> 
+      </View>
+      </ScrollView>
   </View>
 );
 
 const initialLayout = { width: Dimensions.get('window').width };
 
-export default function Profile(props) {
+export default function Profile({props}) {
   const user = firebase.auth().currentUser;
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
@@ -44,13 +53,34 @@ export default function Profile(props) {
   const navToEditProfile = () => {
     props.navigation.push('EditProfile')
   }
+
+  // state = {
+  //   photo: null,
+  // }
+
+  // handleChoosePhoto = () => {
+  //   const options = {
+  //     noData: true,
+  //   }
+  //   ImagePicker.launchImageLibrary(options, response => {
+  //     if (response.uri) {
+  //       this.setState({ photo: response })
+  //     }
+  //   })
+  // }
+  // const { photo } = this.state
   return (
     <View style={styles.screen}>
       <View style={{ flexDirection: 'row' }}>
-        <View>
-          <TouchableOpacity >
+        <View style={{ flexDirection: 'columm' }}>
             <Image style={styles.pic} source={require("../../assets/profile_icon.jpg")} />
-          </TouchableOpacity>
+            {/* {photo && (
+              <Image
+                source={{ uri: photo.uri }}
+                style={{ width: 300, height: 300 }}
+              />
+            )}
+            <Button style={{ fontSize: 15}} title="Choose Photo" onPress={this.handleChoosePhoto} /> */}
         </View>
           <Text style={{ fontSize: 22}}>{user.displayName}</Text>
         <TouchableOpacity onPress={navToEditProfile}>
@@ -99,5 +129,9 @@ const styles = StyleSheet.create({
   },
   header:{
       fontSize:18
+  },
+  file:{
+    width: 120,
+    height: 120
   },
 });

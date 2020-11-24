@@ -16,12 +16,25 @@ export default function EditProfileScreen(props) {
   const [confirmPass, setConfirmPass] = useState('');
   const [name, setName] = useState('');
   const [sur, setSur] = useState('');
+  const [dataCollection, setDataCollection] = useState({})
+  const [checkUser, setCheckUser] = useState('0');
   var db = firebase.firestore()
+
+  // useEffect(()=>{
+  //   const didMount=async () => {
+  //     const querySnapshot = await db.collection("userCollection").doc(user.uid).get()
+  //     if(querySnapshot.exist){
+  //       setCheckUser('1')
+  //     }
+  //   }
+  //   didMount()
+  // }, []);
 
   const handleFilePick = async () => {
     const fileResponse = await DocumentPicker.getDocumentAsync();
     console.log(fileResponse);
   }
+
   return (
     <ScrollView style={styles.screen}>
       <View style={styles.headerText}>
@@ -46,28 +59,27 @@ export default function EditProfileScreen(props) {
             type="outline"
           />
         <Button title="ยืนยัน" style={styles.button} onPress={()=>{
-          
           user.updateProfile({
-              displayName: name + ' ' + sur,
-            }).then(function() {
-              console.log(user.displayName)
-            }).catch(function(error) {
-              // An error happened.
+            displayName: name + ' ' + sur,
+          }).then(function() {
+            console.log(user.displayName)
+          }).catch(function(error) {
+            // An error happened.
           })
-          db.collection("userCollection").doc().set({
-            tel: tel,
-            accountNo: accountNo,
-            account: account,
-            uid:user.uid
-          })
-          .then(function() {
-              console.log("Document successfully written!");
-              props.navigation.pop()
-          })
-          .catch(function(error) {
-              console.error("Error writing document: ", error);
-          });
-          }}/>
+            db.collection("userCollection").doc(user.uid).set({
+              tel: tel,
+              accountNo: accountNo,
+              account: account,
+            },{merge: true})
+            .then(function() {
+                console.log("Document successfully updated!");
+            })
+            .catch(function(error) {
+                // The document probably doesn't exist.
+                console.error("Error updating document: ", error);
+            });
+            props.navigation.pop()
+        }}/>
      </View>
     </ScrollView>
   );

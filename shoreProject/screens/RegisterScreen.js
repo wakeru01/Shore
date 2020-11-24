@@ -33,7 +33,7 @@ export default function RegisterScreen(props) {
       // }).catch(function(error) {
       //   // An error happened.
       // });
-      props.navigation.push('Condition')
+      props.navigation.push('Login')
     } catch (error) {
       var errorCode = error.code;
       var errorMessage = error.message;

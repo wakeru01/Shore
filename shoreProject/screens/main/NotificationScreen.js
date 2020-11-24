@@ -24,6 +24,7 @@ export default function Notification({ navigation }) {
                 type="outline"
                 color="#e63525"
                 style={styles.button}
+                onPress={() => navigation.navigate('Buysheet')}
               />
             </View>
           </View>
@@ -44,6 +45,7 @@ export default function Notification({ navigation }) {
                 type="outline"
                 color="#e63525"
                 style={styles.button}
+                onPress={() => navigation.navigate('Buysheet')}
               />
             </View>
           </View>
