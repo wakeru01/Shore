@@ -34,27 +34,6 @@ export default function Notification({ navigation }) {
             <Image style={styles.pic} source={require("../../assets/file.png")} />
           </View>
           <View style={styles.detailGride}>
-            <Text style={{ fontSize: 18 }} >Thanida Samniang</Text>
-            <Text style={{ fontSize: 14 }} >ทำการซื้อชีท</Text>
-            <View style={{ flexDirection: 'row', marginTop: 5 }} >
-              <Button
-                title="ยืนยัน"
-              />
-              <Button
-                title="ติดต่อ"
-                type="outline"
-                color="#e63525"
-                style={styles.button}
-                onPress={() => navigation.navigate('Buysheet')}
-              />
-            </View>
-          </View>
-        </View>
-        <View style={styles.gridTile}>
-          <View style={styles.imageGride}>
-            <Image style={styles.pic} source={require("../../assets/file.png")} />
-          </View>
-          <View style={styles.detailGride}>
             <View style={{ flexDirection: 'colum' }}>
               <Text style={{ fontSize: 18 }} >Thanida Samniang</Text>
               <Text style={{ fontSize: 17}} >ยืนยันการซื้อชีท</Text>
