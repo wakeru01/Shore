@@ -1,41 +1,43 @@
 import React from 'react';
-import { StyleSheet, 
-  Text, 
-  View, 
-  ScrollView} from 'react-native';
-import { Rating as Rate, AirbnbRating } from 'react-native-ratings';
-// import { AirbnbRating } from 'react-native-elements';
+import {
+    StyleSheet,
+    Text,
+    View,
+    ScrollView
+} from 'react-native';
+import { AirbnbRating } from 'react-native-elements';
 import { Button } from 'react-native-elements';
 
-export default function Rating( props ) {
-    const ratingCompleted = (rating) => {
+export default class App extends React.Component {
+    ratingCompleted(rating) {
         console.log("Rating is: " + rating)
     }
-    return (
-        <View style={styles.screen}>
-        <ScrollView>
-        <View style={styles.container}>
-            <View style={styles.rating}>
-                <Text style={styles.text}>ความถูกต้อง :</Text>
-                <AirbnbRating style={styles.star} onFinishRating={ratingCompleted} size={26} reviewSize={18} />
-                <View style={styles.line}/>
+    render() {
+        return (
+            <View style={styles.screen}>
+                <ScrollView>
+                    <View style={styles.container}>
+                        <View style={styles.rating}>
+                            <Text style={styles.text}>ความถูกต้อง :</Text>
+                            <AirbnbRating style={styles.star} size={26} reviewSize={18} />
+                            <View style={styles.line} />
+                        </View>
+                        <View style={styles.rating}>
+                            <Text style={styles.text}>ความสวยงาม :</Text>
+                            <AirbnbRating style={styles.star} size={26} reviewSize={18} />
+                            <View style={styles.line} />
+                        </View>
+                        <View style={styles.rating}>
+                            <Text style={styles.text}>ความเข้าใจ :</Text>
+                            <AirbnbRating style={styles.star} size={26} reviewSize={18} />
+                            <View style={styles.line} />
+                        </View>
+                        <Button style={styles.button} title="ยืนยัน" />
+                    </View>
+                </ScrollView>
             </View>
-            <View style={styles.rating}>
-                <Text style={styles.text}>ความสวยงาม :</Text>
-                <AirbnbRating style={styles.star} onFinishRating={ratingCompleted} size={26} reviewSize={18} />
-                <View style={styles.line}/>
-            </View>
-            <View style={styles.rating}>
-                <Text style={styles.text}>ความเข้าใจ :</Text>
-                <AirbnbRating style={styles.star} onFinishRating={ratingCompleted} size={26} reviewSize={18} />
-                <View style={styles.line}/>
-            </View>
-            <Button style={styles.button} title="ยืนยัน" onPress={() => props.navigation.popToTop()} />
-            </View>
-        </ScrollView>
-        </View>
-    );
-//   }
+        );
+    }
 }
 
 const styles = StyleSheet.create({
@@ -44,29 +46,29 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 10,
     },
-    container:{
+    container: {
         backgroundColor: "white",
-        padding:10,
-        margin:30
+        padding: 10,
+        margin: 30
     },
-    rating:{
+    rating: {
         marginTop: 20
     },
-    line:{
+    line: {
         borderBottomColor: 'black',
         borderBottomWidth: 1,
-        marginTop:5,
-        marginBottom:15
+        marginTop: 5,
+        marginBottom: 15
     },
-    text:{
-        fontSize: 18, 
-        marginBottom:7
+    text: {
+        fontSize: 18,
+        marginBottom: 7
     },
-    star:{
-        alignItems:'center',
+    star: {
+        alignItems: 'center',
 
     },
-    button:{
+    button: {
         marginTop: 40,
         marginBottom: 20
     }

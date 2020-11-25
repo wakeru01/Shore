@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from "react-navigation-tabs";
 import { Entypo } from '@expo/vector-icons';
 import HomeScreen from "../screens/main/HomeScreen";
 import AddSheetScreen from "../screens/main/AddSheetScreen";
-import NotificationScreen from "../screens/main/NotificationScreen";
+// import NotificationScreen from "../screens/main/NotificationScreen";
 import ProfileScreen from "../screens/main/ProfileScreen";
 import RatingScreen from "../screens/RatingScreen";
 import DetailScreen from "../screens/DetailScreen";
@@ -48,22 +48,22 @@ const AddSheetNavigator = () => {
 
 export {AddSheetNavigator}
 
-const NotificationNavigator = () => {
-  return (
-      <Stack.Navigator screenOptions={{
-        headerStyle: { backgroundColor: "#3198cc", },
-        headerTintColor: "white",
+// const NotificationNavigator = () => {
+//   return (
+//       <Stack.Navigator screenOptions={{
+//         headerStyle: { backgroundColor: "#3198cc", },
+//         headerTintColor: "white",
         
-      }} initialRouteName="Notification">
-        <Stack.Screen name="Notification" component={NotificationScreen} />
-        <Stack.Screen name="Rating" component={RatingScreen} />
-        <Stack.Screen name="Buysheet" component={BuySheetScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
-      </Stack.Navigator>
-    )
-}
+//       }} initialRouteName="Notification">
+//         <Stack.Screen name="Notification" component={NotificationScreen} />
+//         <Stack.Screen name="Rating" component={RatingScreen} />
+//         <Stack.Screen name="Buysheet" component={BuySheetScreen} />
+//         <Stack.Screen name="Home" component={HomeScreen} />
+//       </Stack.Navigator>
+//     )
+// }
 
-export {NotificationNavigator}
+// export {NotificationNavigator}
 
 const ProfileNavigator = (props) => {
   return (

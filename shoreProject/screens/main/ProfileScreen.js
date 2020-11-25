@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, StyleSheet, Text, Image, Dimensions, StatusBar, TouchableOpacity,ScrollView } from "react-native";
+import { View, StyleSheet, Text, Image, Dimensions, StatusBar, TouchableOpacity, ScrollView } from "react-native";
 import { TabView, SceneMap } from 'react-native-tab-view';
 import firebase from 'firebase/app'
 import 'firebase/auth'
@@ -8,98 +8,105 @@ import { FlatList } from 'react-native-gesture-handler';
 
 export default function Profile(props) {
   var db = firebase.firestore()
-    
-    const [keepSheet, setSheet] = React.useState([]);
+
+  const [keepSheet, setSheet] = React.useState([]);
   useEffect(() => {
     const didMount = async () => {
-        let keepSheet = []
-        const db = firebase.firestore()
-        const user = firebase.auth().currentUser
-        const docs = await db.collectionGroup('sheets').where('userid', '==', user.uid).get()
-        docs.forEach(s => {
-            keepSheet = [...keepSheet, {...s.data(), id: s.id}]
-        })
-        console.log(keepSheet)
-        setSheet(keepSheet)
+      let keepSheet = []
+      const db = firebase.firestore()
+      const user = firebase.auth().currentUser
+      const docs = await db.collectionGroup('sheets').where('userid', '==', user.uid).get()
+      docs.forEach(s => {
+        keepSheet = [...keepSheet, { ...s.data(), id: s.id }]
+      })
+      console.log(keepSheet)
+      setSheet(keepSheet)
     }
     didMount()
   }, []);
-
   const renderBuy = ({ item }) => (
     <ScrollView>
-    <View style={styles.gridTile}>
-            <View style={styles.imageGride}>
-                <Image style={styles.pic} source={require("../../assets/file.png")} />
-            </View>
-            <View style={styles.detailGride}>
-                <Text style={styles.header}>วิชา : {item.subject}</Text>
-                <Text>คณะ : เทคโนโลยีสารสนเทศ</Text>
-                <Text>ภาควิชา : เทคโนโลยีสารสนเทศ</Text>
-                <Text>ปีการศึกษา : 2018</Text>
-                <Text>ภาคเรียนที่ : 2</Text>
-                <Text>ราคา : 50 บาท</Text>
-            </View>
-            <View style={styles.detailPrice}>
-            <TouchableOpacity onPress={() => {
-                }}>
-                <Image style={styles.picNext} source={require("../../assets/x.png")} />
-            </TouchableOpacity>
-            </View>
+      <View style={styles.gridTile}>
+        <View style={styles.imageGride}>
+          <Image style={styles.pic} source={require("../../assets/file.png")} />
         </View>
-        </ScrollView>
-);
+        <View style={styles.detailGride}>
+          <Text style={styles.header}>วิชา : {item.subject}</Text>
+          <Text>คณะ : เทคโนโลยีสารสนเทศ</Text>
+          <Text>ภาควิชา : เทคโนโลยีสารสนเทศ</Text>
+          <Text>ปีการศึกษา : 2018</Text>
+          <Text>ภาคเรียนที่ : 2</Text>
+          <Text>ราคา : 50 บาท</Text>
+        </View>
+        <View style={styles.detailPrice}>
+          <TouchableOpacity onPress={() => {
+            // console.log(item);
+            firebase.firestore().collectionGroup("sheets").doc(item.id).delete()
+            // console.log(item.id);
+            // db.collection("sheets").doc("DC").delete().then(function () {
+            //   console.log("Document successfully deleted!");
+            // }).catch(function (error) {
+            //   console.error("Error removing document: ", error);
+            // });
+          }}>
+            <Image style={styles.picNext} source={require("../../assets/x.png")} />
+          </TouchableOpacity>
+        </View>
+      </View>
+    </ScrollView>
+  );
 
-// const renderItem = ({ item }) => (
-//   <ScrollView>
-//   <View style={styles.gridTile}>
-//           <View style={styles.imageGride}>
-//               <Image style={styles.pic} source={require("../../assets/file.png")} />
-//           </View>
-//           <View style={styles.detailGride}>
-//               <Text style={styles.header}>วิชา : {item.subject}</Text>
-//               <Text>คณะ : เทคโนโลยีสารสนเทศ</Text>
-//               <Text>ภาควิชา : เทคโนโลยีสารสนเทศ</Text>
-//               <Text>ปีการศึกษา : 2018</Text>
-//               <Text>ภาคเรียนที่ : 2</Text>
-//               <Text>ราคา : 50 บาท</Text>
-//           </View>
-//           <View style={styles.detailPrice}>
-//           <TouchableOpacity onPress={() => {
-//               }}>
-//               <Image style={styles.picNext} source={require("../../assets/x.png")} />
-//           </TouchableOpacity>
-//           </View>
-//       </View>
-//       </ScrollView>
-// );
+  // const renderItem = ({ item }) => (
+  //   <ScrollView>
+  //   <View style={styles.gridTile}>
+  //           <View style={styles.imageGride}>
+  //               <Image style={styles.pic} source={require("../../assets/file.png")} />
+  //           </View>
+  //           <View style={styles.detailGride}>
+  //               <Text style={styles.header}>วิชา : {item.subject}</Text>
+  //               <Text>คณะ : เทคโนโลยีสารสนเทศ</Text>
+  //               <Text>ภาควิชา : เทคโนโลยีสารสนเทศ</Text>
+  //               <Text>ปีการศึกษา : 2018</Text>
+  //               <Text>ภาคเรียนที่ : 2</Text>
+  //               <Text>ราคา : 50 บาท</Text>
+  //           </View>
+  //           <View style={styles.detailPrice}>
+  //           <TouchableOpacity onPress={() => {
+  //               }}>
+  //               <Image style={styles.picNext} source={require("../../assets/x.png")} />
+  //           </TouchableOpacity>
+  //           </View>
+  //       </View>
+  //       </ScrollView>
+  // );
 
 
-const FirstRoute = () => (
-  <View>
-    <View style={[styles.scene, { backgroundColor: 'white' }]} />
-    <ScrollView>
-      <Text>cvghbjk</Text>
-                {/* <FlatList
+  const FirstRoute = () => (
+    <View>
+      <View style={[styles.scene, { backgroundColor: 'white' }]} />
+      <ScrollView>
+        <Text>cvghbjk</Text>
+        {/* <FlatList
                     data={keepSheet}
                     renderItem={renderItem}
                 /> */}
-            </ScrollView>
-  </View>
-);
+      </ScrollView>
+    </View>
+  );
 
-const SecondRoute = () => (
-  <View>
-    <View style={[styles.scene, { backgroundColor: 'white' }]} />
-    <ScrollView>
-                <FlatList
-                    data={keepSheet}
-                    renderItem={renderBuy}
-                />
-    </ScrollView>
-  </View>
-);
+  const SecondRoute = () => (
+    <View>
+      <View style={[styles.scene, { backgroundColor: 'white' }]} />
+      <ScrollView>
+        <FlatList
+          data={keepSheet}
+          renderItem={renderBuy}
+        />
+      </ScrollView>
+    </View>
+  );
 
-const initialLayout = { width: Dimensions.get('window').width };
+  const initialLayout = { width: Dimensions.get('window').width };
 
   const user = firebase.auth().currentUser;
   const [index, setIndex] = React.useState(0);
@@ -119,24 +126,24 @@ const initialLayout = { width: Dimensions.get('window').width };
   return (
     <View style={styles.screen}>
       <ScrollView>
-      <View style={{ flexDirection: 'row' }}>
-        <View>
-          <TouchableOpacity >
-            <Image style={styles.pic} source={require("../../assets/profile_icon.jpg")} />
+        <View style={{ flexDirection: 'row' }}>
+          <View>
+            <TouchableOpacity >
+              <Image style={styles.pic} source={require("../../assets/profile_icon.jpg")} />
+            </TouchableOpacity>
+          </View>
+          <Text style={{ fontSize: 22 }}>{user.displayName}</Text>
+          <TouchableOpacity onPress={navToEditProfile}>
+            <Image style={styles.edit} source={require("../../assets/edit.png")} />
           </TouchableOpacity>
         </View>
-          <Text style={{ fontSize: 22}}>{user.displayName}</Text>
-        <TouchableOpacity onPress={navToEditProfile}>
-          <Image style={styles.edit} source={require("../../assets/edit.png")} />
-        </TouchableOpacity>
-      </View>
-      <TabView
-        navigationState={{ index, routes }}
-        renderScene={renderScene}
-        onIndexChange={setIndex}
-        initialLayout={initialLayout}
-        style={styles.container}
-      />
+        <TabView
+          navigationState={{ index, routes }}
+          renderScene={renderScene}
+          onIndexChange={setIndex}
+          initialLayout={initialLayout}
+          style={styles.container}
+        />
       </ScrollView>
     </View>
   );
@@ -144,21 +151,21 @@ const initialLayout = { width: Dimensions.get('window').width };
 
 const styles = StyleSheet.create({
   screen: {
-      backgroundColor: '#EDF5FA',
-      flex: 1,
-      padding: 10,
-      paddingTop: 20,
+    backgroundColor: '#EDF5FA',
+    flex: 1,
+    padding: 10,
+    paddingTop: 20,
   },
   pic: {
     width: 80,
     height: 80,
-    alignItems:'center',
-    justifyContent:'center'
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   edit: {
     width: 13,
     height: 13,
-    marginLeft:10,
+    marginLeft: 10,
   },
   container: {
     marginTop: StatusBar.currentHeight,
@@ -167,7 +174,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   gridTile: {
-    flex:1,
+    flex: 1,
     backgroundColor: "white",
     padding: 10,
     paddingLeft: 2,
@@ -175,24 +182,24 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     flexDirection: 'row'
   },
-  header:{
-      fontSize:18
+  header: {
+    fontSize: 18
   },
   imageGride: {
     flex: 1,
-},
+  },
   detailGride: {
-      flex: 2
+    flex: 2
   },
   picNext: {
-      width: 10,
-      height: 10,
+    width: 10,
+    height: 10,
   },
   detailPrice: {
-      flexDirection: 'column'
+    flexDirection: 'column'
   },
   pic: {
-      width: 100,
-      height: 100
+    width: 100,
+    height: 100
   },
-  });
+});
