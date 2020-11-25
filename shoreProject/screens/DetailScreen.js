@@ -24,15 +24,19 @@ export default function DetailScreen(props) {
       var data = {};
       const docs = await db.collectionGroup('sheets').get()
       docs.forEach(s => {
-        if (s.id === id) data = s.data()
+        if (s.id === id) data = {
+          ...s.data(),
+          sheetid: s.id
+        }
       })
       setSnap(data)
     })()
   }, [])
 
-  const navToBuySheet = (payload) => {
+  const navToBuySheet = (payload, sheetid) => {
     props.navigation.push('BuySheet', {
-      uid: payload
+      uid: payload,
+      sheetid
     })
 }
   if(snap === null){
@@ -54,7 +58,7 @@ export default function DetailScreen(props) {
           <Text style={{ fontSize: 15 }}>ความสวยงาม : 00 {"\n"}</Text>
           <Text style={{ fontSize: 15 }}>ความเข้าใจ : 00000{"\n"}{"\n"}{"\n"}{"\n"}</Text>
         </View>
-        <Button title="ซื้อ" onPress={() => {navToBuySheet(snap.uid)}}></Button>
+        <Button title="ซื้อ" onPress={() => {navToBuySheet(snap.uid, snap.sheetid)}}></Button>
         
         
       </View>
