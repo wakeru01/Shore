@@ -53,7 +53,7 @@ export default function DetailScreen(props) {
         </View>
         <Text style={{ fontSize: 15 }}>รายละเอียด : {snap.detail}{"\n"}{"\n"}</Text>
         <Text style={{ fontSize: 20 }}>Rating : </Text>
-        <View style={styles.rating}>
+        <View style={styles.ratingTile}>
           <Text style={{ fontSize: 15 }}>ความถูกต้อง : 
             <Image style={styles.picStar} source={require("../assets/star.png")} />
             <Image style={styles.picStar} source={require("../assets/star.png")} />
@@ -91,9 +91,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  rating: {
+  ratingTile: {
     padding: 10,
-    marginButtom: 50,
+    marginBottom: 50,
     marginLeft: 20,
   },
   picStar: {

@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     textSole: {
         alignItems: 'center',
         alignContent: 'center',
-        marginButtom: 20
+        marginBottom: 20
     },
     line: {
         borderBottomColor: 'black',
