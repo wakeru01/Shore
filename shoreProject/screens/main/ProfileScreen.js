@@ -39,8 +39,8 @@ export default function Profile(props) {
           }]
         }
         // ดึง user มา แล้วเทียบว่า boughtSheets มี id ไหม
-        console.log(userDocs.data().boughtSheets)
-        console.log(s.id)
+        // console.log(userDocs.data().boughtSheets)
+        // console.log(s.id)
         if (userDocs.exists && userDocs.data().boughtSheets && userDocs.data().boughtSheets.includes(s.id)) {
           boughtSheets = [...boughtSheets, {
             ...s.data(),
