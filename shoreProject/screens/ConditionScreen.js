@@ -34,6 +34,10 @@ export default function RegisterScreen(props) {
         <Text style={styles.label}>ยอมรับเงื่อนไขการใช้บริการ</Text>
       </View>
      <Button  title="ยืนยัน" onPress={()=>{
+        if (!toggleCheckBox) {
+          alert('กรุณายอมรับเงื่อนไข')
+          return
+        }
         props.navigation.navigate('Home')
      }}style={styles.button}/>
     </ScrollView>

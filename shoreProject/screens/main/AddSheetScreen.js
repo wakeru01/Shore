@@ -169,6 +169,8 @@ const AddSheet = (props) => {
                             subject: subject,
                             price: price,
                             detail: detail,
+                            faculty,
+                            branch,
                             semester: selectedsemester,
                             year: selectedyear,
                             userid: user.uid,

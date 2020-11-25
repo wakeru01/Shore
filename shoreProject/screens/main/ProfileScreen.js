@@ -10,21 +10,53 @@ export default function Profile(props) {
   var db = firebase.firestore()
 
   const [keepSheet, setSheet] = React.useState([]);
+  const [boughtSheet, setBoughtSheet] = React.useState([]);
   useEffect(() => {
     const didMount = async () => {
       let keepSheet = []
+      let boughtSheets = []
       const db = firebase.firestore()
       const user = firebase.auth().currentUser
-      const docs = await db.collectionGroup('sheets').where('userid', '==', user.uid).get()
-      docs.forEach(s => {
-        keepSheet = [...keepSheet, { ...s.data(), id: s.id }]
-      })
-      console.log(keepSheet)
+      console.log(user.uid)
+      const userDocs = await db.collection('users').doc(user.uid).get()
+      const docs = await db.collectionGroup('sheets').get()
+
+      for (const s of docs.docs) {
+        let facultyDocs
+        let branchDocs
+        if (s.data().faculty) {
+          const facultyRef = db.collection('faculty').doc(s.data().faculty)
+          facultyDocs = await facultyRef.get()
+          branchDocs = await facultyRef.collection('branch').doc(s.data().branch).get()
+        }
+
+        if (s.data().userid === user.uid) {
+          keepSheet = [...keepSheet, {
+            ...s.data(),
+            id: s.id,
+            faculty: facultyDocs ? facultyDocs.data() : {},
+            branch: branchDocs ? branchDocs.data() : {}
+          }]
+        }
+        // ดึง user มา แล้วเทียบว่า boughtSheets มี id ไหม
+        console.log(userDocs.data().boughtSheets)
+        console.log(s.id)
+        if (userDocs.exists && userDocs.data().boughtSheets && userDocs.data().boughtSheets.includes(s.id)) {
+          boughtSheets = [...boughtSheets, {
+            ...s.data(),
+            id: s.id,
+            faculty: facultyDocs ? facultyDocs.data() : {},
+            branch: branchDocs ? branchDocs.data() : {}
+          }]
+        }
+      }
+      console.log({ boughtSheets })
+      setBoughtSheet(boughtSheets)
       setSheet(keepSheet)
     }
     didMount()
   }, []);
-  const renderBuy = ({ item }) => (
+  const renderShell = ({ item, index }) => (
     <ScrollView>
       <View style={styles.gridTile}>
         <View style={styles.imageGride}>
@@ -32,22 +64,25 @@ export default function Profile(props) {
         </View>
         <View style={styles.detailGride}>
           <Text style={styles.header}>วิชา : {item.subject}</Text>
-          <Text>คณะ : เทคโนโลยีสารสนเทศ</Text>
-          <Text>ภาควิชา : เทคโนโลยีสารสนเทศ</Text>
-          <Text>ปีการศึกษา : 2018</Text>
-          <Text>ภาคเรียนที่ : 2</Text>
-          <Text>ราคา : 50 บาท</Text>
+          <Text>คณะ : {item.faculty.name || 'ไม่ระบุคณะ'}</Text>
+          <Text>ภาควิชา : {item.branch.name || 'ไม่ระบุภาควิชา'}</Text>
+          <Text>ปีการศึกษา : {item.year || 'ไม่ระบุปีการศึกษา'}</Text>
+          <Text>ภาคเรียนที่ : {item.semester || 'ไม่ระบุภาคเรียน'}</Text>
+          <Text>ราคา : {item.price} บาท</Text>
         </View>
         <View style={styles.detailPrice}>
-          <TouchableOpacity onPress={() => {
-            // console.log(item);
-            firebase.firestore().collectionGroup("sheets").doc(item.id).delete()
-            // console.log(item.id);
-            // db.collection("sheets").doc("DC").delete().then(function () {
-            //   console.log("Document successfully deleted!");
-            // }).catch(function (error) {
-            //   console.error("Error removing document: ", error);
-            // });
+        <TouchableOpacity onPress={async () => {
+            const db = firebase.firestore().collectionGroup("sheets").where('userid', '==', user.uid)
+            const docs = await db.get()
+            docs.forEach(async s => {
+              if (s.id === item.id) {
+                await s.ref.delete()
+                const keepSheets = [...keepSheet]
+                keepSheets.splice(index, 1)
+                console.log(keepSheets)
+                setSheet(prev => ([...keepSheet]))
+              }
+            })
           }}>
             <Image style={styles.picNext} source={require("../../assets/x.png")} />
           </TouchableOpacity>
@@ -56,40 +91,42 @@ export default function Profile(props) {
     </ScrollView>
   );
 
-  // const renderItem = ({ item }) => (
-  //   <ScrollView>
-  //   <View style={styles.gridTile}>
-  //           <View style={styles.imageGride}>
-  //               <Image style={styles.pic} source={require("../../assets/file.png")} />
-  //           </View>
-  //           <View style={styles.detailGride}>
-  //               <Text style={styles.header}>วิชา : {item.subject}</Text>
-  //               <Text>คณะ : เทคโนโลยีสารสนเทศ</Text>
-  //               <Text>ภาควิชา : เทคโนโลยีสารสนเทศ</Text>
-  //               <Text>ปีการศึกษา : 2018</Text>
-  //               <Text>ภาคเรียนที่ : 2</Text>
-  //               <Text>ราคา : 50 บาท</Text>
-  //           </View>
-  //           <View style={styles.detailPrice}>
-  //           <TouchableOpacity onPress={() => {
-  //               }}>
-  //               <Image style={styles.picNext} source={require("../../assets/x.png")} />
-  //           </TouchableOpacity>
-  //           </View>
-  //       </View>
-  //       </ScrollView>
-  // );
+  const renderBought = ({ item, index }) => (
+    <ScrollView>
+      <View style={styles.gridTile}>
+        <View style={styles.imageGride}>
+          <Image style={styles.pic} source={require("../../assets/file.png")} />
+        </View>
+        <View style={styles.detailGride}>
+          <Text style={styles.header}>วิชา : {item.subject}</Text>
+          <Text>คณะ : {item.faculty.name || 'ไม่ระบุคณะ'}</Text>
+          <Text>ภาควิชา : {item.branch.name || 'ไม่ระบุภาควิชา'}</Text>
+          <Text>ปีการศึกษา : {item.year || 'ไม่ระบุปีการศึกษา'}</Text>
+          <Text>ภาคเรียนที่ : {item.semester || 'ไม่ระบุภาคเรียน'}</Text>
+          <Text>ราคา : {item.price} บาท</Text>
+        </View>
+        <View style={styles.detailPrice}>
+          <TouchableOpacity onPress={async () => {
+            alert('ไม่สามารถลบชีทของคนอื่นได้')
+            return
+          }}>
+            <Image style={styles.picNext} source={require("../../assets/x.png")} />
+          </TouchableOpacity>
+        </View>
+      </View>
+    </ScrollView>
+  );
 
 
   const FirstRoute = () => (
     <View>
       <View style={[styles.scene, { backgroundColor: 'white' }]} />
       <ScrollView>
-        <Text>cvghbjk</Text>
-        {/* <FlatList
-                    data={keepSheet}
-                    renderItem={renderItem}
-                /> */}
+        <FlatList
+          extraData={boughtSheet}
+                    data={boughtSheet}
+                    renderItem={renderBought}
+                />
       </ScrollView>
     </View>
   );
@@ -99,8 +136,9 @@ export default function Profile(props) {
       <View style={[styles.scene, { backgroundColor: 'white' }]} />
       <ScrollView>
         <FlatList
+          extraData={keepSheet}
           data={keepSheet}
-          renderItem={renderBuy}
+          renderItem={renderShell}
         />
       </ScrollView>
     </View>
