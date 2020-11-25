@@ -33,10 +33,11 @@ export default function DetailScreen(props) {
     })()
   }, [])
 
-  const navToBuySheet = (payload, sheetid) => {
+  const navToBuySheet = (payload, sheetid, owner) => {
     props.navigation.push('BuySheet', {
       uid: payload,
-      sheetid
+      sheetid,
+      owner
     })
 }
   if(snap === null){
@@ -67,7 +68,7 @@ export default function DetailScreen(props) {
           <Image style={styles.picStar} source={require("../assets/star.png")} />
           <Image style={styles.picStar} source={require("../assets/star.png")} />{"\n"}{"\n"}{"\n"}{"\n"}</Text>
         </View>
-        <Button title="ซื้อ" onPress={() => {navToBuySheet(snap.uid, snap.sheetid)}}></Button>
+        <Button title="ซื้อ" onPress={() => {navToBuySheet(snap.uid, snap.sheetid, snap.userid)}}></Button>
         
         
       </View>

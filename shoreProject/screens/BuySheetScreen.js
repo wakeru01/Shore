@@ -9,7 +9,8 @@ import "firebase/firestore";
 const BuySheet = (props) => {
   var db = firebase.firestore();
   const user = firebase.auth().currentUser;
-  const { uid, sheetid } = props.route.params;
+  const [userAccount, setUserAccount] = useState({})
+  const { uid, sheetid, owner } = props.route.params;
   const [snap, setSnap] = React.useState(null);
   const [time, setTime] = useState("");
   const [price, setPrice] = useState("");
@@ -17,10 +18,11 @@ const BuySheet = (props) => {
     const didMount = async () => {
       var db = firebase.firestore();
       var data = {};
-      const docs = await db.collectionGroup("userCollection").get();
-      docs.forEach((s) => {
-        if (s.uid === uid) data = s.data();
-      });
+      const user = firebase.auth().currentUser
+      console.log(owner)
+      const docs = await db.collection("userCollection").doc(owner).get();
+      if (docs.exists) data = docs.data()
+      
       setSnap(data);
     };
     didMount();
@@ -32,6 +34,7 @@ const BuySheet = (props) => {
   };
 
   const navTohome = () => {
+    console.log(user.uid)
     db.collection("users")
       .doc(user.uid)
       .set(
@@ -50,6 +53,7 @@ const BuySheet = (props) => {
   if (snap === null) {
     return <Text>Loading</Text>;
   }
+  console.log({ snap })
   return (
     <View style={styles.screen}>
       <ScrollView>
