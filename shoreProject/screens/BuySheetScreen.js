@@ -1,9 +1,11 @@
-import React, { useState,useEffect } from 'react';
-import { View, 
+import React, { useState, useEffect } from 'react';
+import {
+    View,
     StyleSheet,
     TextInput,
     Text,
-    ScrollView} from "react-native";
+    ScrollView
+} from "react-native";
 
 import * as DocumentPicker from 'expo-document-picker';
 import { Button } from 'react-native-elements';
@@ -11,7 +13,7 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 
 const BuySheet = (props) => {
-    
+
     var db = firebase.firestore();
     const user = firebase.auth().currentUser;
     const { uid } = props.route.params
@@ -19,16 +21,18 @@ const BuySheet = (props) => {
     const [time, setTime] = useState('');
     const [price, setPrice] = useState('');
     useEffect(
-        async () => {
-          var db = firebase.firestore()
-          var data = {};
-          const docs = await db.collectionGroup('userCollection').get()
-          docs.forEach(s => {
-            if (s.uid === uid) data = s.data()
-          })
-          setSnap(data)
+        () => {
+            (async () => {
+                var db = firebase.firestore()
+                var data = {};
+                const docs = await db.collectionGroup('userCollection').get()
+                docs.forEach(s => {
+                    if (s.uid === uid) data = s.data()
+                })
+                setSnap(data)
+            })()
         }, [])
-   
+
     const handleFilePick = async () => {
         const fileResponse = await DocumentPicker.getDocumentAsync();
         console.log(fileResponse);
@@ -39,57 +43,57 @@ const BuySheet = (props) => {
             time: time,
             price: price,
             uid: user.uid
-          })
-          .then(function() {
-            try {
-                // await firebase.auth().signInWithEmailAndPassword(email, pass)
-                props.navigation.replace('Main')
-              } catch (error) {
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                alert(errorMessage)
-              }
-          })
-          .catch(function(error) {
-              // The document probably doesn't exist.
-              console.error("Error updating document: ", error);
-          })
+        })
+            .then(function () {
+                try {
+                    // await firebase.auth().signInWithEmailAndPassword(email, pass)
+                    props.navigation.replace('Main')
+                } catch (error) {
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    alert(errorMessage)
+                }
+            })
+            .catch(function (error) {
+                // The document probably doesn't exist.
+                console.error("Error updating document: ", error);
+            })
     }
-    if(snap === null){
+    if (snap === null) {
         return <Text>Loading</Text>
-      }
+    }
     return (
         <View style={styles.screen}>
             <ScrollView>
-            <View style={styles.popUpText}>
-                <Text style={styles.header}>รายละเอียดการโอนเงิน</Text>
-            </View>
-            <View style={styles.showText}>
-                <Text style={styles.text}>เลขที่บัญชี/พร้อมเพย์ :</Text>
-                <View style={styles.textSole}>{snap.accountNo}</View>
-                <View style={styles.line}/>
+                <View style={styles.popUpText}>
+                    <Text style={styles.header}>รายละเอียดการโอนเงิน</Text>
+                </View>
+                <View style={styles.showText}>
+                    <Text style={styles.text}>เลขที่บัญชี/พร้อมเพย์ :</Text>
+                    <View style={styles.textSole}>{snap.accountNo}</View>
+                    <View style={styles.line} />
 
-                <Text style={styles.text}>ชื่อบัญชี :</Text>
-                <View style={styles.textSole}>{ snap.account }</View>
-                <View style={styles.line}/>
+                    <Text style={styles.text}>ชื่อบัญชี :</Text>
+                    <View style={styles.textSole}>{snap.account}</View>
+                    <View style={styles.line} />
 
-                <Text style={styles.text}>ธนาคาร :</Text>
-                <View style={styles.textSole}>{ snap.bank }</View>
-                <View style={styles.line}/>
+                    <Text style={styles.text}>ธนาคาร :</Text>
+                    <View style={styles.textSole}>{snap.bank}</View>
+                    <View style={styles.line} />
 
-                <Text style={styles.text}>หลักฐานการโอนเงิน :</Text>
-                <Button
-                    title="เพิ่มสลิป..."
-                    color="#989a9c"
-                    onPress={handleFilePick}
-                    type="outline"
-                />
-                <Text style={styles.text}>เวลา :</Text>
-                <TextInput style={styles.input} placeholder="เพิ่มเวลาที่นี่ ..." onChangeText={pass => setTime(pass)}/>
-                <Text style={styles.text}>ราคา :</Text>
-                <TextInput style={styles.input} placeholder="เพิ่มราคาที่นี่ ..." onChangeText={pass => setPrice(pass)}/>
-                <Button title="ยืนยัน" onPress={navTohome}/>
-            </View>
+                    <Text style={styles.text}>หลักฐานการโอนเงิน :</Text>
+                    <Button
+                        title="เพิ่มสลิป..."
+                        color="#989a9c"
+                        onPress={handleFilePick}
+                        type="outline"
+                    />
+                    <Text style={styles.text}>เวลา :</Text>
+                    <TextInput style={styles.input} placeholder="เพิ่มเวลาที่นี่ ..." onChangeText={pass => setTime(pass)} />
+                    <Text style={styles.text}>ราคา :</Text>
+                    <TextInput style={styles.input} placeholder="เพิ่มราคาที่นี่ ..." onChangeText={pass => setPrice(pass)} />
+                    <Button title="ยืนยัน" onPress={navTohome} />
+                </View>
             </ScrollView>
         </View>
     );
@@ -103,43 +107,43 @@ const styles = StyleSheet.create({
         padding: 10,
         paddingTop: 10,
     },
-    input:{
+    input: {
         backgroundColor: "white",
         padding: 10,
         marginBottom: 20,
-        borderColor: 'gray', 
+        borderColor: 'gray',
         borderWidth: 1,
-        borderRadius:3
+        borderRadius: 3
     },
-    text:{
-        fontSize: 18, 
-        marginBottom:7,
-        marginTop:7
+    text: {
+        fontSize: 18,
+        marginBottom: 7,
+        marginTop: 7
     },
-    header:{
-        fontSize: 25, 
+    header: {
+        fontSize: 25,
         padding: 20
     },
-    popUpText:{
-        alignContent: 'center', 
+    popUpText: {
+        alignContent: 'center',
         alignItems: 'center'
     },
-    showText:{
+    showText: {
         backgroundColor: "white",
-        padding:20,
-        marginLeft:30,
-        marginRight:30
+        padding: 20,
+        marginLeft: 30,
+        marginRight: 30
     },
-    textSole:{
-        alignItems:'center',
-        alignContent:'center',
+    textSole: {
+        alignItems: 'center',
+        alignContent: 'center',
         marginButtom: 20
     },
-    line:{
+    line: {
         borderBottomColor: 'black',
         borderBottomWidth: 1,
-        marginTop:5,
-        marginBottom:15
+        marginTop: 5,
+        marginBottom: 15
     }
 
 });

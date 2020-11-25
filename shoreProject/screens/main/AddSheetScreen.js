@@ -43,13 +43,15 @@ const AddSheet = (props) => {
         props.navigation.push('AddPic')
     }
 
-    useEffect(async () => {
-        const querySnapshot = await db.collection("faculty").get()
-        const faculty = {}
-        querySnapshot.forEach((doc) => {
-            faculty[doc.id] = doc.data()
-        });
-        setDatafaculty(faculty);
+    useEffect(() => {
+        (async () => {
+            const querySnapshot = await db.collection("faculty").get()
+            const faculty = {}
+            querySnapshot.forEach((doc) => {
+                faculty[doc.id] = doc.data()
+            });
+            setDatafaculty(faculty);
+        })()
     }, []);
 
     const onChangeSearch = query => setSearchQuery(query);
