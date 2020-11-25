@@ -12,6 +12,7 @@ import EditProfileScreen from "../screens/EditProfileScreen";
 import BuySheetScreen from "../screens/BuySheetScreen";
 import ConditionScreen from "../screens/ConditionScreen";
 import { createStackNavigator } from '@react-navigation/stack';
+import firebase from 'firebase'
 import {Button} from 'react-native';
 
 const Stack = createStackNavigator()
@@ -75,7 +76,11 @@ const ProfileNavigator = (props) => {
           options={{
             headerRight: () => (
               <Button
-                onPress={() => props.navigation.navigate('Login')}
+                onPress={async () => {
+                  const auth = firebase.auth()
+                  await auth.signOut()
+                  props.navigation.navigate('Login')
+                }}
                 title="Log Out"
                 // fontsize="10"
                 color="#3198cc"

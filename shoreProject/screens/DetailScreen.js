@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   },
   rating: {
     padding: 10,
-    marginButtom: 50,
+    marginBottom: 50,
     marginLeft: 20,
   },
   picStar: {
