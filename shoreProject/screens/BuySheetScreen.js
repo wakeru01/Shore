@@ -16,48 +16,40 @@ const BuySheet = (props) => {
 
     var db = firebase.firestore();
     const user = firebase.auth().currentUser;
-    const { uid } = props.route.params
+    const { uid, sheetid } = props.route.params
     const [snap, setSnap] = React.useState(null);
     const [time, setTime] = useState('');
     const [price, setPrice] = useState('');
-    useEffect(
-        () => {
-            (async () => {
-                var db = firebase.firestore()
-                var data = {};
-                const docs = await db.collectionGroup('userCollection').get()
-                docs.forEach(s => {
-                    if (s.uid === uid) data = s.data()
-                })
-                setSnap(data)
-            })()
-        }, [])
-
+    useEffect(() => {
+        const didMount = async () => {
+          var db = firebase.firestore()
+          var data = {};
+          const docs = await db.collectionGroup('userCollection').get()
+          docs.forEach(s => {
+            if (s.uid === uid) data = s.data()
+          })
+          setSnap(data)
+        }
+        didMount()
+    }, [])
+        
+   
     const handleFilePick = async () => {
         const fileResponse = await DocumentPicker.getDocumentAsync();
         console.log(fileResponse);
     }
 
     const navTohome = () => {
-        db.collection("log").doc(user.uid).set({
+        db.collection("users").doc(user.uid).set({
             time: time,
             price: price,
+            boughtSheet: firebase.firestore.FieldValue.arrayUnion(sheetid) ,
             uid: user.uid
-        })
-            .then(function () {
-                try {
-                    // await firebase.auth().signInWithEmailAndPassword(email, pass)
-                    props.navigation.replace('Main')
-                } catch (error) {
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                    alert(errorMessage)
-                }
-            })
-            .catch(function (error) {
-                // The document probably doesn't exist.
-                console.error("Error updating document: ", error);
-            })
+          }, {merge: true})
+          .then(function() {
+            props.navigation.popToTop()
+          })
+          
     }
     if (snap === null) {
         return <Text>Loading</Text>

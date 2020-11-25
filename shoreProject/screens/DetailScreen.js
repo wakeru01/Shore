@@ -24,15 +24,19 @@ export default function DetailScreen(props) {
       var data = {};
       const docs = await db.collectionGroup('sheets').get()
       docs.forEach(s => {
-        if (s.id === id) data = s.data()
+        if (s.id === id) data = {
+          ...s.data(),
+          sheetid: s.id
+        }
       })
       setSnap(data)
     })()
   }, [])
 
-  const navToBuySheet = (payload) => {
+  const navToBuySheet = (payload, sheetid) => {
     props.navigation.push('BuySheet', {
-      uid: payload
+      uid: payload,
+      sheetid
     })
 }
   if(snap === null){
@@ -63,7 +67,7 @@ export default function DetailScreen(props) {
           <Image style={styles.picStar} source={require("../assets/star.png")} />
           <Image style={styles.picStar} source={require("../assets/star.png")} />{"\n"}{"\n"}{"\n"}{"\n"}</Text>
         </View>
-        <Button title="ซื้อ" onPress={() => {navToBuySheet(snap.uid)}}></Button>
+        <Button title="ซื้อ" onPress={() => {navToBuySheet(snap.uid, snap.sheetid)}}></Button>
         
         
       </View>
