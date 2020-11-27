@@ -10,17 +10,17 @@ export default function LoginScreen(props) {
   const navToRegister = () => {
     props.navigation.push('Register')
   }
-  useEffect(() => {
-    firebase.auth().onAuthStateChanged(function (user) {
-      if (user) {
-        // User is signed in.
-        console.log(user)
-        props.navigation.replace('Main')
-      } else {
-        // No user is signed in.
-      }
-    })
-  })
+  // useEffect(() => {
+  //   firebase.auth().onAuthStateChanged(function (user) {
+  //     if (user) {
+  //       // User is signed in.
+  //       console.log(user)
+  //       props.navigation.replace('Main')
+  //     } else {
+  //       // No user is signed in.
+  //     }
+  //   })
+  // })
   const navToMain = async () => {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, pass)

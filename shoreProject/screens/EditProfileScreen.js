@@ -13,7 +13,6 @@ export default function EditProfileScreen(props) {
   const [account, setAccount] = useState('');
   const [accountNo, setAccountNo] = useState('');
   const [bank, setBank] = useState('');
-
   const [pass, setPass] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
   const [name, setName] = useState('');
